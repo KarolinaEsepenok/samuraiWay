@@ -1,23 +1,29 @@
 import React from 'react';
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
+import {message} from "antd";
+import Profile from "../Profile";
 
+type MessageType = {
+    message: string,
+    likeCounts: string
+}
 
-function MyPosts() {
+function MyPosts(props:MessageType) {
     return (
-        <div className={s.content}>
-
-            <div>My posts
+            <div>
+                My posts
+                <div>
                 <textarea></textarea>
                 <button>Add post</button>
             </div>
 
             <div className={s.posts}>
-                <Post message={'Hi, how are you'}/>
-                <Post message={'It is my first post'}/>
+                <Post message={'Hi, how are you'} likeCounts={'23'}/>
+                <Post message={'It is my first post'} likeCounts={'23'}/>
 
-            </div>
-        </div>
+            </div></div>
+
 
 
     )

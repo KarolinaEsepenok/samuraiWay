@@ -12,9 +12,7 @@ function App() {
         <div className={'app-wrapper'}>
             <Header/>
             <Navbar/>
-            <Profile/>
-
-
+           <Profile/>
         </div>
     );
 }

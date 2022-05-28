@@ -2,6 +2,9 @@
 .item{
     color: cornsilk;
 }
-.item img{
-    width: 50px;
+.content img{
+    width: 80px;
+border-radius: 50px;
+
+
 }

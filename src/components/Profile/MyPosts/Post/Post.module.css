@@ -1,10 +1,8 @@
 
-.item{
+.item img{
     color: cornsilk;
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
 }
-.content img{
-    width: 80px;
-border-radius: 50px;
 
-
-}

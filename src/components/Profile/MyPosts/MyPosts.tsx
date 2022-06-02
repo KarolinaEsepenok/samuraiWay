@@ -9,21 +9,24 @@ type MessageType = {
     likeCounts: string
 }
 
-function MyPosts(props:MessageType) {
+function MyPosts(props: MessageType) {
     return (
+        <div className={s.postsBlock}>
+           <h2>My posts</h2>
             <div>
-                My posts
                 <div>
-                <textarea></textarea>
-                <button>Add post</button>
+                    <textarea></textarea></div>
+                <div>
+                    <button>Add post</button>
+                </div>
             </div>
 
             <div className={s.posts}>
                 <Post message={'Hi, how are you'} likeCounts={'23'}/>
                 <Post message={'It is my first post'} likeCounts={'23'}/>
 
-            </div></div>
-
+            </div>
+        </div>
 
 
     )

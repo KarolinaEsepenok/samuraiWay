@@ -3,17 +3,15 @@ import s from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
 import Post from "./MyPosts/Post/Post";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {message} from "antd";
 
-type MessageType = {
-    message: string,
-    likeCounts: string
-}
 
 function Profile() {
+
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts message={'Hi, how are you'} likeCounts={'23'}/>
+            <MyPosts  />
 
 
         </div>

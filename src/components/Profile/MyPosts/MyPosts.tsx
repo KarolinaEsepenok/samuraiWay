@@ -4,12 +4,15 @@ import Post from "./Post/Post";
 import {message} from "antd";
 import Profile from "../Profile";
 
+
 type MessageType = {
     message: string,
     likeCounts: string
 }
+function MyPosts(props:MessageType) {
 
-function MyPosts(props: MessageType) {
+
+    let postsElement= posts.map((p)=><Post message={p.message} likeCounts={p.likeCounts}/>)
     return (
         <div className={s.postsBlock}>
            <h2>My posts</h2>
@@ -22,9 +25,7 @@ function MyPosts(props: MessageType) {
             </div>
 
             <div className={s.posts}>
-                <Post message={'Hi, how are you'} likeCounts={'23'}/>
-                <Post message={'It is my first post'} likeCounts={'23'}/>
-
+                {postsElement}
             </div>
         </div>
 

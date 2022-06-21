@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
+
 export type MessageType = {
     id: number,
     message: string,
-    likeCounts: string
+
 }
 export type DialogsType = {
     id:number,

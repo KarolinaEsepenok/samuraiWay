@@ -11,7 +11,7 @@ function Profile() {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts  />
+            <MyPosts message={'Hi'} likeCounts={'23'}/>
 
 
         </div>

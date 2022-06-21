@@ -2,16 +2,20 @@ import React from 'react';
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import {DialogsType} from "../../index";
 
 
 
-type MessageType = {
-    message: string,
-    likeCounts: string
+export type DialogsPropsType = {
+    dialogsData:DialogsType[]
+}
+export type MessagePropsType = {
+    messagesData: MessageType[]
 
 }
 
-function Dialogs(props: MessageType) {
+
+function Dialogs(props: DialogsPropsType) {
 
     let dialogsElements = props.dialogsData
         .map((d) => <DialogItem name={d.name} id={d.id}/>)

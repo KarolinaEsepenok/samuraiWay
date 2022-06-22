@@ -46,6 +46,6 @@ let messagesData=[
 
 
 ReactDOM.render(
-    <App posts={posts} dialogsData={dialogsData} messagesData={messagesData}/>,
+    <App posts={posts} dialogsData={dialogsData} messagesData={messagesData} />,
   document.getElementById('root')
 );

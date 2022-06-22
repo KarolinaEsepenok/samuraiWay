@@ -4,14 +4,15 @@ import {DialogsType} from "../../../index";
 
 
 export type MessagePropsType = {
-    messagesData: MessageType[]
+    // messagesData: MessageType[]
 
 }
 
 
 function Message(props: MessagePropsType) {
     return (
-        <div className={s.message}>{props.messagesData}
+         <div className={s.message}>
+             {/*{props.messagesData}*/}
         </div>
     )
 }

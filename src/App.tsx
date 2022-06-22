@@ -12,13 +12,14 @@ import dialogs from "./components/Dialogs/Dialogs";
 import {DialogsType, MessageType, PostsType} from "./index";
 
 
-type AppPropsType = {
-   dialogsData: DialogsType[],
+export type AppPropsType = {
+    posts: PostsType[],
+    dialogsData: DialogsType[],
     messagesData: MessageType[]
 
 }
 
-function App(props:AppPropsType) {
+function App(props: AppPropsType) {
 
     return (
         <BrowserRouter>
@@ -27,8 +28,8 @@ function App(props:AppPropsType) {
                 <Navbar/>
                 {/*}  <Profile/>*/}
                 <div className={'app-wrapper-content'}>
-                    <Route path='/dialogs' render={() => <Dialogs dialogs={props.dialogsData} messages={props.messagesData}/>}/>
-                    <Route path='/profile' render={() => <Profile posts={posts}/>}/>
+                    <Route path='/dialogs' render={() => <Dialogs dialogsData={props.dialogsData}/>}/>
+                    <Route path='/profile' render={() => <Profile messagesData={props.messagesData} posts={props.posts}/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>

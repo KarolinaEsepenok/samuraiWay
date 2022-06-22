@@ -3,19 +3,22 @@ import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 import {message} from "antd";
 import Profile from "../Profile";
+import {PostsType, MessageType} from "../../../index";
 
 
-type MessageType = {
-    message: string,
-    likeCounts: string
+
+export type PostPropType = {
+    posts: PostsType[]
+    messagesData: MessageType[]
 }
-function MyPosts(props:MessageType) {
+
+function MyPosts(props: PostPropType) {
 
 
-    let postsElement= posts.map((p)=><Post message={p.message} likeCounts={p.likeCounts}/>)
+    let postsElement = props.posts.map((p) => <Post message={p.message} likeCounts={p.likeCounts}/>)
     return (
         <div className={s.postsBlock}>
-           <h2>My posts</h2>
+            <h2>My posts</h2>
             <div>
                 <div>
                     <textarea></textarea></div>

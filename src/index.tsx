@@ -2,24 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import State from './State'
+import state from './State'
 
 
-export type MessageType = {
-    id: number,
-    message: string,
-
-}
-export type DialogsType = {
-    id:number,
-    name: string
-}
-export type PostsType = {
-    id: number,
-    message: string,
-    likeCounts: string
-}
-
-
+{/*
 let posts=[
     {id: 1, message: 'Hi, how are you', likeCounts: '12'},
     {id: 2, message: 'It is my first post', likeCounts: '12'},
@@ -42,10 +29,10 @@ let messagesData=[
     {id: 4, message: 'Yo'},
     {id: 5, message: 'Yo'},
     {id: 6, message: 'Yo'},
-]
-
+]*/
+}
 
 ReactDOM.render(
-    <App posts={posts} dialogsData={dialogsData} messagesData={messagesData} />,
-  document.getElementById('root')
+    <App state={state}/>,
+    document.getElementById('root')
 );

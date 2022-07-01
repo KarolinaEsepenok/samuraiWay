@@ -4,7 +4,7 @@ import MyPosts from "./MyPosts/MyPosts";
 import Post from "./MyPosts/Post/Post";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {message} from "antd";
-import {PostsType, MessageType} from "../../index";
+import {PostsType, MessageType} from "../../State";
 import myPosts from "./MyPosts/MyPosts";
 
 //export type MessageType = {

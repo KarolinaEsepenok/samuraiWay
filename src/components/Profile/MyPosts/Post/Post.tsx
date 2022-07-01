@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Post.module.css'
 import {message} from "antd";
 import MyPosts from "../MyPosts";
-import {MessageType, PostsType} from "../../../../index";
+import {MessageType, PostsType} from "../../../../State";
 
 
 export type PostPropType = {

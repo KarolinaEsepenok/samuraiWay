@@ -3,7 +3,7 @@ import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 import {message} from "antd";
 import Profile from "../Profile";
-import {PostsType, MessageType} from "../../../index";
+import {PostsType, MessageType} from "../../../State";
 
 
 

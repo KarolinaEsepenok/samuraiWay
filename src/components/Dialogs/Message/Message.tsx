@@ -1,10 +1,10 @@
 import s from "./../Dialogs.module.css";
 import React from "react";
-import {DialogsType, MessageType} from "../../../State";
+import {DialogsType, MessageType} from "../../../state";
 
 
 export type MessagePropsType = {
-     messagesData: MessageType[]
+     message: string
 
 }
 
@@ -12,7 +12,7 @@ export type MessagePropsType = {
 function Message(props: MessagePropsType) {
     return (
          <div className={s.message}>
-             {props.messagesData}
+             {props.message}
         </div>
     )
 }

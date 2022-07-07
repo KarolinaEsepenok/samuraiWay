@@ -4,7 +4,7 @@ import MyPosts from "./MyPosts/MyPosts";
 import Post from "./MyPosts/Post/Post";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {message} from "antd";
-import {PostsType, MessageType} from "../../State";
+import {PostsType, MessageType, ProfilePageType} from "../../state";
 import myPosts from "./MyPosts/MyPosts";
 
 //export type MessageType = {
@@ -12,9 +12,7 @@ import myPosts from "./MyPosts/MyPosts";
  // likeCounts: string
 //}
 export  type ProfileProps = {
-    posts: PostsType[]
-    messagesData: MessageType[]
-
+   state: ProfilePageType
 }
 
 function Profile(props: ProfileProps) {
@@ -22,7 +20,7 @@ function Profile(props: ProfileProps) {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts messagesData={props.messagesData} posts={props.posts}/>
+            <MyPosts posts={props.state.posts}/>
 
 
         </div>

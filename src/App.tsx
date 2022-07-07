@@ -9,7 +9,7 @@ import Settings from "./components/Settings/Settings";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import dialogs from "./components/Dialogs/Dialogs";
-import {DialogsType, MessageType, PostsType} from "./State";
+import {DialogsType, MessageType, PostsType, StateType} from "./state";
 
 
 export type AppPropsType = {
@@ -19,10 +19,7 @@ export type AppPropsType = {
 
 }
 export type AppStatePropsType={
-    state:AppPropsType[],
-    posts: PostsType[],
-    dialogsData: DialogsType[],
-    messagesData: MessageType[],
+    state: StateType
 }
 
 function App(props: AppStatePropsType) {

@@ -1,36 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import {rerenderEntireTree} from "./render";
 import {state} from "./state";
 
-{/*
-let posts=[
-    {id: 1, message: 'Hi, how are you', likeCounts: '12'},
-    {id: 2, message: 'It is my first post', likeCounts: '12'},
-    {id: 1, message: 'Hi, how are you', likeCounts: '12'},
-    {id: 2, message: 'It is my first post', likeCounts: '12'}
 
-]
-let dialogsData = [
-    {id: 1, name: 'Dima'},
-    {id: 2, name: 'Andrey'},
-    {id: 3, name: 'Sveta'},
-    {id: 4, name: 'Sasha'},
-    {id: 5, name: 'Valera'},
-    {id: 5, name: 'Misha'}
-]
-let messagesData=[
-    {id: 1, message: 'hi'},
-    {id: 2, message: 'How are you'},
-    {id: 3, message: 'Yo'},
-    {id: 4, message: 'Yo'},
-    {id: 5, message: 'Yo'},
-    {id: 6, message: 'Yo'},
-]*/
-}
+//export const rerenderEntireTree = () => {
 
-ReactDOM.render(
-    <App state={state}/>,
-    document.getElementById('root')
-);
+//}
+
+//ReactDOM.render(
+//  <App state={state} addPost={addPost}/>,
+//document.getElementById('root')
+//);
+rerenderEntireTree(state);

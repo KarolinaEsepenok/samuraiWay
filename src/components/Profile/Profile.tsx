@@ -12,7 +12,9 @@ import myPosts from "./MyPosts/MyPosts";
  // likeCounts: string
 //}
 export  type ProfileProps = {
-   state: ProfilePageType
+    profilePage: ProfilePageType
+    addPost:(message:string)=>void
+    newPostText:string
 }
 
 function Profile(props: ProfileProps) {
@@ -20,7 +22,10 @@ function Profile(props: ProfileProps) {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={props.state.posts}/>
+            <MyPosts posts={props.profilePage.posts}
+                   //  newPostText={props.profilePage.newPostText}
+                     newPostText={props.newPostText}
+                     addPost={props.addPost}/>
 
 
         </div>

@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from "./render";
+
 export type StatePropsType = {
     posts: PostsType[],
     dialogsData: DialogsType[],
@@ -22,7 +24,8 @@ export type PostsType = {
     likeCounts: string
 }
 export type ProfilePageType = {
-    posts: PostsType[]
+    posts: PostsType[],
+    newPostText: string,
 }
 export type DialogsPageType = {
     dialogsData: DialogsType[]
@@ -31,6 +34,7 @@ export type DialogsPageType = {
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
+
 }
 
 export const state: StateType = {
@@ -42,6 +46,7 @@ export const state: StateType = {
             {id: 2, message: 'It is my first post', likeCounts: '12'}
 
         ],
+        newPostText: '',
     },
     dialogsPage: {
         dialogsData: [
@@ -61,4 +66,20 @@ export const state: StateType = {
             {id: 6, message: 'Yo'},
         ]
     }
+}
+//window.state = state
+export const addPost = (postMessage: string) => {
+    const newPost: PostsType = {
+        id: new Date().getTime(),
+        message:postMessage,
+
+        likeCounts: '0'
+    }
+    state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText='';
+    rerenderEntireTree(state);
+}
+export const updateNewPostText = (newPostText:string) => {
+    state.profilePage.newPostText= newPostText;
+    rerenderEntireTree(state);
 }

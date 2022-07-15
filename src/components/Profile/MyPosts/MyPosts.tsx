@@ -1,29 +1,39 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 import {message} from "antd";
 import Profile from "../Profile";
-import {PostsType, MessageType} from "../../../state";
-
+import {PostsType, MessageType, updateNewPostText} from "../../../state";
 
 
 export type PostPropType = {
     posts: PostsType[]
+    addPost: (message: string) => void
+    newPostText: string
 
 }
 
 function MyPosts(props: PostPropType) {
     let postsElement = props.posts.map((p) => <Post message={p.message} likeCounts={p.likeCounts}/>)
-    let newPostElement = React.createRef<HTMLTextAreaElement>()
+    // let newPostElement = React.createRef<HTMLTextAreaElement>()
     const addPost = () => {
-      alert(newPostElement.current?.value)
+        props.addPost(props.newPostText);
+       // props.newPostText = ''
+
+    }
+    let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.newPostText = e.currentTarget.value;
+        //   props.updateNewPostText(newPostElement.current.value)
+
     }
     return (
         <div className={s.postsBlock}>
             <h2>My posts</h2>
             <div>
                 <div>
-                    <textarea ref={newPostElement} ></textarea></div>
+                    <textarea onChange={onPostChange}
+                            //  value={props.newPostText}
+                    ></textarea></div>
                 <div>
                     <button onClick={addPost}>Add post</button>
                 </div>

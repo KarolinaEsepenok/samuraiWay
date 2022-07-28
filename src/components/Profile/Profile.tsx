@@ -15,6 +15,7 @@ export  type ProfileProps = {
     profilePage: ProfilePageType
     addPost:(message:string)=>void
     newPostText:string
+
 }
 
 function Profile(props: ProfileProps) {
@@ -23,9 +24,11 @@ function Profile(props: ProfileProps) {
         <div>
             <ProfileInfo/>
             <MyPosts posts={props.profilePage.posts}
+                     dispatch={props.dispatch}
                    //  newPostText={props.profilePage.newPostText}
                      newPostText={props.newPostText}
-                     addPost={props.addPost}/>
+                    // addPost={props.addPost}
+            />
 
 
         </div>

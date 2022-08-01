@@ -31,11 +31,11 @@ export type DialogsPageType = {
     dialogsData: DialogsType[]
     messageData: MessageType[]
 }
-//export type StateType = {
-  //  profilePage: ProfilePageType
-  //  dialogsPage: DialogsPageType
-//}
-export type StoreType={
+export type StateType = {
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
+}
+export type RootStateType={
     _state:StateType
     updateNewPostText:(newText:string)=>void
     addPost:(postMessage: string)=>void

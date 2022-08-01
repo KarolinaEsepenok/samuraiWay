@@ -9,7 +9,7 @@ import Settings from "./components/Settings/Settings";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import dialogs from "./components/Dialogs/Dialogs";
-import {DialogsType, MessageType, PostsType,  StoreType,} from "./state";
+import {DialogsType, MessageType, PostsType,  StateType,RootStateType} from "./state";
 
 
 {/*export type AppPropsType = {
@@ -18,9 +18,10 @@ import {DialogsType, MessageType, PostsType,  StoreType,} from "./state";
     messagesData: MessageType[],
 }*/}
 export type AppStatePropsType={
+    dispatch: any;
     state: StateType
     addPost:(message:string)=>void
-    store:StoreType
+    store:RootStateType
 
 
 }

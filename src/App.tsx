@@ -19,8 +19,7 @@ import {DialogsType, MessageType, PostsType,  StateType,RootStateType} from "./s
 }*/}
 export type AppStatePropsType={
     dispatch: any;
-    state: StateType
-    addPost:(message:string)=>void
+    //addPost:(message:string)=>void
     store:RootStateType
 
 
@@ -40,9 +39,8 @@ function App(props: AppStatePropsType) {
                     <Route path='/dialogs' render={() => <Dialogs
                       //  state={props.state.dialogsPage}
                     store={props.store}/>}/>
-                    <Route path='/profile' render={() => <Profile profilePage={props.state.profilePage}
+                    <Route path='/profile' render={() => <Profile profilePage={state.profilePage}
                                                                   dispatch={props.dispatch}
-
                                                                  //addPost={props.addPost}
                                                                  // newPostText={props.state.profilePage.newPostText}
                                                                   />}/>

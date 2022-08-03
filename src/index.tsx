@@ -7,20 +7,20 @@ import {BrowserRouter} from "react-router-dom";
 import {StateType, store} from "./state";
 
 
-export const rerenderEntireTree = (state: StateType) => {
+export const rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={store.getState()} dispatch={store.dispatch.bind(store)} store={store}
+            <App dispatch={store.dispatch.bind(store)} store={store}
 
-                 //addPost={store.addPost.bind(store)}
+                //addPost={store.addPost.bind(store)}
                 // updateNewPostText={store.updateNewPostText.bind(store)}>
             />
         </BrowserRouter>,
         document.getElementById('root')
     );
 }
-rerenderEntireTree(store.getState());
-store.subscribe(rerenderEntireTree);
+rerenderEntireTree();
+store.subscriber(rerenderEntireTree);
 
 
 //export const rerenderEntireTree = () => {
@@ -31,4 +31,4 @@ store.subscribe(rerenderEntireTree);
 //  <App state={state} addPost={addPost}/>,
 //document.getElementById('root')
 //);
-rerenderEntireTree(store._state);
+//rerenderEntireTree(store._state);

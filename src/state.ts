@@ -1,5 +1,3 @@
-
-
 export type StatePropsType = {
     posts: PostsType[],
     dialogsData: DialogsType[],
@@ -17,6 +15,7 @@ export type MessageType = {
 export type DialogsType = {
     id: number,
     name: string
+
 }
 export type PostsType = {
     id: number,
@@ -30,79 +29,27 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogsData: DialogsType[]
     messageData: MessageType[]
+    newMessageBody: string
 }
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
 }
-export type RootStateType={
-    _state:StateType
-    updateNewPostText:(newText:string)=>void
-    addPost:(postMessage: string)=>void
-    _callSubscriber:()=>void
-    subscriber:(observer:()=>void)=>void
-    getState:()=>void
-
-
+export type RootStateType = {
+    _state: StateType
+    updateNewPostText: (newText: string) => void
+    //addPost: (postMessage: string) => void
+    _callSubscriber: () => void
+    subscriber: (observer: () => void) => void
+    getState: () => StateType
+    dispatch: (action: ActionsTypes) => void
 }
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
 const SEND_MESSAGE = 'SEND_MESSAGE';
-//let rerenderEntireTree = (state: StateType) => {
-//}
-{/*export const state: StateType = {
-    profilePage: {
-        posts: [
-            {id: 1, message: 'Hi, how are you', likeCounts: '12'},
-            {id: 2, message: 'It is my first post', likeCounts: '12'},
-            {id: 1, message: 'Hi, how are you', likeCounts: '12'},
-            {id: 2, message: 'It is my first post', likeCounts: '12'}
 
-        ],
-        newPostText: '',
-    },
-    dialogsPage: {
-        dialogsData: [
-            {id: 1, name: 'Dima'},
-            {id: 2, name: 'Andrey'},
-            {id: 3, name: 'Sveta'},
-            {id: 4, name: 'Sasha'},
-            {id: 5, name: 'Valera'},
-            {id: 5, name: 'Misha'}
-        ],
-        messageData: [
-            {id: 1, message: 'hi'},
-            {id: 2, message: 'How are you'},
-            {id: 3, message: 'Yo'},
-            {id: 4, message: 'Yo'},
-            {id: 5, message: 'Yo'},
-            {id: 6, message: 'Yo'},
-        ]
-    }
-}
-//window.state = state
-export const addPost = (postMessage: string) => {
-    const newPost: PostsType = {
-        id: new Date().getTime(),
-        message:postMessage,
-        likeCounts: '0'
-    }
-    state.profilePage.posts.push(newPost);
-    state.profilePage.newPostText='';
-    rerenderEntireTree(state);
-}
-export const updateNewPostText = (newPostText:string) => {
-    state.profilePage.newPostText= newPostText;
-    rerenderEntireTree(state);
-}
-export const subscribe=(observer:(state:StateType)=>void)=>{
-    rerenderEntireTree = observer
-
-}*/}
-
-
-export let store:RootStateType = {
+export let store: RootStateType = {
     _state: {
         profilePage: {
             posts: [
@@ -130,55 +77,52 @@ export let store:RootStateType = {
                 {id: 4, message: 'Yo'},
                 {id: 5, message: 'Yo'},
                 {id: 6, message: 'Yo'},],
-            newMessageBody: ''
+            newMessageBody: '',
         },
 
+
     },
-    updateNewPostText  (newText:string) {
+    updateNewPostText(newText: string) {
         this._state.profilePage.newPostText = newText;
         this._callSubscriber();
     },
 
-    _callSubscriber(){
+    _callSubscriber() {
         console.log('State')
     },
     getState() {
         return this._state;
     },
-    subscriber(observer) {
+    subscriber(observer: () => void) {
         this._callSubscriber = observer;
     },
     dispatch(action) {
         if (action.type === ADD_POST) {
-            const newPost:PostsType = {
+            const newPost: PostsType = {
                 id: new Date().getTime(),
-                message: postMessage,
+                message: this._state.profilePage.newPostText,
                 likeCounts: '0'
             };
             this._state.profilePage.posts.push(newPost);
-            store._state.profilePage.newPostText = '';
-            store._state._callSubscriber(store._state)
+            this._state.profilePage.newPostText = '';
+            this._callSubscriber()
             //rerenderEntireTree(store._state);
         } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            store._state.profilePage.newPostText = action.newText;
-            store._state._callSubscriber(store._state)
+            this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber()
             //rerenderEntireTree(store._state);
-        } else if (action.type === UPDATE_NEW_MESSAGE_BODY){
-            store._state.dialogsPage.newMessageBody = action.body;
-            store._state._callSubscriber(store._state)
-        }
-        else if (action.type === SEND_MESSAGE){
-            let body = store._state.dialogsPage.newMessageBody ;
-            store._state.dialogsPage.newMessageBody = '';
-            store._state.dialogsPage.messageData.push({id: 6, message: body})
-            store._state._callSubscriber(store._state)
+        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+            this._state.dialogsPage.newMessageBody = action.body;
+            this._callSubscriber()
+        } else if (action.type === SEND_MESSAGE) {
+            let body = store._state.dialogsPage.newMessageBody;
+            this._state.dialogsPage.newMessageBody = '';
+            this._state.dialogsPage.messageData.push({id: 6, message: body})
+            this._callSubscriber()
         }
     }
 
 }
-
-
-
 
 
 //    _callSubscriber(),
@@ -200,31 +144,34 @@ export let store:RootStateType = {
    }*/
 
 
-
 export const addPostActionCreator = () => {
     return {
         type: ADD_POST,
-    }
+    } as const
 }
-export const updateNewPostTextActionCreator = (text) => {
+export const updateNewPostTextActionCreator = (text: string) => {
     return {
         type: UPDATE_NEW_POST_TEXT,
         newText: text
-    }
+    } as const
 }
 export const sendMessageCreator = () => {
     return {
         type: SEND_MESSAGE,
-    }
+    } as const
 }
-export const updateNewMessageBodyCreator = (text) => {
+export const updateNewMessageBodyCreator = (text: string) => {
     return {
         type: UPDATE_NEW_MESSAGE_BODY,
         body: text
-    }
+    } as const
 }
+type AddPostActionType = ReturnType<typeof addPostActionCreator>
+type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
+type SendMessageType = ReturnType<typeof sendMessageCreator>
+type UpdateNewMessageBodyType = ReturnType<typeof updateNewMessageBodyCreator>
 
-
+export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | SendMessageType | UpdateNewMessageBodyType
 
 
 

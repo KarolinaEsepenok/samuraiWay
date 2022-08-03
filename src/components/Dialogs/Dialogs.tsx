@@ -1,14 +1,22 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {DialogsPageType, DialogsType, MessageType, sendMessageCreator, updateNewMessageBodyCreator} from "../../state";
+import {
+    DialogsPageType,
+    DialogsType,
+    MessageType,
+    RootStateType,
+    sendMessageCreator,
+    updateNewMessageBodyCreator
+} from "../../state";
 import message from "./Message/Message";
 
 
 export type DialogsPropsType = {
-    state: DialogsPageType
-    newMessageBody:string
+    store: RootStateType
+    //state: DialogsPageType
+    //newMessageBody:string
 }
 
 
@@ -25,7 +33,7 @@ function Dialogs(props: DialogsPropsType) {
     let onSendMessageClick = ()=>{
         props.store.dispatch(sendMessageCreator())
     }
-    let onNewMessageChange=(e)=>{
+    let onNewMessageChange=(e: ChangeEvent<HTMLTextAreaElement>)=>{
         let body =e.currentTarget.value
         props.store.dispatch(updateNewMessageBodyCreator(body))
     }

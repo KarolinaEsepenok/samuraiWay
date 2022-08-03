@@ -1,19 +1,15 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {message} from "antd";
-import Profile from "../Profile";
-import {PostsType, MessageType, addPostActionCreator, updateNewPostTextActionCreator} from "../../../state";
-import {text} from "stream/consumers";
-
+import {ActionsTypes, addPostActionCreator, PostsType, updateNewPostTextActionCreator} from "../../../state";
 
 
 export type PostPropType = {
     posts: PostsType[]
-    addPost: (message: string) => void
-    newPostText: string
-
-    updateNewPostText(value: string): void;
+    //addPost: (message: string) => void
+   // newPostText: string
+    dispatch: (action: ActionsTypes) => void
+    //updateNewPostText(value: string): void;
 }
 
 function MyPosts(props: PostPropType) {
@@ -26,7 +22,7 @@ function MyPosts(props: PostPropType) {
     }
 
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let text = newPostElement.currentTarget.value
+        let text = e.currentTarget.value
         let action = updateNewPostTextActionCreator(text)
         props.dispatch(action)
         //props.updateNewPostText(e.currentTarget.value);

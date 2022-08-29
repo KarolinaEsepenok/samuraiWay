@@ -1,8 +1,11 @@
+import {ActionsTypes, ProfilePageReducer} from "./redux/ProfilePageReducer";
+import {DialogsPageReducer} from "./redux/DialogsPageReducer";
+import {SidebarReducer} from "./redux/SitebarReducer";
+
 export type StatePropsType = {
     posts: PostsType[],
     dialogsData: DialogsType[],
     messagesData: MessageType[],
-
 }
 export type AppStateProps = {
     appState: StatePropsType
@@ -44,10 +47,6 @@ export type RootStateType = {
     getState: () => StateType
     dispatch: (action: ActionsTypes) => void
 }
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
-const SEND_MESSAGE = 'SEND_MESSAGE';
 
 export let store: RootStateType = {
     _state: {
@@ -79,6 +78,7 @@ export let store: RootStateType = {
                 {id: 6, message: 'Yo'},],
             newMessageBody: '',
         },
+       // sidebar: {}
 
 
     },
@@ -97,31 +97,13 @@ export let store: RootStateType = {
         this._callSubscriber = observer;
     },
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            const newPost: PostsType = {
-                id: new Date().getTime(),
-                message: this._state.profilePage.newPostText,
-                likeCounts: '0'
-            };
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber()
-            //rerenderEntireTree(store._state);
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber()
-            //rerenderEntireTree(store._state);
-        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
-            this._state.dialogsPage.newMessageBody = action.body;
-            this._callSubscriber()
-        } else if (action.type === SEND_MESSAGE) {
-            let body = store._state.dialogsPage.newMessageBody;
-            this._state.dialogsPage.newMessageBody = '';
-            this._state.dialogsPage.messageData.push({id: 6, message: body})
-            this._callSubscriber()
-        }
-    }
+        this._state.profilePage = ProfilePageReducer(store, action)
+        this._state.dialogsPage = DialogsPageReducer(this._state.dialogsPage, action)
+      //  this._state.sidebar = SidebarReducer(this._state.sidebar, action)
+        this._callSubscriber(this._state)
 
+
+    }
 }
 
 
@@ -141,7 +123,7 @@ export let store: RootStateType = {
    updateNewPostText (newPostText:string)  {
        store._state.profilePage.newPostText= newPostText;
        rerenderEntireTree(store._state);
-   }*/
+   }
 
 
 export const addPostActionCreator = () => {
@@ -173,7 +155,7 @@ type UpdateNewMessageBodyType = ReturnType<typeof updateNewMessageBodyCreator>
 
 export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | SendMessageType | UpdateNewMessageBodyType
 
-
+*/
 
 
 

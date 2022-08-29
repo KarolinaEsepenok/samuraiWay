@@ -9,24 +9,26 @@ import Settings from "./components/Settings/Settings";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import dialogs from "./components/Dialogs/Dialogs";
-import {DialogsType, MessageType, PostsType,  StateType,RootStateType} from "./state";
+import {DialogsType, MessageType, PostsType, StateType, RootStateType} from "./state";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 
 {/*export type AppPropsType = {
     posts: PostsType[],
     dialogsData: DialogsType[],
     messagesData: MessageType[],
-}*/}
-export type AppStatePropsType={
+}*/
+}
+export type AppStatePropsType = {
     dispatch: any;
     //addPost:(message:string)=>void
-    store:RootStateType
+    store: RootStateType
 
 
 }
 
 function App(props: AppStatePropsType) {
-  // let message= props.state.profilePage.posts[0].message
+    // let message= props.state.profilePage.posts[0].message
     const state = props.store.getState()
 
     return (
@@ -36,14 +38,17 @@ function App(props: AppStatePropsType) {
                 <Navbar/>
                 {/*}  <Profile/>*/}
                 <div className={'app-wrapper-content'}>
-                    <Route path='/dialogs' render={() => <Dialogs
-                      //  state={props.state.dialogsPage}
-                    store={props.store}/>}/>
-                    <Route path='/profile' render={() => <Profile profilePage={state.profilePage}
-                                                                  dispatch={props.dispatch}
-                                                                 //addPost={props.addPost}
-                                                                 // newPostText={props.state.profilePage.newPostText}
-                                                                  />}/>
+                    <Route path='/dialogs' render={() =>
+                        <DialogsContainer
+                        //  state={props.state.dialogsPage}
+                        store={props.store}/>}/>
+                    <Route path='/profile' render={() => <Profile
+                        store={props.store}
+                       // profilePage={state.profilePage}
+                        //dispatch={props.dispatch}
+                        //addPost={props.addPost}
+                        // newPostText={props.state.profilePage.newPostText}
+                    />}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>

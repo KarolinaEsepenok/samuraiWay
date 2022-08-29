@@ -4,8 +4,10 @@ import MyPosts from "./MyPosts/MyPosts";
 import Post from "./MyPosts/Post/Post";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {message} from "antd";
-import {PostsType, MessageType, ProfilePageType, ActionsTypes} from "../../state";
+import {PostsType, MessageType, ProfilePageType} from "../../state";
+import {ActionsTypes} from "../../redux/ProfilePageReducer";
 import myPosts from "./MyPosts/MyPosts";
+import MyPostsContainer from "./MyPosts/Post/MyPostContainer";
 
 //export type MessageType = {
  //  message: string,
@@ -13,9 +15,11 @@ import myPosts from "./MyPosts/MyPosts";
 //}
 export  type ProfileProps = {
     profilePage: ProfilePageType
-  //  addPost:(message:string)=>void
-  //  newPostText:string
+    addPost:(message:string)=>void
+    newPostText:string
     dispatch: (action: ActionsTypes) => void
+    store: ActionsTypes
+    updateNewPostTextActionCreator: any
 
 }
 
@@ -24,11 +28,16 @@ function Profile(props: ProfileProps) {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={props.profilePage.posts}
-                     dispatch={props.dispatch}
-                   //  newPostText={props.profilePage.newPostText}
-                   //  newPostText={props.newPostText}
-                    // addPost={props.addPost}
+            <MyPostsContainer {...props.newPostText}
+            updateNewPostTextActionCreator={props.updateNewPostTextActionCreator}
+                posts={props.profilePage.posts}
+                    dispatch={props.dispatch}
+
+            //  newPostText={props.profilePage.newPostText}
+                   // newPostText={props.newPostText}
+                     addPost={props.addPost}
+            // addPost={props.addPost}
+               store={props.store}
             />
 
 

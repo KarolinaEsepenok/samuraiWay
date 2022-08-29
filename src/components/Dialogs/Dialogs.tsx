@@ -7,35 +7,37 @@ import {
     DialogsType,
     MessageType,
     RootStateType,
-    sendMessageCreator,
-    updateNewMessageBodyCreator
+
 } from "../../state";
+import {sendMessageCreator,
+    updateNewMessageBodyCreator} from './../../redux/DialogsPageReducer'
 import message from "./Message/Message";
 
 
 export type DialogsPropsType = {
     store: RootStateType
-    //state: DialogsPageType
+    state: DialogsPageType
     //newMessageBody:string
 }
 
 
 function Dialogs(props: DialogsPropsType) {
-    let state = props.store.getState().dialogsPage
+    let state = props.state.dialogsData;
 
-    let dialogsElements =state.dialogsData
-        .map((d) => <DialogItem key={d.id} name={d.name} id={d.id}/>)
+    let dialogsElements =props.state.dialogsData
+        .map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
 
-    let messagesElements = state.messageData
+    let messagesElements = props.state.messageData
         .map((m) => <Message key={m.id} message={m.message}/>)
-    let newMessagesBody = state.newMessageBody
+    let newMessagesBody = props.state.newMessageBody
 
     let onSendMessageClick = ()=>{
-        props.store.dispatch(sendMessageCreator())
+        props.state.sendMessage()
+        //props.store.dispatch(sendMessageCreator())
     }
     let onNewMessageChange=(e: ChangeEvent<HTMLTextAreaElement>)=>{
         let body =e.currentTarget.value
-        props.store.dispatch(updateNewMessageBodyCreator(body))
+        props.state.updateNewMessageBody(body)
     }
     return (
         <div className={s.dialogs}>

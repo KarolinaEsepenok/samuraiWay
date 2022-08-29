@@ -1,30 +1,34 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {ActionsTypes, addPostActionCreator, PostsType, updateNewPostTextActionCreator} from "../../../state";
+import {ActionsTypes} from "../../../redux/ProfilePageReducer";
+import {PostsType} from "../../../state";
+import message from "../../Dialogs/Message/Message";
 
 
 export type PostPropType = {
     posts: PostsType[]
-    //addPost: (message: string) => void
-   // newPostText: string
+    addPost: (message: string) => void
+    newPostText: string
     dispatch: (action: ActionsTypes) => void
-    //updateNewPostText(value: string): void;
+    updateNewPostTextActionCreator(value: string): void;
 }
 
 function MyPosts(props: PostPropType) {
     let postsElement = props.posts.map((p) => <Post message={p.message} likeCounts={p.likeCounts}/>)
-    // let newPostElement = React.createRef<HTMLTextAreaElement>()
-    const addPost = () => {
-        props.dispatch(addPostActionCreator())
+     let newPostElement = React.createRef<HTMLTextAreaElement>()
+    const onAddPost = () => {
+       props.addPost()
+      //  props.dispatch(addPostActionCreator())
        // props.addPost(props.newPostText);
        // props.newPostText = ''
     }
 
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.currentTarget.value
-        let action = updateNewPostTextActionCreator(text)
-        props.dispatch(action)
+        props.updateNewPostTextActionCreator(text)
+       // let action = updateNewPostTextActionCreator(text)
+        //props.dispatch(action)
         //props.updateNewPostText(e.currentTarget.value);
         //   props.updateNewPostText(newPostElement.current.value)
         //console.log(props.newPostText)
@@ -35,10 +39,10 @@ function MyPosts(props: PostPropType) {
             <div>
                 <div>
                     <textarea onChange={onPostChange}
-                           //  value={props.newPostText}
+                             value={props.newPostText}
                     ></textarea></div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={onAddPost}>Add post</button>
                 </div>
             </div>
 
@@ -50,5 +54,4 @@ function MyPosts(props: PostPropType) {
 
     )
 }
-
 export default MyPosts;

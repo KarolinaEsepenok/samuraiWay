@@ -18,7 +18,7 @@ function MyPosts(props: PostPropType) {
     let postsElement = props.posts.map((p) => <Post message={p.message} likeCounts={p.likeCounts}/>)
      let newPostElement = React.createRef<HTMLTextAreaElement>()
     const onAddPost = () => {
-       props.addPost()
+       props.addPost(message)
       //  props.dispatch(addPostActionCreator())
        // props.addPost(props.newPostText);
        // props.newPostText = ''

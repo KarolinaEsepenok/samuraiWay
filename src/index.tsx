@@ -12,7 +12,7 @@ export const rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
-            <App dispatch={store.dispatch.bind(store)}
+            <App store={store} dispatch={store.dispatch.bind(store)}
                 //addPost={store.addPost.bind(store)}
                 // updateNewPostText={store.updateNewPostText.bind(store)}>
             /></Provider>
@@ -23,7 +23,7 @@ export const rerenderEntireTree = () => {
 //rerenderEntireTree(store.getState());
 store.subscribe(()=>{
     let state = store.getState();
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 })
 
 //rerenderEntireTree();

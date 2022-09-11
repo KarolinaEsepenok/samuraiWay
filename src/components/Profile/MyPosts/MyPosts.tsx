@@ -10,7 +10,7 @@ export type PostPropType = {
     posts: PostsType[]
     addPost: (message: string) => void
     newPostText: string
-    dispatch: (action: ActionsTypes) => void
+    //dispatch: (action: ActionsTypes) => void
     updateNewPostTextActionCreator(value: string): void;
 }
 
@@ -18,7 +18,7 @@ function MyPosts(props: PostPropType) {
     let postsElement = props.posts.map((p) => <Post message={p.message} likeCounts={p.likeCounts}/>)
      let newPostElement = React.createRef<HTMLTextAreaElement>()
     const onAddPost = () => {
-       props.addPost(message)
+       props.addPost(props.newPostText)
       //  props.dispatch(addPostActionCreator())
        // props.addPost(props.newPostText);
        // props.newPostText = ''

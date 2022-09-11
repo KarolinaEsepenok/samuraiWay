@@ -12,7 +12,7 @@ export const rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
-            <App store={store} dispatch={store.dispatch.bind(store)}
+            <App  dispatch={store.dispatch.bind(store)} store={store}
                 //addPost={store.addPost.bind(store)}
                 // updateNewPostText={store.updateNewPostText.bind(store)}>
             /></Provider>

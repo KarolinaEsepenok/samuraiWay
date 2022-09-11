@@ -1,5 +1,5 @@
 import React from 'react';
-import {PostsType, StateType, store} from "../state";
+import {DialogsType, MessageType, PostsType, StateType, store} from "../state";
 
 export type DialogsPageReducer = {
     state: StateType
@@ -9,11 +9,15 @@ type SendMessageType = ReturnType<typeof sendMessageCreator>
 type UpdateNewMessageBodyType = ReturnType<typeof updateNewMessageBodyCreator>
 export type ActionType = SendMessageType | UpdateNewMessageBodyType
 
-
+export type DialogsPageType = {
+    dialogsData: DialogsType[]
+    messageData: MessageType[]
+    newMessageBody: string
+}
 //export type DialogsReducerType= DialogsPageReducer
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
 const SEND_MESSAGE = 'SEND_MESSAGE';
-let initialState = {
+let initialState: DialogsPageType = {
     dialogsData: [
         {id: 1, name: 'Dima'},
         {id: 2, name: 'Andrey'},
@@ -32,7 +36,7 @@ let initialState = {
     newMessageBody: '',
 }
 
-export function DialogsPageReducer(action: ActionType, state = initialState) {
+export function DialogsPageReducer(action: ActionType, state = initialState): DialogsPageType {
 
     // messages: [...state.messageData]
 

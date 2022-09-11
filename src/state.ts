@@ -97,10 +97,10 @@ export let store: RootStateType = {
         this._callSubscriber = observer;
     },
     dispatch(action) {
-        this._state.profilePage = ProfilePageReducer(store, action)
-        this._state.dialogsPage = DialogsPageReducer(this._state.dialogsPage, action)
-      //  this._state.sidebar = SidebarReducer(this._state.sidebar, action)
-        this._callSubscriber(this._state)
+      //   this._state.profilePage = ProfilePageReducer(store, action)
+      //   this._state.dialogsPage = DialogsPageReducer(this._state.dialogsPage, action)
+      // //  this._state.sidebar = SidebarReducer(this._state.sidebar, action)
+      //   this._callSubscriber(this._state)
 
 
     }

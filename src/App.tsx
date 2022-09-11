@@ -11,6 +11,8 @@ import News from "./components/News/News";
 import dialogs from "./components/Dialogs/Dialogs";
 import {DialogsType, MessageType, PostsType, StateType, RootStateType} from "./state";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {Store} from "redux";
+import {AppStateType} from "./redux/reduxStore";
 
 
 {/*export type AppPropsType = {
@@ -22,7 +24,7 @@ import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 export type AppStatePropsType = {
     dispatch: any;
     //addPost:(message:string)=>void
-    store: RootStateType
+    store: Store<AppStateType>
 
 
 }
@@ -41,7 +43,8 @@ function App(props: AppStatePropsType) {
                     <Route path='/dialogs' render={() =>
                         <DialogsContainer
                         //  state={props.state.dialogsPage}
-                        store={props.store}/>}/>
+                        //store={props.store}
+                        />}/>
                     <Route path='/profile' render={() => <Profile
                         store={props.store}
                        // profilePage={state.profilePage}

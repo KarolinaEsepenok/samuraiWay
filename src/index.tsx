@@ -8,23 +8,24 @@ import {store} from "./redux/reduxStore";
 import {Provider} from "react-redux";
 
 
-export const rerenderEntireTree = () => {
+// export const rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
-            <App  dispatch={store.dispatch.bind(store)} store={store}
+            <App
+                // dispatch={store.dispatch.bind(store)} store={store}
                 //addPost={store.addPost.bind(store)}
                 // updateNewPostText={store.updateNewPostText.bind(store)}>
             /></Provider>
         </BrowserRouter>,
         document.getElementById('root')
     );
-}
+// }
 //rerenderEntireTree(store.getState());
-store.subscribe(()=>{
-    let state = store.getState();
-    rerenderEntireTree()
-})
+// store.subscribe(()=>{
+//     let state = store.getState();
+//     rerenderEntireTree()
+// })
 
 //rerenderEntireTree();
 //store.subscribe(rerenderEntireTree);

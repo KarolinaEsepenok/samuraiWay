@@ -1,6 +1,5 @@
 
-.app-wrapper {
-
+.appWrapper {
     display: grid;
     grid-template-areas:
           "h h"
@@ -11,10 +10,8 @@
     background-color: #f8ddfd;
 }
 
-app-wrapper-content {
-    grid-area: c;
-
-
+.appWrapperContent{
+    grid-area: auto;
 
 }
 

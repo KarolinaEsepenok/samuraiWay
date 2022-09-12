@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import s from './App.module.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
@@ -21,33 +21,31 @@ import {AppStateType} from "./redux/reduxStore";
     messagesData: MessageType[],
 }*/
 }
-export type AppStatePropsType = {
-    dispatch: any;
-    //addPost:(message:string)=>void
-    store: Store<AppStateType>
+// export type AppStatePropsType = {
+//     dispatch: any;
+//     //addPost:(message:string)=>void
+//     store: Store<AppStateType>
+// }
 
-
-}
-
-function App(props: AppStatePropsType) {
+function App() {
     // let message= props.state.profilePage.posts[0].message
-    const state = props.store.getState()
+    // const state = props.store.getState()
 
     return (
         <BrowserRouter>
-            <div className={'app-wrapper'}>
+            <div className={s.appWrapper}>
                 <Header/>
                 <Navbar/>
                 {/*}  <Profile/>*/}
-                <div className={'app-wrapper-content'}>
+                <div className={s.appWrapperContent}>
                     <Route path='/dialogs' render={() =>
                         <DialogsContainer
-                        //  state={props.state.dialogsPage}
-                        //store={props.store}
+                            //  state={props.state.dialogsPage}
+                            //store={props.store}
                         />}/>
                     <Route path='/profile' render={() => <Profile
-                        store={props.store}
-                       // profilePage={state.profilePage}
+                        // store={props.store}
+                        // profilePage={state.profilePage}
                         //dispatch={props.dispatch}
                         //addPost={props.addPost}
                         // newPostText={props.state.profilePage.newPostText}

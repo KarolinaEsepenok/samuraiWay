@@ -22,8 +22,8 @@ import {DialogsPropsType} from "./DialogsContainer";
 // }
 
 
-function Dialogs(props: DialogsPropsType) {
-    let state = props.dialogsPage;
+function Dialogs(props:DialogsPropsType) {
+     let state = props.dialogsPage;
 
     let dialogsElements =props.dialogsPage.dialogsData
         .map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)

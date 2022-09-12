@@ -39,16 +39,8 @@ function App() {
                 {/*}  <Profile/>*/}
                 <div className={s.appWrapperContent}>
                     <Route path='/dialogs' render={() =>
-                        <DialogsContainer
-                            //  state={props.state.dialogsPage}
-                            //store={props.store}
-                        />}/>
+                        <DialogsContainer/>}/>
                     <Route path='/profile' render={() => <Profile
-                        // store={props.store}
-                        // profilePage={state.profilePage}
-                        //dispatch={props.dispatch}
-                        //addPost={props.addPost}
-                        // newPostText={props.state.profilePage.newPostText}
                     />}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>

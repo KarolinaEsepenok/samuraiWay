@@ -20,7 +20,7 @@ let initialState = {
     newPostText: '',
 }
 
-export function ProfilePageReducer(action: ActionsTypes, state = initialState) {
+export function ProfilePageReducer(state = initialState,action: ActionsTypes) {
     switch (action.type) {
         case ADD_POST:
             let newPost: PostsType = {
@@ -37,8 +37,9 @@ export function ProfilePageReducer(action: ActionsTypes, state = initialState) {
             return  {
                 ...state,
                 newPostText: action.newText
-            };
-        }
+            };}
+        default: return state
+
     }
 };
 export const addPostActionCreator = () => {

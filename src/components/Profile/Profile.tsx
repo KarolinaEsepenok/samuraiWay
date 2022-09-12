@@ -1,13 +1,5 @@
 import React from 'react';
-import s from './Profile.module.css'
-import MyPosts from "./MyPosts/MyPosts";
-import Post from "./MyPosts/Post/Post";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {message} from "antd";
-import {PostsType, MessageType, ProfilePageType} from "../../state";
-import {ActionsTypes} from "../../redux/ProfilePageReducer";
-import myPosts from "./MyPosts/MyPosts";
-import MyPostsContainer from "./MyPosts/Post/MyPostContainer";
 import {Store} from "redux";
 import {AppStateType} from "../../redux/reduxStore";
 
@@ -30,7 +22,7 @@ function Profile(props: ProfileProps) {
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer
+            {/* <MyPostsContainer />
             // updateNewPostTextActionCreator={props.updateNewPostTextActionCreator}
             //     posts={props.profilePage.posts}
             //         dispatch={props.dispatch}
@@ -39,8 +31,8 @@ function Profile(props: ProfileProps) {
             //        // newPostText={props.newPostText}
             //          addPost={props.addPost}
             // // addPost={props.addPost}
-            //    store={props.store}
-            />
+            //    store={props.store}*/}
+
 
 
         </div>

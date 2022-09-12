@@ -8,7 +8,7 @@ import {Dispatch} from "redux";
 
 export let mapStateToProps=(state:AppStateType)=>{
     return{
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.messagePage
     }
 }
 export let mapDispatchToProps=(dispatch: Dispatch)=>{
@@ -17,7 +17,6 @@ export let mapDispatchToProps=(dispatch: Dispatch)=>{
             dispatch(updateNewMessageBodyCreator(body))
         },
         sendMessage:()=>{
-
             dispatch(sendMessageCreator())
         }
     }

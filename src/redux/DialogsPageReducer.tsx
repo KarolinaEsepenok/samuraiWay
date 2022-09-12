@@ -36,7 +36,7 @@ let initialState: DialogsPageType = {
     newMessageBody: '',
 }
 
-export function DialogsPageReducer(action: ActionType, state = initialState): DialogsPageType {
+export function DialogsPageReducer(state = initialState,action: ActionType): DialogsPageType {
 
     // messages: [...state.messageData]
 
@@ -53,6 +53,7 @@ export function DialogsPageReducer(action: ActionType, state = initialState): Di
                 newMessageBody: '',
                 messageData: [...state.messageData, {id: 6, message: body}]
             }
+        default: return state
     }
 };
 export const sendMessageCreator = () => {

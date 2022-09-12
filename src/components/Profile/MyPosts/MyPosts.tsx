@@ -16,18 +16,18 @@ export type PostPropType = {
 
 function MyPosts(props: PostPropType) {
     let postsElement = props.posts.map((p) => <Post message={p.message} likeCounts={p.likeCounts}/>)
-     let newPostElement = React.createRef<HTMLTextAreaElement>()
+    let newPostElement = React.createRef<HTMLTextAreaElement>()
     const onAddPost = () => {
-       props.addPost(props.newPostText)
-      //  props.dispatch(addPostActionCreator())
-       // props.addPost(props.newPostText);
-       // props.newPostText = ''
+        props.addPost(props.newPostText)
+        //  props.dispatch(addPostActionCreator())
+        // props.addPost(props.newPostText);
+        // props.newPostText = ''
     }
 
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.currentTarget.value
         props.updateNewPostTextActionCreator(text)
-       // let action = updateNewPostTextActionCreator(text)
+        // let action = updateNewPostTextActionCreator(text)
         //props.dispatch(action)
         //props.updateNewPostText(e.currentTarget.value);
         //   props.updateNewPostText(newPostElement.current.value)
@@ -39,7 +39,7 @@ function MyPosts(props: PostPropType) {
             <div>
                 <div>
                     <textarea onChange={onPostChange}
-                             value={props.newPostText}
+                              value={props.newPostText}
                     ></textarea></div>
                 <div>
                     <button onClick={onAddPost}>Add post</button>
@@ -54,4 +54,5 @@ function MyPosts(props: PostPropType) {
 
     )
 }
+
 export default MyPosts;

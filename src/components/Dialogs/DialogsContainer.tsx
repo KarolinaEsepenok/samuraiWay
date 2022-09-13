@@ -21,7 +21,6 @@ export let mapDispatchToProps=(dispatch: Dispatch)=>{
         }
     }
 }
-
 type MapStatePropsType = {
     dialogsPage: DialogsPageType
 }

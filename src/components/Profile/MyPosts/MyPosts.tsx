@@ -15,7 +15,7 @@ function MyPosts(props: MyPostPropsType) {
     }
         return (
             <div className={s.postsBlock}>
-                <Post message={'hfhfhfhfhfh'} likeCounts={'34'}/>
+
                 <h2>My posts</h2>
                 <div>
                     <div>

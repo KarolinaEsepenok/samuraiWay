@@ -9,7 +9,6 @@ function Profile() {
     return (
         <div>
             <ProfileInfo/>
-            <Post message={'hfhfhfhfhfh'} likeCounts={'34'}/>
             <MyPostsContainer />
         </div>
     )

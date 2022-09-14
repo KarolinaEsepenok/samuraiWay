@@ -2,14 +2,15 @@ import {connect} from "react-redux";
 import MyPosts from "./MyPosts";
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/ProfilePageReducer";
 import {AppStateType} from "../../../redux/reduxStore";
-import { ProfilePageType} from "../../../state";
+import {PostsType, ProfilePageType} from "../../../state";
 import {Dispatch} from "redux";
 
 
 let mapStateToProps = (state: AppStateType) => {
     return {
-        posts: state.profilePage.posts,
-        newPostText: state.profilePage.newPostText
+        profilePage: state.profilePage
+      //  posts: state.profilePage.posts,
+        //newPostText: state.profilePage.newPostText
     }
 }
 let mapDispatchToProps = (dispatch:Dispatch
@@ -26,6 +27,8 @@ let mapDispatchToProps = (dispatch:Dispatch
     }
 }
 export type MapStatePropsType = {
+    //posts: PostsType[],
+    //newPostText: string,
     profilePage:ProfilePageType
 }
 export type MapDispatchPropsType = {

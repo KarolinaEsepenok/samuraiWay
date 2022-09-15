@@ -36,4 +36,4 @@ export type MapDispatchPropsType = {
     addPost: ()=>void
 }
 export type MyPostPropsType = MapStatePropsType & MapDispatchPropsType
-export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps )(MyPosts)
+//export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps )(MyPosts)

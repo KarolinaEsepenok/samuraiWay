@@ -4,23 +4,20 @@ import {PostsType, StateType} from "../state";
 
 type FollowActionType = ReturnType<typeof followAC>
 type UnfollowActionType = ReturnType<typeof unfollowAC>
-export type ActionsTypes = FollowActionType | UnfollowActionType
+type SetUsersActionType = ReturnType<typeof setUsersAC >
+export type ActionsTypes = FollowActionType | UnfollowActionType | SetUsersActionType
 
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
-let initialState = {
-    users: [
-        {id: 1,followed:false, fullName: 'Dmitry',status: 'I am a boss', location: {city: 'Minsk', country: 'Belarus'}},
-        {id: 2,followed:false, fullName: 'Sveta',status: 'I am a boss', location: {city: 'Borisov', country: 'Belarus'}},
-        {id: 3,followed:true, fullName: 'Ann',status: 'I am a boss', location: {city: 'Moscow', country: 'Russia'}},
-        {id: 4,followed:false, fullName: 'Vlad',status: 'I am a boss', location: {city: 'Kiev', country: 'Ukraine'}},
+const SET_USERS = 'SET_USERS';
+let initialState :  SetUsersActionType= {
+   users:[]
+};
 
-    ]
 
-}
 
-export function UsersReducer(state = initialState,action: ActionsTypes) {
+export function UsersReducer(state = initialState,action: ActionsTypes): SetUsersActionType {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -42,9 +39,14 @@ export function UsersReducer(state = initialState,action: ActionsTypes) {
                         return u
                     })
                 }
+        case SET_USERS:
+            return { ...state,
+                users: [...state.users, ...action.users]
+            }
 
 
-        default: return state
+
+        default: return state;
 
     }
 };
@@ -59,3 +61,10 @@ export const unfollowAC = (userId:number) => {
 
     } as const
 }
+export const setUsersAC = (users:[{id: number,photoUrl:string,followed:boolean, fullName: string,status: string, location: {city:string, country: string}}]) => {
+    return {
+        type: SET_USERS,users
+
+    } as const
+}
+

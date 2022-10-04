@@ -12,7 +12,8 @@ import dialogs from "./components/Dialogs/Dialogs";
 import {DialogsType, MessageType, PostsType, StateType, RootStateType} from "./state";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {Store} from "redux";
-import {AppStateType} from "./redux/reduxStore";
+
+import UsersContainer from "./components/Users/UsersContainer";
 
 
 {/*export type AppPropsType = {
@@ -45,7 +46,7 @@ function App() {
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
-                    <Route path='/users' render={() => <Users/>}/>
+                    <Route path='/users' render={() => <UsersContainer/>}/>
                 </div>
             </div>
         </BrowserRouter>

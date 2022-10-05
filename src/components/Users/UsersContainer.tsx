@@ -1,4 +1,3 @@
-
 import {connect} from "react-redux";
 import Users from "./Users";
 import {AppStateType} from "../../redux/reduxStore";
@@ -16,23 +15,26 @@ export let mapDispatchToProps = (dispatch: Dispatch) => {
         follow: (userId: number) => {
             dispatch(followAC(userId))
         },
-       unfollow: (userId: number) => {
+        unfollow: (userId: number) => {
             dispatch(unfollowAC(userId))
         },
-        setUsers: (users:[{id: number,photoUrl:string,followed:boolean, fullName: string,status: string, location: {city:string, country: string}}]) => {
+        setUsers: (users: { id: number, photoUrl: string, followed: boolean, fullName: string, status: string, location: { city: string, country: string } }[]) => {
             dispatch(setUsersAC(users))
 
         }
     }
 }
 type MapStatePropsType = {
-    users:[{id: number,photoUrl:string,followed:boolean, fullName: string,status: string, location: {city:string, country: string}}]
+    users: { id: number, photoUrl: string, followed: boolean, fullName: string, status: string, location: { city: string, country: string } }[]
 }
 type MapDispatchPropsType = {
-    follow:(userId:number)=>void
-    unfollow:(userId:number)=>void
-    setUsers:(users:[{id: number,photoUrl:string,followed:boolean, fullName: string,status: string, location: {city:string, country: string}}])=>void
-
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+    setUsers: (users: { id: number, photoUrl: string, followed: boolean, fullName: string, status: string, location: { city: string, country: string } }[]) => void
+    /*
+    Array<string>
+    string[]
+    */
 }
 export type UsersPropsType = MapStatePropsType & MapDispatchPropsType
 export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);

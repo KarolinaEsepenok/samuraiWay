@@ -4,7 +4,7 @@ import s from './Users.module.css'
 
 
 const Users = (props: UsersPropsType) => {
-    if(props.users.length === 0 ){
+    if(props.users.length === 0) {
     props.setUsers(  [
             {
                 id: 1,
@@ -12,16 +12,14 @@ const Users = (props: UsersPropsType) => {
                 followed: false,
                 fullName: 'Dmitry',
                 status: 'I am a boss',
-                location: {city: 'Minsk', country: 'Belarus'}
-            },
+                location: {city: 'Minsk', country: 'Belarus'}},
             {
                 id: 2,
                 photoUrl:'https://www.biletik.aero/upload/medialibrary/807/807f262b60da392f1e09aa6d33f20a9b.png',
                 followed: false,
                 fullName: 'Sveta',
                 status: 'I am a boss',
-                location: {city: 'Borisov', country: 'Belarus'}
-            },
+                location: {city: 'Borisov', country: 'Belarus'}},
             {id: 3,
                 photoUrl:'https://www.biletik.aero/upload/medialibrary/807/807f262b60da392f1e09aa6d33f20a9b.png',
                 followed: true, fullName: 'Ann', status: 'I am a boss', location: {city: 'Moscow', country: 'Russia'}},
@@ -32,7 +30,7 @@ const Users = (props: UsersPropsType) => {
         ]
     )}
     return (
-        <div>
+        <div>users
             {props.users.map(u => <div key={u.id}>
                 <span>
                     <div>
@@ -60,7 +58,7 @@ const Users = (props: UsersPropsType) => {
 
             </div>)}
         </div>
-    );
+    )
 };
 
 export default Users;

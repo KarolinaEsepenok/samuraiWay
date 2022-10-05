@@ -11,13 +11,17 @@ export type ActionsTypes = FollowActionType | UnfollowActionType | SetUsersActio
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
-let initialState :  SetUsersActionType= {
+
+let initialState:InitialState = {
    users:[]
 };
 
+type InitialState = {
+    users:  { id: number, photoUrl: string, followed: boolean, fullName: string, status: string, location: { city: string, country: string } }[]
+}
 
 
-export function UsersReducer(state = initialState,action: ActionsTypes): SetUsersActionType {
+export function UsersReducer(state = initialState,action: ActionsTypes): InitialState {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -61,7 +65,7 @@ export const unfollowAC = (userId:number) => {
 
     } as const
 }
-export const setUsersAC = (users:[{id: number,photoUrl:string,followed:boolean, fullName: string,status: string, location: {city:string, country: string}}]) => {
+export const setUsersAC = (users:{id: number,photoUrl:string,followed:boolean, fullName: string,status: string, location: {city:string, country: string}}[]) => {
     return {
         type: SET_USERS,users
 

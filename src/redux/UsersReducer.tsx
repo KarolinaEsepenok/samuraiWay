@@ -17,7 +17,7 @@ let initialState:InitialState = {
 };
 
 type InitialState = {
-    users:  { id: number, photoUrl: string, followed: boolean, fullName: string, status: string, location: { city: string, country: string } }[]
+    users:  { id: number, photos: {small: string, large: string}, followed: boolean, name: string, status: string, location: { city: string, country: string } }[]
 }
 
 
@@ -65,7 +65,7 @@ export const unfollowAC = (userId:number) => {
 
     } as const
 }
-export const setUsersAC = (users:{id: number,photoUrl:string,followed:boolean, fullName: string,status: string, location: {city:string, country: string}}[]) => {
+export const setUsersAC = (users:{id: number,photos: {small: string, large: string},followed:boolean, name: string,status: string, location: {city:string, country: string}}[]) => {
     return {
         type: SET_USERS,users
 

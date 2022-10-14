@@ -2,11 +2,14 @@ import {connect} from "react-redux";
 import Users from "./Users";
 import {AppStateType} from "../../redux/reduxStore";
 import {Dispatch} from "redux";
-import {followAC, setUsersAC, unfollowAC} from "../../redux/UsersReducer";
+import {followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC} from "../../redux/UsersReducer";
 
 export let mapStateToProps = (state: AppStateType) => {
     return {
-        users: state.usersPage.users
+        users: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount:state.usersPage.totalUsersCount,
+        currentPage:state.usersPage.currentPage
 
     }
 }
@@ -20,17 +23,27 @@ export let mapDispatchToProps = (dispatch: Dispatch) => {
         },
         setUsers: (users: { id: number, photos: {small: string, large: string}, followed: boolean, name: string, status: string, location: { city: string, country: string } }[]) => {
             dispatch(setUsersAC(users))
-
+        },
+        setCurrentPage: (pageNumber:number)=>{
+            dispatch(setCurrentPageAC(pageNumber))
+        },
+        setTotalUsersCount:(totalUsersCount:number)=>{
+            dispatch(setTotalUsersCountAC(totalUsersCount))
         }
     }
 }
 type MapStatePropsType = {
-    users: { id: number, photos: {small: string, large: string}, followed: boolean, name: string, status: string, location: { city: string, country: string } }[]
+    users: { id: number, photos: {small: string, large: string}, followed: boolean, name: string, status: string, location: { city: string, country: string } }[],
+    pageSize: number,
+    totalUsersCount: number,
+    currentPage:number
 }
 type MapDispatchPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     setUsers: (users: { id: number, photos: {small: string, large: string}, followed: boolean, name: string, status: string, location: { city: string, country: string } }[]) => void
+    setCurrentPage:(pageNumber:number)=>void
+    setTotalUsersCount:(totalUsersCount:number)=>void
     /*
     Array<string>
     string[]

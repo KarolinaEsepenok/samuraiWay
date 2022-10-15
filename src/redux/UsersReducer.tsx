@@ -7,7 +7,8 @@ type UnfollowActionType = ReturnType<typeof unfollowAC>
 type SetUsersActionType = ReturnType<typeof setUsersAC >
 type SetCurrentPageActionType = ReturnType<typeof setCurrentPageAC>
 type SetTotalUsersCountActionType = ReturnType<typeof setTotalUsersCountAC>
-export type ActionsTypes = FollowActionType | UnfollowActionType | SetUsersActionType | SetCurrentPageActionType | SetTotalUsersCountActionType
+type onPageChangedActionType = ReturnType<typeof onPageChangedAC>
+export type ActionsTypes = FollowActionType | UnfollowActionType | SetUsersActionType | SetCurrentPageActionType | SetTotalUsersCountActionType | onPageChangedActionType
 
 
 const FOLLOW = 'FOLLOW';
@@ -15,12 +16,13 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
+const ON_PAGE_CHANGED = 'ON_PAGE_CHANGED'
 
 
 let initialState:InitialState = {
    users:[],
     pageSize:5,
-    totalUsersCount: 0,
+    totalUsersCount: 54,
     currentPage:1
 };
 
@@ -66,7 +68,11 @@ export function UsersReducer(state = initialState,action: ActionsTypes): Initial
         case SET_TOTAL_USERS_COUNT:{
             return { ...state,totalUsersCount:action.count
 
-            }}
+            }
+
+        }
+        case ON_PAGE_CHANGED:
+            return {...state}
 
 
 
@@ -102,6 +108,12 @@ export const setCurrentPageAC = (currentPage:number) => {
 export const setTotalUsersCountAC = (totalUsersCount:number) => {
     return {
         type: SET_TOTAL_USERS_COUNT,count:totalUsersCount
+
+    } as const
+}
+export const onPageChangedAC = (pageNumber:number) => {
+    return {
+        type: ON_PAGE_CHANGED,pageNumber
 
     } as const
 }

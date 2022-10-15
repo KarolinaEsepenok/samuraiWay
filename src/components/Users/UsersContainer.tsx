@@ -33,10 +33,13 @@ export let mapDispatchToProps = (dispatch: Dispatch) => {
     }
 }
 type MapStatePropsType = {
+
     users: { id: number, photos: {small: string, large: string}, followed: boolean, name: string, status: string, location: { city: string, country: string } }[],
     pageSize: number,
     totalUsersCount: number,
-    currentPage:number
+    currentPage:number,
+
+
 }
 type MapDispatchPropsType = {
     follow: (userId: number) => void
@@ -44,6 +47,7 @@ type MapDispatchPropsType = {
     setUsers: (users: { id: number, photos: {small: string, large: string}, followed: boolean, name: string, status: string, location: { city: string, country: string } }[]) => void
     setCurrentPage:(pageNumber:number)=>void
     setTotalUsersCount:(totalUsersCount:number)=>void
+   // onPageChanged:(p:number)=>void
     /*
     Array<string>
     string[]

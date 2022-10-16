@@ -8,29 +8,36 @@ type SetUsersActionType = ReturnType<typeof setUsersAC >
 type SetCurrentPageActionType = ReturnType<typeof setCurrentPageAC>
 type SetTotalUsersCountActionType = ReturnType<typeof setTotalUsersCountAC>
 type onPageChangedActionType = ReturnType<typeof onPageChangedAC>
-export type ActionsTypes = FollowActionType | UnfollowActionType | SetUsersActionType | SetCurrentPageActionType | SetTotalUsersCountActionType | onPageChangedActionType
+type ToggleIsFetchingActionType = ReturnType<typeof toggleIsFetchingAC>
+export type ActionsTypes = FollowActionType | UnfollowActionType
+    | SetUsersActionType | SetCurrentPageActionType
+    | SetTotalUsersCountActionType | onPageChangedActionType
+| ToggleIsFetchingActionType
 
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
-const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
-const ON_PAGE_CHANGED = 'ON_PAGE_CHANGED'
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
+const ON_PAGE_CHANGED = 'ON_PAGE_CHANGED';
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 
 let initialState:InitialState = {
    users:[],
     pageSize:5,
     totalUsersCount: 54,
-    currentPage:1
+    currentPage:1,
+    isFetching: false
 };
 
 type InitialState = {
     users:  { id: number, photos: {small: string, large: string}, followed: boolean, name: string, status: string, location: { city: string, country: string } }[],
     pageSize: number,
     totalUsersCount: number,
-    currentPage:number
+    currentPage:number,
+    isFetching: boolean
 
 }
 
@@ -71,9 +78,12 @@ export function UsersReducer(state = initialState,action: ActionsTypes): Initial
             }
 
         }
-        case ON_PAGE_CHANGED:
-            return {...state}
-
+        case ON_PAGE_CHANGED: {
+            return {...state, pageSize:action.pageNumber}
+        }
+        case TOGGLE_IS_FETCHING:{
+            return  {...state, isFetching: action.isFetching}
+        }
 
 
 
@@ -117,4 +127,9 @@ export const onPageChangedAC = (pageNumber:number) => {
 
     } as const
 }
+export const toggleIsFetchingAC = (isFetching:boolean) => {
+    return {
+        type: TOGGLE_IS_FETCHING,isFetching
 
+    } as const
+}

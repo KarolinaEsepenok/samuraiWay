@@ -1,15 +1,27 @@
 import React from 'react';
-import {PostsType, StateType} from "../state";
+import {DialogsType, MessageType, PostsType, StateType} from "../state";
 
 
 type AddPostActionType = ReturnType<typeof addPostActionCreator>
 type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
-export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType
+type SetUserProfile = ReturnType<typeof setUserProfile >
+export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | SetUserProfile
 
+
+export type ProfilePageType = {
+    posts:PostsType[]
+    newPostText:string
+    profile:null
+}
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-let initialState = {
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
+
+
+
+
+let initialState:ProfilePageType = {
     posts: [
         {id: 1, message: 'Hi, how are you', likeCounts: '12'},
         {id: 2, message: 'It is my first post', likeCounts: '12'},
@@ -18,6 +30,7 @@ let initialState = {
 
     ],
     newPostText: '',
+    profile:null
 }
 
 export function ProfilePageReducer(state = initialState,action: ActionsTypes) {
@@ -38,6 +51,9 @@ export function ProfilePageReducer(state = initialState,action: ActionsTypes) {
                 ...state,
                 newPostText: action.newText
             };}
+        case "SET_USER_PROFILE":{
+            return {...state, profile: action.profile}
+        }
         default: return state
 
     }
@@ -51,5 +67,11 @@ export const updateNewPostTextActionCreator = (text: string) => {
     return {
         type: UPDATE_NEW_POST_TEXT,
         newText: text
+    } as const
+}
+export const setUserProfile = (profile: any) => {
+    return {
+        type: SET_USER_PROFILE,
+       profile
     } as const
 }

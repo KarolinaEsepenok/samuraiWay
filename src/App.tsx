@@ -9,6 +9,7 @@ import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 
 
@@ -25,8 +26,6 @@ import {UsersContainer} from "./components/Users/UsersContainer";
 // }
 
 function App() {
-    // let message= props.state.profilePage.posts[0].message
-    // const state = props.store.getState()
 
     return (
         <BrowserRouter>
@@ -37,7 +36,7 @@ function App() {
                 <div className={s.appWrapperContent}>
                     <Route path='/dialogs' render={() =>
                         <DialogsContainer/>}/>
-                    <Route path='/profile' render={() => <Profile
+                    <Route path='/profile' render={() => <ProfileContainer
                     />}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>

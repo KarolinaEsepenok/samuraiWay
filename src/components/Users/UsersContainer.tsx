@@ -21,10 +21,10 @@ const UsersAPIComponent = (props: UsersPropsType) => {
     let getUsers = () => {
         if (props.users.length === 0) {
             props.toggleIsFetching(true)
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${props.currentPage}&count=${props.pageSize}`).then(responce => {
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${props.currentPage}&count=${props.pageSize}`).then(response => {
                 props.toggleIsFetching(false)
-                props.setUsers(responce.data.items)
-                props.setTotalUsersCount(responce.data.totalCount)
+                props.setUsers(response.data.items)
+                props.setTotalUsersCount(response.data.totalCount)
             });
         }
     }

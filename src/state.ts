@@ -1,6 +1,7 @@
 import {ActionsTypes, ProfilePageReducer} from "./redux/ProfilePageReducer";
 import {DialogsPageReducer} from "./redux/DialogsPageReducer";
 import {SidebarReducer} from "./redux/SitebarReducer";
+import profile from "./components/Profile/Profile";
 
 export type StatePropsType = {
     posts: PostsType[],
@@ -28,6 +29,7 @@ export type PostsType = {
 export type ProfilePageType = {
     posts: PostsType[],
     newPostText: string,
+    profile: null | ProfileType
 }
 export type DialogsPageType = {
     dialogsData: DialogsType[]
@@ -47,6 +49,27 @@ export type RootStateType = {
     getState: () => StateType
     dispatch: (action: ActionsTypes) => void
 }
+export type ProfileCommonType={
+    userId: number,
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    contacts:object,
+    github: string,
+    vk: string,
+    facebook: string,
+    instagram:string,
+    twitter: string,
+    website:string,
+    youtube: string,
+    mainLink: string,
+    photos:{
+    small: string | null,
+    large: string | null}
+}
+export  type ProfileType={
+    profile: ProfileCommonType
+}
 
 export let store: RootStateType = {
     _state: {
@@ -59,6 +82,7 @@ export let store: RootStateType = {
 
             ],
             newPostText: '',
+            profile: null
         },
         dialogsPage: {
             dialogsData: [

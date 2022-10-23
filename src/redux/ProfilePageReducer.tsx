@@ -1,5 +1,5 @@
 import React from 'react';
-import {DialogsType, MessageType, PostsType, StateType} from "../state";
+import {DialogsType, MessageType, PostsType, ProfileType, StateType} from "../state";
 
 
 type AddPostActionType = ReturnType<typeof addPostActionCreator>
@@ -11,7 +11,7 @@ export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | Set
 export type ProfilePageType = {
     posts:PostsType[]
     newPostText:string
-    profile:null
+    profile: null | ProfileType
 }
 
 const ADD_POST = 'ADD-POST';
@@ -33,7 +33,7 @@ let initialState:ProfilePageType = {
     profile:null
 }
 
-export function ProfilePageReducer(state = initialState,action: ActionsTypes) {
+export function ProfilePageReducer(state = initialState,action: ActionsTypes):ProfilePageType {
     switch (action.type) {
         case ADD_POST:
             let newPost: PostsType = {
@@ -51,7 +51,7 @@ export function ProfilePageReducer(state = initialState,action: ActionsTypes) {
                 ...state,
                 newPostText: action.newText
             };}
-        case "SET_USER_PROFILE":{
+        case SET_USER_PROFILE:{
             return {...state, profile: action.profile}
         }
         default: return state
@@ -60,7 +60,7 @@ export function ProfilePageReducer(state = initialState,action: ActionsTypes) {
 };
 export const addPostActionCreator = () => {
     return {
-        type: ADD_POST,
+        type: ADD_POST
     } as const
 }
 export const updateNewPostTextActionCreator = (text: string) => {
@@ -69,7 +69,7 @@ export const updateNewPostTextActionCreator = (text: string) => {
         newText: text
     } as const
 }
-export const setUserProfile = (profile: any) => {
+export const setUserProfile = (profile: null | ProfileType) => {
     return {
         type: SET_USER_PROFILE,
        profile

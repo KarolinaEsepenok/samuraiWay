@@ -2,9 +2,10 @@ import React from 'react';
 import s from './ProfileInfo.module.css'
 import {AppStateType} from "../../../redux/reduxStore";
 import Preloader from "../../common/Preloader/Preloader";
+import {ProfilePageType, ProfileType} from "../../../state";
 
 
-function ProfileInfo(props:AppStateType) {
+function ProfileInfo(props: {profilePage: ProfilePageType}) {
     if(!props.profilePage){
         return <Preloader isFetching={true}/>
     }
@@ -15,7 +16,7 @@ function ProfileInfo(props:AppStateType) {
             </div>
 
             <div className={s.descriptionBlock}>
-                <img src={props.profilePage.profile.photos.large}/>
+                <img src={props.profilePage.profile?.profile.photos.large}/>
                 ava +discr
             </div>
         </div>

@@ -9,6 +9,8 @@ function ProfileInfo(props: {profilePage: ProfilePageType}) {
     if(!props.profilePage){
         return <Preloader isFetching={true}/>
     }
+
+    const photoSrc = props.profilePage.profile?.profile.photos.large
     return (
         <div >
             <div >
@@ -16,7 +18,7 @@ function ProfileInfo(props: {profilePage: ProfilePageType}) {
             </div>
 
             <div className={s.descriptionBlock}>
-                <img src={props.profilePage.profile?.profile.photos.large}/>
+                {photoSrc && <img src={photoSrc}/>}
                 ava +discr
             </div>
         </div>

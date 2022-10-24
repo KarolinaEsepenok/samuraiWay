@@ -5,7 +5,7 @@ import Profile from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/reduxStore";
-import {PostsType, ProfileType} from "../../state";
+import {PostsType, ProfileType, RootStateType} from "../../state";
 import {ActionsTypes, ProfilePageType, setUserProfile} from "../../redux/ProfilePageReducer";
 
 class ProfileContainer extends React.Component<MapStateToPropsType & MapDispatchToPropsType>{
@@ -23,9 +23,8 @@ class ProfileContainer extends React.Component<MapStateToPropsType & MapDispatch
         </div>
     );}
 };
-let mapStateToProps=(state:ProfilePageType)=>({
-    profilePage: state.profile
-
+let mapStateToProps=(state:AppStateType)=>({
+    profilePage: state.profilePage
 })
 
 type MapStateToPropsType = {

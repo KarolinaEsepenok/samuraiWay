@@ -13,9 +13,6 @@ import {Provider} from "react-redux";
         <BrowserRouter>
             <Provider store={store}>
             <App
-                // dispatch={store.dispatch.bind(store)} store={store}
-                //addPost={store.addPost.bind(store)}
-                // updateNewPostText={store.updateNewPostText.bind(store)}>
             /></Provider>
         </BrowserRouter>,
         document.getElementById('root')

@@ -14,13 +14,15 @@ let initialState: InitialState = {
     userId: null,
     email: null,
     login: null,
-    isFetching: false
+    isAuth:false
+
 };
 type InitialState = {
     userId: number | null,
     email: string | null,
     login: string | null,
-    isFetching: boolean
+    isAuth:boolean
+
 }
 
 export function AuthReducer(state = initialState, action: ActionsTypes): InitialState {
@@ -28,16 +30,17 @@ export function AuthReducer(state = initialState, action: ActionsTypes): Initial
         case SET_USER_DATA:
             return {
                 ...state,
-                ...action.data
+                ...action.data,
+                isAuth:true
             }
 
         default:
             return state;
     }
 };
-export const setUserDataAC = (userId: number | null, email: string | null, login: string | null, isFetching: boolean) => {
+export const setUserDataAC = (userId: number | null, email: string | null, login: string | null, isAuth:boolean) => {
     return {
-        type: 'SET_USER_DATA', data:{userId, email, login, isFetching}
+        type: 'SET_USER_DATA', data:{userId, email, login,isAuth}
     } as const
 }
 

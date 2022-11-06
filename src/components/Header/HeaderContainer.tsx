@@ -26,7 +26,7 @@ export class HeaderContainer extends React.Component<CommonPropsType> {
     }
 }
 type PathParamsType = {
-    userId: string
+    userId?: string
 }
 type OnPropsType = MapStateToPropsType & MapDispatchToPropsType
 type CommonPropsType = RouteComponentProps<PathParamsType> & OnPropsType
@@ -37,7 +37,7 @@ type MapStateToPropsType = {
 
 }
 type MapDispatchToPropsType = {
-    setAuthUserData: (id:string, email: string, login:string ) => void
+    setAuthUserData: (id:number |null, email: string |null, login:string | null ) => void
 }
 const mapStateToProps = (state:AppStateType)=>({
     isAuth:state.auth.isAuth,

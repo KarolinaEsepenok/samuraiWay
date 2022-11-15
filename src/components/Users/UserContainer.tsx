@@ -7,7 +7,7 @@ import {
     onPageChangedAC,
     setCurrentPageAC,
     setTotalUsersCountAC,
-    setUsersAC, toggleIsFetchingAC,
+    setUsersAC, toggleFollowingProgressAC, toggleIsFetchingAC,
     unfollowAC
 } from "../../redux/UsersReducer";
 
@@ -52,7 +52,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
                    isFetching={this.props.isFetching}
                    setTotalUsersCount={this.props.setTotalUsersCount}
                    setUsers={this.props.setUsers}
-                   setCurrentPage={this.props.setCurrentPage}
+                   setCurrentPage={this.props.setCurrentPage} toggleFollowingProgress={this.props.toggleFollowingProgress}
 
             />
         </>
@@ -90,6 +90,9 @@ export let mapDispatchToProps = (dispatch: Dispatch) => {
         },
         toggleIsFetching: (isFetching: boolean) => {
             dispatch(toggleIsFetchingAC(isFetching))
+        },
+        toggleFollowingProgress:(isFetching:boolean)=>{
+            dispatch(toggleFollowingProgressAC(isFetching))
         }
     }
 }
@@ -108,6 +111,8 @@ type MapDispatchPropsType = {
     setTotalUsersCount: (totalUsersCount: number) => void
     onPageChanged: (pageNumber: number) => void
     toggleIsFetching: (isFetching: boolean) => void
+    toggleFollowingProgress:(isFetching:boolean)=>void
+
     /*
     Array<string>
     string[]

@@ -9,10 +9,11 @@ type SetCurrentPageActionType = ReturnType<typeof setCurrentPageAC>
 type SetTotalUsersCountActionType = ReturnType<typeof setTotalUsersCountAC>
 type onPageChangedActionType = ReturnType<typeof onPageChangedAC>
 type ToggleIsFetchingActionType = ReturnType<typeof toggleIsFetchingAC>
+type ToggleFollowingProgressActionType= ReturnType<typeof toggleFollowingProgressAC>
 export type ActionsTypes = FollowActionType | UnfollowActionType
     | SetUsersActionType | SetCurrentPageActionType
     | SetTotalUsersCountActionType | onPageChangedActionType
-| ToggleIsFetchingActionType
+| ToggleIsFetchingActionType | ToggleFollowingProgressActionType
 
 
 const FOLLOW = 'FOLLOW';
@@ -21,15 +22,16 @@ const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const ON_PAGE_CHANGED = 'ON_PAGE_CHANGED';
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
-
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
 
 let initialState:InitialState = {
    users:[],
     pageSize:5,
     totalUsersCount: 54,
     currentPage:1,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: false
 };
 
 type InitialState = {
@@ -38,6 +40,7 @@ type InitialState = {
     totalUsersCount: number,
     currentPage:number,
     isFetching: boolean
+    followingInProgress: boolean
 
 }
 
@@ -83,6 +86,9 @@ export function UsersReducer(state = initialState,action: ActionsTypes): Initial
         }
         case TOGGLE_IS_FETCHING:{
             return  {...state, isFetching: action.isFetching}
+        }
+        case TOGGLE_IS_FOLLOWING_PROGRESS:{
+            return  {...state, followingInProgress:action.isFetching}
         }
 
 
@@ -133,3 +139,10 @@ export const toggleIsFetchingAC = (isFetching:boolean) => {
 
     } as const
 }
+export const toggleFollowingProgressAC= (isFetching:boolean) => {
+    return {
+        type: TOGGLE_IS_FOLLOWING_PROGRESS,isFetching
+
+    } as const
+}
+

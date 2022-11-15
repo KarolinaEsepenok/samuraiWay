@@ -1,14 +1,15 @@
 import React from 'react';
 import Header from "./Header";
-import {render} from "react-dom";
+
 import axios from "axios";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/reduxStore";
 import {RouteComponentProps} from "react-router-dom";
-import {ProfilePageType} from "../../redux/ProfilePageReducer";
-import {ProfileType} from "../../state";
 
-export class HeaderContainer extends React.Component<CommonPropsType> {
+import {mapDispatchToProps} from "../Users/UserContainer";
+
+
+class HeaderContainer extends React.Component<CommonPropsType,{}> {
     componentDidMount() {
         axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials:true}).then(response => {
             if(response.data.resultCode === 0){
@@ -19,7 +20,7 @@ export class HeaderContainer extends React.Component<CommonPropsType> {
     }
 
     render() {
-        return <Header {...this.props}/>
+        return <Header {...this.props} isAuth={this.props.isAuth} login={this.props.login}/>
 
     }
 }
@@ -31,7 +32,7 @@ type CommonPropsType = RouteComponentProps<PathParamsType> & OnPropsType
 
 type MapStateToPropsType = {
     isAuth:boolean,
-    login:string |null
+    login:string
 
 }
 type MapDispatchToPropsType = {
@@ -42,5 +43,4 @@ const mapStateToProps = (state:AppStateType)=>({
     login:state.auth.login
 })
 
-
-export default connect(mapStateToProps,{setAuthUserData})(HeaderContainer)
+export default connect(mapStateToProps,mapDispatchToProps)(HeaderContainer)

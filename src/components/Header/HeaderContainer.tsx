@@ -15,8 +15,6 @@ export class HeaderContainer extends React.Component<CommonPropsType> {
                 let {id, email,login} = response.data.data
                 this.props.setAuthUserData(id,email,login)
             }
-
-
         });
     }
 

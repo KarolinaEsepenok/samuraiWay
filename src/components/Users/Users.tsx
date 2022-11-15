@@ -1,11 +1,12 @@
 import React from 'react';
-import {UsersPropsType} from "./UsersContainer";
+import {UsersPropsType} from "./UserContainer";
 import s from "./Users.module.css";
 import users from "../asses/img/users.png";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
 
-const Users = (props: UsersPropsType) => {
+export const Users = (props: UsersPropsType) => {
+
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
@@ -36,7 +37,7 @@ const Users = (props: UsersPropsType) => {
                                 axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
                                     withCredentials:true,
                                     headers:{
-                                        "API-KEY":''
+                                        "API-KEY":'abd96315-58cc-42a7-a904-226e13c834ce'
 
                                     }
                                 }).then(response => {
@@ -49,7 +50,7 @@ const Users = (props: UsersPropsType) => {
                                 axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{}, {
                                     withCredentials:true,
                                     headers:{
-                                        "API-KEY":''
+                                        "API-KEY":'abd96315-58cc-42a7-a904-226e13c834ce'
                                     }
                                 }).then(response => {
                                     if(response.data.resultCode == 0 ){

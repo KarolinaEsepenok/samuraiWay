@@ -52,7 +52,8 @@ class UsersContainer extends React.Component<UsersPropsType> {
                    isFetching={this.props.isFetching}
                    setTotalUsersCount={this.props.setTotalUsersCount}
                    setUsers={this.props.setUsers}
-                   setCurrentPage={this.props.setCurrentPage} toggleFollowingProgress={this.props.toggleFollowingProgress}
+                   setCurrentPage={this.props.setCurrentPage}
+                   toggleFollowingProgress={this.props.toggleFollowingProgress} followingInProgress={this.props.followingInProgress}
 
             />
         </>
@@ -65,7 +66,9 @@ export let mapStateToProps = (state: AppStateType) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress:state.usersPage.followingInProgress
+
     }
 }
 export let mapDispatchToProps = (dispatch: Dispatch) => {
@@ -91,8 +94,8 @@ export let mapDispatchToProps = (dispatch: Dispatch) => {
         toggleIsFetching: (isFetching: boolean) => {
             dispatch(toggleIsFetchingAC(isFetching))
         },
-        toggleFollowingProgress:(isFetching:boolean)=>{
-            dispatch(toggleFollowingProgressAC(isFetching))
+        toggleFollowingProgress:(isFetching:boolean,userId:number)=>{
+            dispatch(toggleFollowingProgressAC(isFetching, userId))
         }
     }
 }
@@ -102,6 +105,7 @@ type MapStatePropsType = {
     totalUsersCount: number,
     currentPage: number,
     isFetching: boolean
+    followingInProgress:[]
 }
 type MapDispatchPropsType = {
     follow: (userId: number) => void
@@ -111,7 +115,7 @@ type MapDispatchPropsType = {
     setTotalUsersCount: (totalUsersCount: number) => void
     onPageChanged: (pageNumber: number) => void
     toggleIsFetching: (isFetching: boolean) => void
-    toggleFollowingProgress:(isFetching:boolean)=>void
+    toggleFollowingProgress:(isFetching:boolean, userId:number)=>void
 
     /*
     Array<string>

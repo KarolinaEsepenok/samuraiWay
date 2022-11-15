@@ -3,7 +3,7 @@ import s from './Header.module.css'
 import {NavLink} from "react-router-dom";
 
 
-function Header(props:{isAuth:boolean, login:string}) {
+function Header(props:{isAuth:boolean, login:string | null}) {
     return (
         <header className={s.header}>
             <img src='https://cryptologos.cc/logos/stellar-xlm-logo.png'/>

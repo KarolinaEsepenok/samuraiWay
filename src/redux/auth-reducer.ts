@@ -38,9 +38,9 @@ export function AuthReducer(state = initialState, action: ActionsTypes): Initial
             return state;
     }
 };
-export const setUserDataAC = (userId: number | null, email: string | null, login: string | null, isAuth:boolean) => {
+export const setUserDataAC = (userId: number | null, email: string | null, login: string | null) => {
     return {
-        type: 'SET_USER_DATA', data:{userId, email, login,isAuth}
+        type: 'SET_USER_DATA', data:{userId, email, login}
     } as const
 }
 

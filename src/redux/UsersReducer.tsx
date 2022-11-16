@@ -92,10 +92,6 @@ export function UsersReducer(state = initialState,action: ActionsTypes): Initial
                 followingInProgress: action.isFetching ?[...state.followingInProgress, action.userId]
                     :state.followingInProgress.filter(id => id != action.userId)}
         }
-
-
-
-
         default: return state;
 
     }
@@ -148,3 +144,9 @@ export const toggleFollowingProgressAC= (isFetching:boolean, userId:number) => {
     } as const
 }
 
+export const toggleFollowingProgressAC= (isFetching:boolean, userId:number) => {
+    return {
+        type: TOGGLE_IS_FOLLOWING_PROGRESS,isFetching, userId
+
+    } as const
+}

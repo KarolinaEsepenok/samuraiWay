@@ -144,9 +144,3 @@ export const toggleFollowingProgressAC= (isFetching:boolean, userId:number) => {
     } as const
 }
 
-export const toggleFollowingProgressAC= (isFetching:boolean, userId:number) => {
-    return {
-        type: TOGGLE_IS_FOLLOWING_PROGRESS,isFetching, userId
-
-    } as const
-}

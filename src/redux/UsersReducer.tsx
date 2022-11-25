@@ -35,13 +35,16 @@ let initialState:InitialState = {
 };
 
 type InitialState = {
-    users:  { id: number, photos: {small: string, large: string}, followed: boolean, name: string, status: string, location: { city: string, country: string } }[],
+    users:  UsersType[],
     pageSize: number,
     totalUsersCount: number,
     currentPage:number,
-    isFetching: boolean
+    isFetching: boolean,
     followingInProgress: []
 
+}
+export type UsersType={
+    id: number, photos: {small: string, large: string}, followed: boolean, name: string, status: string, location: { city: string, country: string }
 }
 
 
@@ -90,7 +93,7 @@ export function UsersReducer(state = initialState,action: ActionsTypes): Initial
         case TOGGLE_IS_FOLLOWING_PROGRESS:{
             return  {...state,
                 followingInProgress: action.isFetching ?[...state.followingInProgress, action.userId]
-                    :state.followingInProgress.filter(id => id != action.userId)}
+                    :state.followingInProgress.filter((id: number) => id != action.userId)}
         }
         default: return state;
 
@@ -107,7 +110,7 @@ export const unfollowAC = (userId:number) => {
 
     } as const
 }
-export const setUsersAC = (users:{id: number,photos: {small: string, large: string},followed:boolean, name: string,status: string, location: {city:string, country: string}}[]) => {
+export const setUsersAC = (users:UsersType[]) => {
     return {
         type: SET_USERS,users
 

@@ -3,11 +3,11 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../redux/reduxStore";
 import {Dispatch} from "redux";
 import {
-    followAC, getUsers,
+    followSuccess,
+    getUsers,
     onPageChangedAC,
-    setCurrentPageAC,
-    toggleFollowingProgressAC,
-    unfollowAC, UsersType
+    setCurrentPageAC, toggleFollowingProgress, unfollowSuccess,
+    UsersType
 } from "../../redux/UsersReducer";
 
 import Users from "./Users";
@@ -32,13 +32,15 @@ class UsersContainer extends React.Component<UsersPropsType> {
             {this.props.isFetching ? <Preloader isFetching={this.props.isFetching}/> : null}
             <Users totalUsersCount={this.props.totalUsersCount}
                    pageSize={this.props.pageSize}
-                   currentPage={this.props.currentPage}
+                   currentPage={this.props.currentPage} setCurrentPage={this.props.setCurrentPage}
+                   isFetching={this.props.isFetching}
+                   getUsers={this.props.getUsers}
+
                    users={this.props.users}
                    follow={this.props.follow}
                    unfollow={this.props.unfollow}
-                   isFetching={this.props.isFetching}
-                   setCurrentPage={this.props.setCurrentPage}
-                   toggleFollowingProgress={this.props.toggleFollowingProgress}followingInProgress={this.props.followingInProgress}
+                   toggleFollowingProgress={this.props.toggleFollowingProgress}
+                   followingInProgress={this.props.followingInProgress}
 
             />
         </>
@@ -60,10 +62,10 @@ export let mapStateToProps = (state: AppStateType) => {
 export let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         follow: (userId: number) => {
-            dispatch(followAC(userId))
+            dispatch(followSuccess(userId))
         },
         unfollow: (userId: number) => {
-            dispatch(unfollowAC(userId))
+            dispatch(unfollowSuccess(userId))
         },
 
         setCurrentPage: (pageNumber: number) => {
@@ -75,7 +77,7 @@ export let mapDispatchToProps = (dispatch: Dispatch) => {
         },
 
         toggleFollowingProgress:(isFetching:boolean,userId:number)=>{
-            dispatch(toggleFollowingProgressAC(isFetching, userId))
+            dispatch(toggleFollowingProgress(isFetching, userId))
         }
     }
 }
@@ -85,11 +87,12 @@ type MapStatePropsType = {
     totalUsersCount: number,
     currentPage: number,
     isFetching: boolean
-    followingInProgress:any
+    followingInProgress:Array<number>
 }
 type MapDispatchPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
+    getUsers: (currentPage: number, pageSize: number) => void
    // setUsers: (users: UsersType[]) => void
     setCurrentPage: (pageNumber: number) => void
  //   setTotalUsersCount: (totalUsersCount: number) => void

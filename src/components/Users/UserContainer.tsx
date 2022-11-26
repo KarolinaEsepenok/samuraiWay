@@ -34,7 +34,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
                    pageSize={this.props.pageSize}
                    currentPage={this.props.currentPage} setCurrentPage={this.props.setCurrentPage}
                    isFetching={this.props.isFetching}
-                   getUsers={this.props.getUsers}
+                   getUsers={this.props.getUsers} onPageChanged={this.props.onPageChanged}
 
                    users={this.props.users}
                    follow={this.props.follow}
@@ -96,7 +96,7 @@ type MapDispatchPropsType = {
    // setUsers: (users: UsersType[]) => void
     setCurrentPage: (pageNumber: number) => void
  //   setTotalUsersCount: (totalUsersCount: number) => void
-  //  onPageChanged: (pageNumber: number) => void
+    onPageChanged: (pageNumber: number) => void
    // toggleIsFetching: (isFetching: boolean) => void
     toggleFollowingProgress:(isFetching:boolean, userId:number)=>void
 

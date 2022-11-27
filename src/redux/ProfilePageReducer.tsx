@@ -1,5 +1,7 @@
 import React from 'react';
 import {DialogsType, MessageType, PostsType, ProfileType, StateType} from "../state";
+import {Dispatch} from "redux";
+import {usersAPI} from "../components/api/api-js";
 
 
 type AddPostActionType = ReturnType<typeof addPostActionCreator>
@@ -75,3 +77,10 @@ export const setUserProfile = (profile: null | ProfileType) => {
        profile
     } as const
 }
+export const getUserProfile = (userId:number) =>(dispatch:Dispatch)=>{
+    usersAPI.getProfile(userId)
+        .then(response => {
+            dispatch(setUserProfile(response.data))})
+
+}
+

@@ -42,6 +42,7 @@ function App() {
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
                     <Route path='/users' render={() => <UserContainer />}/>
+                    <Route path='/login' render={() => <Login />}/>
                 </div>
             </div>
         </BrowserRouter>

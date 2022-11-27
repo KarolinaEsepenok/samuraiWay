@@ -36,12 +36,12 @@ function App() {
                 {/*}  <Profile/>*/}
                 <div className={s.appWrapperContent}>
                     <Route path='/dialogs' render={() =>
-                        <DialogsContainer/>}/>
-                    <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+                        <DialogsContainer />}/>
+                    <Route path='/profile/:userId?' render={() => <ProfileContainer />}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
-                    <Route path='/users' render={() => <UserContainer/>}/>
+                    <Route path='/users' render={() => <UserContainer />}/>
                 </div>
             </div>
         </BrowserRouter>

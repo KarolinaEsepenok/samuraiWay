@@ -13,6 +13,7 @@ import {sendMessageCreator,
     updateNewMessageBodyCreator} from './../../redux/DialogsPageReducer'
 import message from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
+import {Redirect} from "react-router-dom";
 
 
 // export type DialogsPropsType = {
@@ -25,11 +26,11 @@ import {DialogsPropsType} from "./DialogsContainer";
 function Dialogs(props:DialogsPropsType) {
      let state = props.dialogsPage;
 
-    let dialogsElements =props.dialogsPage.dialogsData
+    let dialogsElements =state.dialogsData
         .map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
-    let messagesElements = props.dialogsPage.messageData
+    let messagesElements = state.messageData
         .map((m) => <Message key={m.id} message={m.message}/>)
-    let newMessagesBody = props.dialogsPage.newMessageBody
+    let newMessagesBody = state.newMessageBody
 
     let onSendMessageClick = ()=>{
         props.sendMessage()
@@ -39,6 +40,8 @@ function Dialogs(props:DialogsPropsType) {
         let body =e.currentTarget.value
         props.updateNewMessageBody(body)
     }
+    if(!props.isAuth) return <Redirect to={"/login"}/>
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>

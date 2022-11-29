@@ -13,9 +13,10 @@ class HeaderContainer extends React.Component<CommonPropsType> {
         ;
     }
     render() {
-        return <Header {...this.props} isAuth={this.props.isAuth} login={this.props.login}/>
+        return <Header {...this.props} />
     }
 }
+//isAuth={this.props.isAuth} login={this.props.login}
 type PathParamsType = {
     userId?: string
 }
@@ -33,8 +34,8 @@ const mapStateToProps = (state:AppStateType)=>({
     isAuth:state.auth.isAuth,
     login:state.auth.login
 })
-export default connect(mapStateToProps, {getAuthUserData})(withRouter(HeaderContainer));
-
+//export default connect(mapStateToProps, {getAuthUserData})(withRouter(HeaderContainer));
+export default connect(mapStateToProps, {getAuthUserData})(HeaderContainer);
 
 //export default connect(mapStateToProps,mapDispatchToProps)(Header)
 

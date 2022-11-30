@@ -7,8 +7,8 @@ import {BrowserRouter, Route} from "react-router-dom";
 import Settings from "./components/Settings/Settings";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
-import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-import {UserContainer} from "./components/Users/UserContainer";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import UserContainer from "./components/Users/UserContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
@@ -32,7 +32,7 @@ function App() {
     return (
         <BrowserRouter>
             <div className={s.appWrapper}>
-                <HeaderContainer />
+                <HeaderContainer  />
                 <Navbar/>
                 {/*}  <Profile/>*/}
                 <div className={s.appWrapperContent}>

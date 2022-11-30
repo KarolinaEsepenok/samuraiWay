@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 
 import {AppStateType} from "../../redux/reduxStore";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {
     followSuccess,
     getUsers,
@@ -16,9 +16,10 @@ import React from "react";
 import Preloader from "../common/Preloader/Preloader";
 import {withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {getUserProfile} from "../../redux/ProfilePageReducer";
 
 
-class UsersContainer extends React.Component<UsersPropsType> {
+class UserContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
@@ -48,7 +49,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
     }
 }
 
-export default UsersContainer
+
 
 
 export let mapStateToProps = (state: AppStateType) => {
@@ -97,13 +98,13 @@ type MapDispatchPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     getUsers: (currentPage: number, pageSize: number) => void
-    // setUsers: (users: UsersType[]) => void
     setCurrentPage: (pageNumber: number) => void
-    //   setTotalUsersCount: (totalUsersCount: number) => void
     onPageChanged: (pageNumber: number) => void
-    // toggleIsFetching: (isFetching: boolean) => void
     toggleFollowingProgress: (isFetching: boolean, userId: number) => void
 
+    //   setTotalUsersCount: (totalUsersCount: number) => void
+    // toggleIsFetching: (isFetching: boolean) => void
+// setUsers: (users: UsersType[]) => void
     /*
     Array<string>
     string[]
@@ -111,5 +112,11 @@ type MapDispatchPropsType = {
 }
 export type UsersPropsType = MapStatePropsType & MapDispatchPropsType
 
-let withRedirect = withAuthRedirect(UsersContainer)
-export const UserContainer = connect(mapStateToProps, mapDispatchToProps)(withRedirect);
+//let withRedirect = withAuthRedirect(UsersContainer)
+//export const UserContainer = connect(mapStateToProps, mapDispatchToProps)(withRedirect);
+
+
+export default  compose<React.ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect,
+)(UserContainer)

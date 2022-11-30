@@ -13,11 +13,13 @@ import {compose} from "redux";
 
 class ProfileContainer extends React.Component<CommonPropsType> {
     componentDidMount() {
-        let userId = this.props.match.params.userId;
-        if (!userId && this.props.profilePage) {
-            userId = this.props.profilePage.userId
+        let userId:string | number = this.props.match.params.userId;
+
+        if (!userId) {
+
+            userId = Number(this.props.userId)
         }
-      this.props.getUserProfile(userId)
+      this.props.getUserProfile(+userId)
     }
 
     render() {
@@ -33,24 +35,26 @@ class ProfileContainer extends React.Component<CommonPropsType> {
 };
 let mapStateToProps = (state: AppStateType) => ({
     profilePage: state.profilePage.profile,
+    userId: state.auth.userId
 
 })
 type PathParamsType = {
     userId: string
 }
 type OnPropsType = MapStateToPropsType & MapDispatchToPropsType
-type CommonPropsType = RouteComponentProps<PathParamsType> & any
+type CommonPropsType = RouteComponentProps<PathParamsType> & OnPropsType
 
 type MapStateToPropsType = {
     profilePage: ProfilePageType
+    userId:number | null
 
 }
 type MapDispatchToPropsType = {
-    setUserProfile: (profile: null | ProfileType) => void
+    getUserProfile: (userId:number) => void
 }
 
 
-let WithUrlDataContainerComponent = withRouter(ProfileContainer)
+//let WithUrlDataContainerComponent = withRouter(ProfileContainer)
 
 
 export default  compose<React.ComponentType>(

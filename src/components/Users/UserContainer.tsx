@@ -15,6 +15,7 @@ import React from "react";
 
 import Preloader from "../common/Preloader/Preloader";
 import {withRouter} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 class UsersContainer extends React.Component<UsersPropsType> {
@@ -110,4 +111,5 @@ type MapDispatchPropsType = {
 }
 export type UsersPropsType = MapStatePropsType & MapDispatchPropsType
 
-export const UserContainer = connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+let withRedirect = withAuthRedirect(UsersContainer)
+export const UserContainer = connect(mapStateToProps, mapDispatchToProps)(withRedirect);

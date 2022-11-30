@@ -50,8 +50,6 @@ class UserContainer extends React.Component<UsersPropsType> {
 }
 
 
-
-
 export let mapStateToProps = (state: AppStateType) => {
     return {
         users: state.usersPage.users,
@@ -83,7 +81,9 @@ export let mapDispatchToProps = (dispatch: Dispatch) => {
         toggleFollowingProgress: (isFetching: boolean, userId: number) => {
             dispatch(toggleFollowingProgress(isFetching, userId))
         },
-        getUsers: getUsers
+        getUsers: (currentPage: number, pageSize: number) => {
+            dispatch(getUsers(currentPage, pageSize))
+        }
     }
 }
 type MapStatePropsType = {
@@ -116,7 +116,7 @@ export type UsersPropsType = MapStatePropsType & MapDispatchPropsType
 //export const UserContainer = connect(mapStateToProps, mapDispatchToProps)(withRedirect);
 
 
-export default  compose<React.ComponentType>(
+export default compose<React.ComponentType>(
     connect(mapStateToProps, mapDispatchToProps),
     withAuthRedirect,
 )(UserContainer)

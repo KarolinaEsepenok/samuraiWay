@@ -14,7 +14,6 @@ import {compose} from "redux";
 class ProfileContainer extends React.Component<CommonPropsType> {
     componentDidMount() {
         let userId:string | number = this.props.match.params.userId;
-
         if (!userId) {
 
             userId = Number(this.props.userId)

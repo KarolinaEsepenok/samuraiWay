@@ -30,18 +30,11 @@ type InitialState = {
 export function AuthReducer(state = initialState, action: ActionsTypes): InitialState {
     switch (action.type) {
         case SET_USER_DATA:
-            const obj = {
-                ...state,
-                ...action.data,
-                isAuth:true
-            }
-
             return {
                 ...state,
                 ...action.data,
                 isAuth:true
             }
-
         default:
             return state;
     }

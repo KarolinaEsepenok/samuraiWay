@@ -65,7 +65,7 @@ export type ProfileCommonType={
     mainLink: string,
     photos:{
     small: string | null,
-    large: string | null}
+    large: string | null }
 }
 export  type ProfileType={
     profile: ProfileCommonType

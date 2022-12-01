@@ -37,7 +37,8 @@ class UserContainer extends React.Component<UsersPropsType> {
                    pageSize={this.props.pageSize}
                    currentPage={this.props.currentPage} setCurrentPage={this.props.setCurrentPage}
                    isFetching={this.props.isFetching}
-                   getUsers={this.props.getUsers} onPageChanged={this.props.onPageChanged}
+                   getUsers={this.props.getUsers}
+                   onPageChanged={this.props.onPageChanged}
                    users={this.props.users}
                    follow={this.props.follow}
                    unfollow={this.props.unfollow}
@@ -48,8 +49,6 @@ class UserContainer extends React.Component<UsersPropsType> {
         </>
     }
 }
-
-
 export let mapStateToProps = (state: AppStateType) => {
     return {
         users: state.usersPage.users,

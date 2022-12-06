@@ -5,13 +5,18 @@ import Preloader from "../../common/Preloader/Preloader";
 import {ProfilePageType, ProfileType} from "../../../state";
 import ProfileStatus from "./ProfileStatus";
 
+type PropsType = {
+    profile: ProfileType
+    status: string
+    updateStatus: (status:string)=>void
+}
 
-function ProfileInfo(props: {profilePage: ProfilePageType}) {
-    if(!props.profilePage){
+function ProfileInfo(props:PropsType) {
+    if(!props.profile){
         return <Preloader isFetching={true}/>
     }
 
-    const photoSrc = props.profilePage.profile?.profile.photos.small
+    const photoSrc = props.profile?.photos.small
 
     return (
         <div >
@@ -21,7 +26,7 @@ function ProfileInfo(props: {profilePage: ProfilePageType}) {
 
             <div className={s.descriptionBlock}>
                 {photoSrc ? <img src={photoSrc}/> : <img  className={s.profileImgCommon} src={'https://w7.pngwing.com/pngs/409/621/png-transparent-computer-icons-avatar-male-user-profile-others-logo-monochrome-silhouette.png'}/>}
-                <ProfileStatus status={'Hello'}/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
     )

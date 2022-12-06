@@ -1,25 +1,21 @@
 import React from 'react';
-import {DialogsType, MessageType, PostsType, ProfileType, StateType} from "../state";
+import {DialogsType, MessageType, PostsType, ProfilePageType, ProfileType, StateType} from "../state";
 import {Dispatch} from "redux";
-import {usersAPI} from "../components/api/api-js";
+import {profileAPI, usersAPI} from "../components/api/api-js";
 
 
 type AddPostActionType = ReturnType<typeof addPostActionCreator>
 type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
 type SetUserProfile = ReturnType<typeof setUserProfile >
-export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | SetUserProfile
-
-
-export type ProfilePageType = {
-    posts:PostsType[]
-    newPostText:string
-    profile: null | ProfileType
-}
+type SetStatus = ReturnType<typeof setStatus >
+type UpdateStatus = ReturnType<typeof setUpdateStatus >
+export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | SetUserProfile |SetStatus |UpdateStatus
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
-
+const SET_STATUS = 'SET_STATUS';
+const UPDATE_STATUS = 'UPDATE_STATUS';
 
 
 
@@ -32,7 +28,8 @@ let initialState:ProfilePageType = {
 
     ],
     newPostText: '',
-    profile:null
+    profile:null,
+    status: " "
 }
 
 export function ProfilePageReducer(state = initialState,action: ActionsTypes):ProfilePageType {
@@ -56,6 +53,12 @@ export function ProfilePageReducer(state = initialState,action: ActionsTypes):Pr
         case SET_USER_PROFILE:{
             return {...state, profile: action.profile}
         }
+        case SET_STATUS:{
+            return {...state,status: action.status}
+        }
+        case UPDATE_STATUS:{
+            return {...state,status: action.status}
+        }
         default: return state
 
     }
@@ -77,10 +80,38 @@ export const setUserProfile = (profile: null | ProfileType) => {
        profile
     } as const
 }
+export const setStatus = (status:string) => {
+    return {
+        type: SET_STATUS,
+        status
+    } as const
+}
+export const setUpdateStatus = (status:string) => {
+    return {
+        type: UPDATE_STATUS,
+        status
+    } as const
+}
+
 export const getUserProfile = (userId:number) =>(dispatch:Dispatch)=>{
     usersAPI.getProfile(userId)
         .then(response => {
             dispatch(setUserProfile(response.data))})
+
+}
+export const getStatus= (userId:number) =>(dispatch:Dispatch)=>{
+    profileAPI.getStatus(userId)
+        .then(response => {
+            dispatch(setStatus(response.data))})
+
+}
+export const updateStatus= (status:string) =>(dispatch:Dispatch)=>{
+    profileAPI.updateStatus(status)
+        .then(response => {
+            if(response.data.resultCode === 0){
+                dispatch(setUpdateStatus(status))
+            }
+            })
 
 }
 

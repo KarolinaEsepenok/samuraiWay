@@ -30,6 +30,8 @@ export type ProfilePageType = {
     posts: PostsType[],
     newPostText: string,
     profile: null | ProfileType
+    status: string
+   // updateStatus:(status:string)=>void
 }
 export type DialogsPageType = {
     dialogsData: DialogsType[]
@@ -49,7 +51,7 @@ export type RootStateType = {
     getState: () => StateType
     dispatch: (action: ActionsTypes) => void
 }
-export type ProfileCommonType={
+export type ProfileType={
     userId: number,
     lookingForAJob: boolean,
     lookingForAJobDescription: string,
@@ -67,9 +69,6 @@ export type ProfileCommonType={
     small: string | null,
     large: string | null }
 }
-export  type ProfileType={
-    profile: ProfileCommonType
-}
 
 export let store: RootStateType = {
     _state: {
@@ -82,7 +81,9 @@ export let store: RootStateType = {
 
             ],
             newPostText: '',
-            profile: null
+            profile: null,
+            status: " ",
+
         },
         dialogsPage: {
             dialogsData: [

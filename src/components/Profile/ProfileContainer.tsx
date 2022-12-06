@@ -1,14 +1,12 @@
 import React from 'react';
 import Profile from "./Profile";
-import axios from "axios";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/reduxStore";
-import {ProfileCommonType, ProfileType} from "../../state";
-import {getUserProfile, ProfilePageType} from "../../redux/ProfilePageReducer";
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {ProfileType} from "../../state";
+import {getStatus, getUserProfile, updateStatus} from "../../redux/ProfilePageReducer";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect"
 import {compose} from "redux";
-
 
 
 class ProfileContainer extends React.Component<CommonPropsType> {
@@ -19,37 +17,43 @@ class ProfileContainer extends React.Component<CommonPropsType> {
             userId = Number(this.props.userId)
         }
       this.props.getUserProfile(+userId)
+        this.props.getStatus(+userId)
     }
 
     render() {
       //  if(!this.props.isAuth) return <Redirect to={"/login"}/>
         return (
             <div>
-                <Profile
-                    {...this.props}
-                    profilePage={this.props.profilePage}/>
+                {this.props.profile &&
+                    <Profile
+                    profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>}
             </div>
         );
     }
 };
-let mapStateToProps = (state: AppStateType) => ({
-    profilePage: state.profilePage.profile,
-    userId: state.auth.userId
+let mapStateToProps = (state: AppStateType):MapStateToPropsType => ({
+    profile: state.profilePage.profile,
+    userId: state.auth.userId,
+    status:state.profilePage.status
+   // updateStatus:state.profilePage.status
 
 })
 type PathParamsType = {
     userId: string
 }
-type OnPropsType = MapStateToPropsType & MapDispatchToPropsType
-type CommonPropsType = RouteComponentProps<PathParamsType> & OnPropsType
+export type ProfileContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
+type CommonPropsType = RouteComponentProps<PathParamsType> & ProfileContainerPropsType
 
 type MapStateToPropsType = {
-    profilePage: ProfilePageType
+    profile: null | ProfileType
     userId:number | null
+    status:string
 
 }
 type MapDispatchToPropsType = {
     getUserProfile: (userId:number) => void
+    getStatus:(userId:number)=>void
+   updateStatus:(status:string)=>void
 }
 
 
@@ -57,6 +61,6 @@ type MapDispatchToPropsType = {
 
 
 export default  compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile}),
+    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus}),
         withRouter,withAuthRedirect
 )(ProfileContainer)

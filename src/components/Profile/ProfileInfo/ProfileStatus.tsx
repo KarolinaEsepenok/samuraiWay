@@ -27,9 +27,14 @@ activateEditMode=()=>{
         this.setState({
             status: e.currentTarget.value
         })
-
-
     }
+    componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
+
+        if(prevProps.status !== this.props.status){
+            this.setState({status:this.props.status})
+        }
+    }
+
     render() {
         return (
             <div>{!this.state.editMode && <div><span onDoubleClick={this.activateEditMode}>{this.props.status || "____" }</span></div>

@@ -8,9 +8,6 @@ export type StatePropsType = {
     dialogsData: DialogsType[],
     messagesData: MessageType[],
 }
-export type AppStateProps = {
-    appState: StatePropsType
-}
 
 export type MessageType = {
     id: number,

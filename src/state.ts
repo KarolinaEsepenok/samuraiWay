@@ -12,6 +12,7 @@ export type StatePropsType = {
 export type MessageType = {
     id: number,
     message: string,
+
 }
 export type DialogsType = {
     id: number,
@@ -25,7 +26,6 @@ export type PostsType = {
 }
 export type ProfilePageType = {
     posts: PostsType[],
-    newPostText: string,
     profile: null | ProfileType
     status: string
    // updateStatus:(status:string)=>void
@@ -41,12 +41,12 @@ export type StateType = {
 }
 export type RootStateType = {
     _state: StateType
-    updateNewPostText: (newText: string) => void
+    //updateNewPostText: (newText: string) => void
     //addPost: (postMessage: string) => void
-    _callSubscriber: () => void
-    subscriber: (observer: () => void) => void
-    getState: () => StateType
-    dispatch: (action: ActionsTypes) => void
+   // _callSubscriber: () => void
+   // subscriber: (observer: () => void) => void
+   // getState: () => StateType
+   // dispatch: (action: ActionsTypes) => void
 }
 export type ProfileType={
     userId: number,
@@ -77,7 +77,7 @@ export let store: RootStateType = {
                 {id: 2, message: 'It is my first post', likeCounts: '12'},
 
             ],
-            newPostText: '',
+
             profile: null,
             status: " ",
 
@@ -103,22 +103,16 @@ export let store: RootStateType = {
        // sidebar: {}
 
 
-    },
-    updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber();
-    },
-
-    _callSubscriber() {
-        console.log('State')
-    },
-    getState() {
-        return this._state;
-    },
-    subscriber(observer: () => void) {
-        this._callSubscriber = observer;
-    },
-    dispatch(action) {
+   // _callSubscriber() {
+   //     console.log('State')
+   // },
+  //  getState() {
+  //      return this._state;
+  //  },
+  //  subscriber(observer: () => void) {
+  //      this._callSubscriber = observer;
+  //  },
+  //  dispatch(action) {
       //   this._state.profilePage = ProfilePageReducer(store, action)
       //   this._state.dialogsPage = DialogsPageReducer(this._state.dialogsPage, action)
       // //  this._state.sidebar = SidebarReducer(this._state.sidebar, action)

@@ -13,7 +13,6 @@ import {withRouter} from "react-router-dom";
 export let mapStateToProps=(state:AppStateType)=>{
     return{
         dialogsPage: state.messagePage,
-
     }
 }
 export let mapDispatchToProps=(dispatch: Dispatch)=>{
@@ -25,10 +24,8 @@ export let mapDispatchToProps=(dispatch: Dispatch)=>{
 }
 type MapStatePropsType = {
     dialogsPage: DialogsPageType,
-
 }
 type MapDispatchPropsType = {
-   // updateNewMessageBody: (body:string)=>void
     sendMessage: (newMessageBody:string)=>void
 }
 export type DialogsPropsType = MapStatePropsType & MapDispatchPropsType

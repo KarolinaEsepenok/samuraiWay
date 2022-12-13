@@ -32,18 +32,18 @@ export function AuthReducer(state = initialState, action: ActionsTypes): Initial
         case SET_USER_DATA:
             return {
                 ...state,
-                ...action.data,
-                isAuth:true
+                ...action.payload,
+
             }
         default:
             return state;
     }
 };
 
-export const setAuthUserData = (userId: number | null, email: string | null, login: string | null) => {
+export const setAuthUserData = (userId: number | null, email: string | null, login: string | null,isAuth:boolean) => {
 
     return {
-        type: 'SET_USER_DATA', data:{userId, email, login}
+        type: 'SET_USER_DATA', payload:{userId, email, login,isAuth}
     } as const
 }
 export const getAuthUserData=()=>{
@@ -52,8 +52,27 @@ export const getAuthUserData=()=>{
             .then(response => {
                 if(response.data.resultCode === 0){
                     let {id, email,login} = response.data.data
+                    dispatch(setAuthUserData(id,email,login, true))
+                }
+            })
 
-                    dispatch(setAuthUserData(id,email,login))
+    }}
+export const login=(email:string,password:string, rememberMe:boolean)=>{
+    return  (dispatch:Dispatch)=>{
+        authAPI.login(email,password, rememberMe)
+            .then(response => {
+                if(response.data.resultCode === 0){
+                    dispatch(getAuthUserData())
+                }
+            })
+
+    }}
+export const logout=()=>{
+    return  (dispatch:Dispatch)=>{
+        authAPI.logout()
+            .then(response => {
+                if(response.data.resultCode === 0){
+                    dispatch(setAuthUserData(null,null,null, false))
                 }
             })
 

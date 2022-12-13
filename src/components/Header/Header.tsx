@@ -8,7 +8,7 @@ function Header(props:{isAuth:boolean, login:string | null}) {
         <header className={s.header}>
             <img src='https://cryptologos.cc/logos/stellar-xlm-logo.png'/>
             <div className={s.loginBlock}>
-                {props.isAuth ? props.login
+                {props.isAuth ?<div>{props.login} - <button onClick={props.login}>Log out</button></div>
                 :<NavLink to={'/login'}>Login</NavLink>}
             </div>
 

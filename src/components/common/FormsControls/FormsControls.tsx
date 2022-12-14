@@ -16,8 +16,8 @@ const FormControl = ({meta, input, ...props}: FormsControls) => {
     const hasError = meta.error && meta.touched
 
     return (
-        <div className={styles.formControl + ' ' + (hasError ? styles.error : '')}>
-            <div><textarea {...input} {...props}/></div>
+        <div>
+            <div className={styles.formControl + ' ' + (hasError ? styles.error : '')}><textarea {...input} {...props}/></div>
             {hasError && <span>{meta.error}</span>}
         </div>
 
@@ -28,8 +28,8 @@ export const Textarea = ({meta, input, ...props}: FormsControls) => {
     const hasError = meta.error && meta.touched
 
     return (
-        <div className={styles.formControl + ' ' + (hasError ? styles.error : '')}>
-            <div><textarea {...input} {...props}/></div>
+        <div >
+            <div ><textarea className={styles.formControl + ' ' + (hasError ? styles.error : '')}{...input} {...props}/></div>
             {hasError && <span>{meta.error}</span>}
         </div>
 
@@ -42,8 +42,8 @@ export const Input = ({meta, input, ...props}: FormsControls) => {
     const hasError = meta.error && meta.touched
 
     return (
-        <div className={styles.formControl + ' ' + (hasError ? styles.error : '')}>
-            <div><input {...input} {...props}/></div>
+        <div>
+            <div ><input className={styles.formControl + ' ' + (hasError ? styles.error : '')}{...input} {...props}/></div>
             {hasError && <span>{meta.error}</span>}
         </div>
 

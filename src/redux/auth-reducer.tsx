@@ -4,6 +4,7 @@ import {Dispatch} from "redux";
 import {authAPI} from "../components/api/api-js";
 import {stopSubmit} from "redux-form";
 import {AppStateType, RootState} from "./reduxStore";
+import {ThunkAction} from "redux-thunk";
 
 
 type SetUserDataActionType = ReturnType<typeof setAuthUserData>
@@ -39,7 +40,9 @@ export const setAuthUserData = (userId: number | null, email: string | null, log
         type: 'SET_USER_DATA', payload:{userId, email, login,isAuth}
     } as const
 }
-export const getAuthUserData=()=>{
+
+export type ThunkGetUsersType= ThunkAction<void, AppStateType, unknown, ActionsTypes>
+export const getAuthUserData=():ThunkGetUsersType=>{
    return  (dispatch:Dispatch)=>{
         authAPI.me()
             .then(response => {

@@ -2,6 +2,7 @@ import React from 'react';
 import {PostsType, StateType} from "../state";
 import {Dispatch} from "redux";
 import {authAPI} from "../components/api/api-js";
+import {stopSubmit} from "redux-form";
 
 
 type SetUserDataActionType = ReturnType<typeof setAuthUserData>
@@ -56,17 +57,19 @@ export const getAuthUserData=()=>{
             })
 
     }}
-export const login=(email:string,password:string, rememberMe:boolean)=>{
-    return  (dispatch:Dispatch)=>{
+export const login=(email:string,password:string, rememberMe:boolean)=>(dispatch:Dispatch)=>{
         authAPI.login(email,password, rememberMe)
             .then(response => {
                 if(response.data.resultCode === 0){
                     let {id, email,login} = response.data.data
                     dispatch(setAuthUserData(id, email, login, true))
+                }else{
+                  let message = response.data.message.length > 0 ? response.data.message[0]: "Some Error"
+                    dispatch(stopSubmit("login",{_error:message}))
                 }
             })
 
-    }}
+    }
 export const logout=()=>{
     return  (dispatch:Dispatch)=>{
         authAPI.logout()

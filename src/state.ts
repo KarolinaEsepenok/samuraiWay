@@ -41,12 +41,7 @@ export type StateType = {
 }
 export type RootStateType = {
     _state: StateType
-    //updateNewPostText: (newText: string) => void
-    //addPost: (postMessage: string) => void
-   // _callSubscriber: () => void
-   // subscriber: (observer: () => void) => void
-   // getState: () => StateType
-   // dispatch: (action: ActionsTypes) => void
+
 }
 export type ProfileType={
     userId: number,

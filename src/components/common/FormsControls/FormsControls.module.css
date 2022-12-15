@@ -9,3 +9,7 @@
 .formControl.error span{
     color: darkred;
 }
+.forSummaryError{
+    border: 1px solid darkred;
+    color: darkslategrey;
+}

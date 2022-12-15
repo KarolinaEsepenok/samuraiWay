@@ -4,20 +4,23 @@ import {Input} from "../common/FormsControls/FormsControls";
 import {required} from "../../utils/validators/validators";
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
+import {AppStateType} from "../../redux/reduxStore";
+import s from "../common/FormsControls/FormsControls.module.css"
+import {login} from "../../redux/auth-reducer";
 
 type FormDataType={
-    login:string,
+    email:string,
     password:string,
-    rememberMe:boolean
+    rememberMe:boolean,
 }
-
-export const LoginForm:React.FC<InjectedFormProps<FormDataType>> = (props:any) => {
+ const LoginForm = (props: InjectedFormProps<FormDataType>) => {
     return (
-
             <form onSubmit={props.handleSubmit}>
                 <div><Field placeholder={'Email'} name={'email'} component={Input} validate={[required]}/></div>
                 <div><Field placeholder={'Password'} name={'password'} type={'password'} component={Input} validate={[required]}/></div>
                 <div><Field type={'checkbox'}name={'rememberMe'} component={Input} validate={[required]}/>Remember me</div>
+                {props.error && <div className={s.forSummaryError}>{props.error}</div>}
+
                 <div><button>Login</button></div>
             </form>
 
@@ -28,23 +31,31 @@ const LoginReduxForm=reduxForm<FormDataType>({
     form:'login'
 })(LoginForm)
 
+type LoginPropsType = {
+    login: (email: string, password: string, rememberMe: boolean) => void
+    isAuth: boolean
+}
 
+const Login = (props: LoginPropsType) => {
 
- const Login = (props:any) => {
-    const onSubmit=(formData:FormDataType)=>{
-        props.login(formData.login,formData.password,formData.rememberMe)
+    const onSubmit = (formData: FormDataType) => {
+        props.login(formData.email, formData.password, formData.rememberMe)
     }
-    if(props.isAuth){
-        return <Redirect to={"/profile"}/>
+    if (props.isAuth) {
+        return <Redirect to={'/profile'}/>
     }
+
     return (
         <div>
-            <h2>LOGIN</h2>
+            <h1>Login</h1>
             <LoginReduxForm onSubmit={onSubmit}/>
         </div>
-    );
-};
-const mapStateToProps=(state:any)=>{
-    isAuth:state.auth.isAuth
+    )
 }
-export default connect(mapStateToProps,{Login})(Login)
+
+const mapStateToProps = (state: AppStateType): { isAuth: boolean } => {
+    return {
+        isAuth: state.auth.isAuth
+    }
+}
+export default connect(mapStateToProps, {login})(Login)

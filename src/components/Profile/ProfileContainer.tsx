@@ -13,7 +13,6 @@ class ProfileContainer extends React.Component<CommonPropsType> {
     componentDidMount() {
         let userId:string | number = this.props.match.params.userId;
         if (!userId) {
-
             userId = Number(this.props.userId)
         }
       this.props.getUserProfile(+userId)
@@ -34,8 +33,9 @@ class ProfileContainer extends React.Component<CommonPropsType> {
 let mapStateToProps = (state: AppStateType):MapStateToPropsType => ({
     profile: state.profilePage.profile,
     userId: state.auth.userId,
-    status:state.profilePage.status
-   // updateStatus:state.profilePage.status
+    status:state.profilePage.status,
+    isAuth: state.auth.isAuth
+
 
 })
 type PathParamsType = {
@@ -48,6 +48,7 @@ type MapStateToPropsType = {
     profile: null | ProfileType
     userId:number | null
     status:string
+    isAuth:boolean
 
 }
 type MapDispatchToPropsType = {

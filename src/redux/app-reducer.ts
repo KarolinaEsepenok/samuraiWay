@@ -36,9 +36,9 @@ export const initializedSuccess = () => {
     } as const
 }
 
-//export type ThunkGetUsersType= ThunkAction<void, AppStateType, unknown, ActionsTypes>
+export type ThunkGetUsersType= ThunkAction<void, InitialState, unknown, ActionsTypes>
 
-export const initializeApp =():any=>{
+export const initializeApp =():ThunkGetUsersType=>{
    return  (dispatch:Dispatch<any>)=>{
        let promise = dispatch(getAuthUserData())
        Promise.all([promise])

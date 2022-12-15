@@ -9,10 +9,16 @@ import {Provider} from "react-redux";
 
 
 // export const rerenderEntireTree = () => {
-    ReactDOM.render(
+    // @ts-ignore
+
+
+// @ts-ignore
+ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
-            <App/></Provider>
+                // @ts-ignore
+            <App />
+            </Provider>
         </BrowserRouter>,
         document.getElementById('root')
     );

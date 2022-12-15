@@ -13,7 +13,6 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect} from "react-redux";
-import {getAuthUserData, logout} from "./redux/auth-reducer";
 import {AppStateType} from "./redux/reduxStore";
 import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
@@ -25,27 +24,28 @@ import Preloader from "./components/common/Preloader/Preloader";
 type mapStateToProps = {
     initialized:boolean
 }
-type CommonPropsType=mapStateToProps
+type mapDispatchToProps={
+    initializeApp:()=>void
+}
+type CommonPropsType=mapStateToProps |mapDispatchToProps
 
-const mapStateToProps = (state:AppStateType) => {
+const mapStateToProps = (state:AppStateType) => ({
     initialized: state.app.initialized
 
-}
-
-class App extends React.Component<CommonPropsType> {
+})
+ class App extends React.Component<CommonPropsType> {
     componentDidMount() {
-        this.props.initializeApp();
+     this.props.initializeApp();
     }
     render() {
-        if(!this.props.initialized)
-            return <Preloader isFetching={true}/>
+    if(!this.props.initialized)
+        return <Preloader />
 
         return (
             <BrowserRouter>
                 <div className={s.appWrapper}>
                     <HeaderContainer/>
                     <Navbar/>
-                    {/*}  <Profile/>*/}
                     <div className={s.appWrapperContent}>
                         <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                         <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>

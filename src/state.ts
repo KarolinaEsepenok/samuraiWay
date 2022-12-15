@@ -12,12 +12,10 @@ export type StatePropsType = {
 export type MessageType = {
     id: number,
     message: string,
-
 }
 export type DialogsType = {
     id: number,
     name: string
-
 }
 export type PostsType = {
     id: number,
@@ -28,7 +26,6 @@ export type ProfilePageType = {
     posts: PostsType[],
     profile: null | ProfileType
     status: string
-   // updateStatus:(status:string)=>void
 }
 export type DialogsPageType = {
     dialogsData: DialogsType[]
@@ -41,7 +38,6 @@ export type StateType = {
 }
 export type RootStateType = {
     _state: StateType
-
 }
 export type ProfileType={
     userId: number,
@@ -70,12 +66,10 @@ export let store: RootStateType = {
                 {id: 2, message: 'It is my first post', likeCounts: '12'},
                 {id: 1, message: 'Hi, how are you', likeCounts: '12'},
                 {id: 2, message: 'It is my first post', likeCounts: '12'},
-
             ],
 
             profile: null,
             status: " ",
-
         },
         dialogsPage: {
             dialogsData: [

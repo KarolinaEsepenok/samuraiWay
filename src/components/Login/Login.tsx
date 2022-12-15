@@ -14,11 +14,12 @@ type FormDataType={
     rememberMe:boolean,
 }
  const LoginForm = (props: InjectedFormProps<FormDataType>) => {
+
     return (
             <form onSubmit={props.handleSubmit}>
                 <div><Field placeholder={'Email'} name={'email'} component={Input} validate={[required]}/></div>
                 <div><Field placeholder={'Password'} name={'password'} type={'password'} component={Input} validate={[required]}/></div>
-                <div><Field type={'checkbox'}name={'rememberMe'} component={Input} validate={[required]}/>Remember me</div>
+                <div><Field type={'checkbox'} name={'rememberMe'} component={Input} />Remember me</div>
                 {props.error && <div className={s.forSummaryError}>{props.error}</div>}
 
                 <div><button>Login</button></div>
@@ -37,14 +38,13 @@ type LoginPropsType = {
 }
 
 const Login = (props: LoginPropsType) => {
-
     const onSubmit = (formData: FormDataType) => {
+        console.log('ddddd')
         props.login(formData.email, formData.password, formData.rememberMe)
     }
     if (props.isAuth) {
         return <Redirect to={'/profile'}/>
     }
-
     return (
         <div>
             <h1>Login</h1>
@@ -52,7 +52,6 @@ const Login = (props: LoginPropsType) => {
         </div>
     )
 }
-
 const mapStateToProps = (state: AppStateType): { isAuth: boolean } => {
     return {
         isAuth: state.auth.isAuth

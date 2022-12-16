@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import {AppContainer} from './App';
 //import {addPost, state, StateType, subscribe} from "./state";
 import {BrowserRouter} from "react-router-dom";
 import {store} from "./redux/reduxStore";
@@ -9,19 +9,16 @@ import {Provider} from "react-redux";
 
 
 // export const rerenderEntireTree = () => {
-    // @ts-ignore
 
-
-// @ts-ignore
 ReactDOM.render(
+    <Provider store={store}>
         <BrowserRouter>
-            <Provider store={store}>
-                // @ts-ignore
-            <App />
-            </Provider>
+            <AppContainer/>
         </BrowserRouter>,
-        document.getElementById('root')
-    );
+    </Provider>,
+document.getElementById('root')
+)
+;
 // }
 //rerenderEntireTree(store.getState());
 // store.subscribe(()=>{

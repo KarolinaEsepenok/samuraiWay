@@ -5,3 +5,24 @@
 .posts{
     margin-top: 10px;
 }
+.MyPostFormContainer{
+    padding: 20px 0px;
+}
+.MyPostFormContainer textarea{
+    width: 96%;
+    border-radius: 15px;
+    padding: 20px;
+}
+.MyPostButtonContainer{
+    text-align: end;
+}
+.MyPostButton{
+    background-color: #0077B5;
+    color: #FFFFFF;
+    border-radius: 10px;
+    padding: 8px 6px;
+    border: none;
+    width: 100px;
+    font-family: "Montserrat";
+
+}

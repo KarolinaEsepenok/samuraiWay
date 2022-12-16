@@ -4,16 +4,21 @@
     grid-template-areas:
           "h h"
           "n c";
-    grid-template-rows: 60px 1fr;
-    grid-template-columns: 2fr 10fr;
+    grid-template-rows: 80px 1fr;
+    grid-template-columns: 3fr 9fr;
     /*grid-gap: 10px;*/
-    background-color: #f8ddfd;
-    width: 1960px;
+    background-color: #E5E5E5;
+    max-width: 1440px;
+    margin: 0 auto;
+    border:2px solid #F4F4F4;
+    font-family: "Montserrat";
 }
 
 .appWrapperContent{
     grid-area: auto;
-
+margin: 20px;
+    background-color: #FFF;
+    border-radius: 15px;
 }
 
 

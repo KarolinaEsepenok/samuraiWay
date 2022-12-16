@@ -1,8 +1,26 @@
+.itemPost{
+    margin-top:20px;
+    background-color: #F4F4F4;
+    border-radius: 15px;
+    padding: 20px;
 
-.item img{
+}
+.itemPostImgMessage{
+    display: flex;
+}
+.itemPost img{
     color: cornsilk;
     width: 70px;
     height: 70px;
     border-radius: 50px;
+    overflow: hidden;
+}
+
+.itemPostMessage{
+    padding-left: 20px;
+
+}
+.itemPostLikes{
+   padding-left: 90px;
 }
 

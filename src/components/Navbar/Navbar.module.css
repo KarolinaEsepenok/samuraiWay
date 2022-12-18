@@ -2,6 +2,7 @@
     grid-area: n;
     background-color: #E5E5E5;
     padding: 20px;
+    font-weight: bold;
 
 
 }
@@ -9,6 +10,7 @@
     background-color: #FFF;
     padding: 20px 20px;
     border-radius: 15px;
+    margin-top: 0px;
 }
 .item{
     padding: 15px 15px;

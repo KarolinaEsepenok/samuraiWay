@@ -4,7 +4,7 @@ import {AppStateType} from "../../redux/reduxStore";
 import {compose, Dispatch} from "redux";
 import {
     followSuccess,
-    getUsers,
+    requestUsers,
     onPageChangedAC,
     setCurrentPageAC, toggleFollowingProgress, unfollowSuccess,
     UsersType
@@ -81,7 +81,7 @@ export let mapDispatchToProps = (dispatch: Dispatch) => {
             dispatch(toggleFollowingProgress(isFetching, userId))
         },
         getUsers: (currentPage: number, pageSize: number) => {
-            dispatch(getUsers(currentPage, pageSize))
+            dispatch(requestUsers(currentPage, pageSize))
         }
     }
 }

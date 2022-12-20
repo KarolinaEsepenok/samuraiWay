@@ -1,0 +1,7 @@
+.newsContainer{
+    height: 100vh;
+}
+.newsContainer h2{
+    padding: 20px;
+    text-align: center;
+}

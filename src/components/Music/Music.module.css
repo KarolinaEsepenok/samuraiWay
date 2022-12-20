@@ -1,0 +1,7 @@
+.musicContainer{
+    height: 100vh;
+}
+.musicContainer h2{
+    padding: 20px;
+    text-align: center;
+}

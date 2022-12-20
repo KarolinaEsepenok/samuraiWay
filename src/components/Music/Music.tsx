@@ -3,7 +3,9 @@ import s from './Music.module.css'
 
 function Music () {
     return(
-        <div >Music</div>
+        <div className={s.musicContainer}>
+            <h2>Music</h2>
+            </div>
     )
 
 }

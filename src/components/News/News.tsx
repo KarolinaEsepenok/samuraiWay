@@ -3,7 +3,9 @@ import s from './News.module.css'
 
 function News () {
     return(
-        <div >News</div>
+        <div className={s.newsContainer} >
+           <h2>News</h2>
+        </div>
     )
 
 }

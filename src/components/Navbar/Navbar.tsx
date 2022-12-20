@@ -7,7 +7,7 @@ function Navbar() {
     return (
         <nav className={s.nav}>
             <ul className={s.items}>
-            <li className={s.item}>
+                 <li className={s.item}>
                 <NavLink to={"/profile"} activeClassName={s.active}>Profile</NavLink></li>
             <li className={`${s.item} ${s.active}`}>
                 <NavLink to={"/dialogs"} activeClassName={s.active}>Messages</NavLink></li>

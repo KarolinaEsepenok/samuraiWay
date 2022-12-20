@@ -1,3 +1,6 @@
+.usersContainer{
+    height: 100vh;
+}
 .userPhoto{
     width: 70px;
     height: 70px;

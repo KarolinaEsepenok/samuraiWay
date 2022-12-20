@@ -1,0 +1,7 @@
+.settingsContainer{
+    height: 100vh;
+}
+.settingsContainer h2{
+    padding: 20px;
+    text-align: center;
+}

@@ -3,7 +3,9 @@ import s from './Settings.module.css'
 
 function Settings () {
     return(
-        <div>Settings</div>
+        <div className={s.settingsContainer}>
+            <h2>Settings</h2>
+        </div>
     )
 
 }

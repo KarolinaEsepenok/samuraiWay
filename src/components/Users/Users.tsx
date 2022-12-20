@@ -18,7 +18,7 @@ export const Users = (props: UsersPropsType) => {
 
 
     return (
-        <div>
+        <div className={s.usersContainer}>
             <div>
                 {pages.map(p => {
                     return <span className={props.pageSize === p ? s.selectedPage : ""}

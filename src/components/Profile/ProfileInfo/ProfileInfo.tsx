@@ -4,6 +4,7 @@ import {AppStateType} from "../../../redux/reduxStore";
 import Preloader from "../../common/Preloader/Preloader";
 import {ProfilePageType, ProfileType} from "../../../state";
 import ProfileStatus from "./ProfileStatus";
+import user from "../../asses/img/user.svg"
 
 type PropsType = {
     profile: ProfileType
@@ -25,7 +26,7 @@ function ProfileInfo(props:PropsType) {
             </div>
 
             <div className={s.descriptionBlock}>
-                {photoSrc ? <img src={photoSrc}/> : <img  className={s.profileImgCommon} src={'https://w7.pngwing.com/pngs/409/621/png-transparent-computer-icons-avatar-male-user-profile-others-logo-monochrome-silhouette.png'}/>}
+                {photoSrc ? <img src={photoSrc}/> : <img  className={s.profileImgCommon} src={user}/>}
                 <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>

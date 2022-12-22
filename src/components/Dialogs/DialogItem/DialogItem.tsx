@@ -18,4 +18,5 @@ function DialogItem(props: DialogItem) {
         </div>
     )
 }
+
 export default DialogItem;

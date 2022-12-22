@@ -17,7 +17,7 @@ import {maxLengthCreator, required} from "../../utils/validators/validators";
 //     //newMessageBody:string
 // }
 type AddMessageType = {
-   newMessageBody: string
+    newMessageBody: string
 
 }
 
@@ -27,10 +27,10 @@ function Dialogs(props: DialogsPropsType) {
         .map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
     let messagesElements = state.messageData
         .map((m) => <Message key={m.id} message={m.message}/>)
-   // let newMessagesBody = action.newMessageBody
+    // let newMessagesBody = action.newMessageBody
     // if(!props.isAuth) return <Redirect to={"/login"}/>
-    const  addNewMessage =(values:AddMessageType)=>{
-       props.sendMessage(values.newMessageBody)
+    const addNewMessage = (values: AddMessageType) => {
+        props.sendMessage(values.newMessageBody)
 
     }
 
@@ -65,4 +65,4 @@ export const AddMessageForm: React.FC<InjectedFormProps<AddMessageType>> = (prop
         </form>
     )
 }
-export  const AddMessageFormRedux = reduxForm<AddMessageType>({form: 'dialogAddMessageForm'})(AddMessageForm)
+export const AddMessageFormRedux = reduxForm<AddMessageType>({form: 'dialogAddMessageForm'})(AddMessageForm)

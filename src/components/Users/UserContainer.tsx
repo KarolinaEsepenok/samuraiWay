@@ -17,16 +17,21 @@ import Preloader from "../common/Preloader/Preloader";
 import {withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {getUserProfile} from "../../redux/ProfilePageReducer";
+import {FilterType} from "./UsersSearchForm";
 
 
 class UserContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        this.props.getUsers(this.props.currentPage, this.props.pageSize,this.props.filter)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.getUsers(pageNumber, this.props.pageSize)
-
+        const {pageSize,filter}= this.props
+        this.props.getUsers(pageNumber, pageSize,filter)
+    }
+    onFilterChanged=(filter:FilterType)=>{
+        const {pageSize}= this.props
+        this.props.getUsers(1, pageSize,filter)
     }
 
     render() {
@@ -35,15 +40,20 @@ class UserContainer extends React.Component<UsersPropsType> {
             {this.props.isFetching ? <Preloader isFetching={this.props.isFetching}/> : null}
             <Users totalUsersCount={this.props.totalUsersCount}
                    pageSize={this.props.pageSize}
-                   currentPage={this.props.currentPage} setCurrentPage={this.props.setCurrentPage}
-                   isFetching={this.props.isFetching}
-                   getUsers={this.props.getUsers}
+                   currentPage={this.props.currentPage}
                    onPageChanged={this.props.onPageChanged}
                    users={this.props.users}
                    follow={this.props.follow}
                    unfollow={this.props.unfollow}
-                   toggleFollowingProgress={this.props.toggleFollowingProgress}
                    followingInProgress={this.props.followingInProgress}
+                   onFilterChanged={this.onFilterChanged} filter={this.props.filter}
+
+
+                   setCurrentPage={this.props.setCurrentPage}
+                   isFetching={this.props.isFetching}
+                   getUsers={this.props.getUsers}
+                   toggleFollowingProgress={this.props.toggleFollowingProgress}
+
 
             />
         </>
@@ -56,7 +66,8 @@ export let mapStateToProps = (state: AppStateType) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        followingInProgress: state.usersPage.followingInProgress,
+        filter:state.usersPage.filter
 
     }
 }
@@ -80,26 +91,28 @@ export let mapDispatchToProps = (dispatch: Dispatch) => {
         toggleFollowingProgress: (isFetching: boolean, userId: number) => {
             dispatch(toggleFollowingProgress(isFetching, userId))
         },
-        getUsers: (currentPage: number, pageSize: number) => {
-            dispatch(requestUsers(currentPage, pageSize))
+        getUsers: (currentPage: number, pageSize: number,filter:FilterType) => {
+            dispatch(requestUsers(currentPage, pageSize,filter))
         }
     }
 }
 type MapStatePropsType = {
     users: UsersType[],
     pageSize: number,
-    totalUsersCount: number,
+   totalUsersCount: number,
     currentPage: number,
     isFetching: boolean
-    followingInProgress: Array<number>
+   followingInProgress: Array<number>
+    filter:FilterType
 }
 type MapDispatchPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    getUsers: (currentPage: number, pageSize: number) => void
+    getUsers: (currentPage: number, pageSize: number,filter:FilterType) => void
     setCurrentPage: (pageNumber: number) => void
-    onPageChanged: (pageNumber: number) => void
-    toggleFollowingProgress: (isFetching: boolean, userId: number) => void
+   onPageChanged: (pageNumber: number) => void
+    onFilterChanged: (filter: FilterType) => void
+   toggleFollowingProgress: (isFetching: boolean, userId: number) => void
 
     //   setTotalUsersCount: (totalUsersCount: number) => void
     // toggleIsFetching: (isFetching: boolean) => void

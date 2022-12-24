@@ -5,6 +5,7 @@ import {authAPI} from "../components/api/api-js";
 import {stopSubmit} from "redux-form";
 import {AppStateType, RootState} from "./reduxStore";
 import {ThunkAction} from "redux-thunk";
+import {debuglog} from "util";
 
 
 type SetUserDataActionType = ReturnType<typeof setAuthUserData>
@@ -44,6 +45,7 @@ export const setAuthUserData = (userId: number | null, email: string | null, log
 export type ThunkGetUsersType= ThunkAction<void, AppStateType, unknown, ActionsTypes>
 export const getAuthUserData=():ThunkGetUsersType=>{
    return  (dispatch:Dispatch)=>{
+
         authAPI.me()
             .then(response => {
                 if (response.data.resultCode === 0) {
@@ -54,6 +56,7 @@ export const getAuthUserData=():ThunkGetUsersType=>{
 export const login=(email:string,password:string, rememberMe:boolean)=>(dispatch:Dispatch<any>)=>{
         authAPI.login(email,password, rememberMe)
             .then(response => {
+                debugger
                 if(response.data.resultCode === 0){
                     dispatch(getAuthUserData())
 
@@ -68,6 +71,7 @@ export const login=(email:string,password:string, rememberMe:boolean)=>(dispatch
     }
 export const logout=()=>{
     return  (dispatch:Dispatch)=>{
+        debugger
         authAPI.logout()
             .then(response => {
                 if(response.data.resultCode === 0){

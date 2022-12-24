@@ -8,6 +8,8 @@ import {AppStateType} from "../../redux/reduxStore";
 import s from "../common/FormsControls/FormsControls.module.css"
 import {login} from "../../redux/auth-reducer";
 
+
+
 type FormDataType={
     email:string,
     password:string,
@@ -15,16 +17,16 @@ type FormDataType={
 }
  const LoginForm = (props: InjectedFormProps<FormDataType>) => {
 
-    return (
-            <form onSubmit={props.handleSubmit}>
-                <div><Field placeholder={'Email'} name={'email'} component={Input} validate={[required]}/></div>
-                <div><Field placeholder={'Password'} name={'password'} type={'password'} component={Input} validate={[required]}/></div>
-                <div><Field type={'checkbox'} name={'rememberMe'} component={Input} />Remember me</div>
-                {props.error && <div className={s.forSummaryError}>{props.error}</div>}
 
-                <div><button>Login</button></div>
-            </form>
+     return (
+         <form onSubmit={props.handleSubmit}>
+             <div><Field placeholder={'Email'} name={'email'} component={Input} validate={[required]}/></div>
+             <div><Field placeholder={'Password'} name={'password'} type={'password'} component={Input} validate={[required]}/></div>
+             <div><Field type={'checkbox'} name={'rememberMe'} component={Input} />Remember me</div>
+             {props.error && <div className={s.forSummaryError}>{props.error}</div>}
 
+             <div><button>Login</button></div>
+         </form>
     );
 };
 
@@ -58,3 +60,6 @@ const mapStateToProps = (state: AppStateType): { isAuth: boolean } => {
     }
 }
 export default connect(mapStateToProps, {login})(Login)
+
+
+         {/*}   */}

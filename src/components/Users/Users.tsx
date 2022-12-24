@@ -3,10 +3,8 @@ import {UsersPropsType} from "./UserContainer";
 import s from "./Users.module.css";
 import users from "../asses/img/users.png";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-import {UsersType} from "../../redux/UsersReducer";
-import {usersAPI} from "../api/api-js";
-import {userInfo} from "os";
+import {UsersSearchForm} from "./UsersSearchForm";
+
 
 export const Users = (props: UsersPropsType) => {
 
@@ -19,6 +17,7 @@ export const Users = (props: UsersPropsType) => {
 
     return (
         <div className={s.usersContainer}>
+            <UsersSearchForm onFilterChanged={props.onFilterChanged} />
             <div>
                 {pages.map(p => {
                     return <span className={props.pageSize === p ? s.selectedPage : ""}
@@ -35,11 +34,12 @@ export const Users = (props: UsersPropsType) => {
                                                              className={s.userPhoto}/></NavLink>
                 </div>
                     <div>
-                        {u.followed ? <button disabled={props.followingInProgress.some((id)=>id===u.id)} onClick={() => {
-                            props.unfollow(u.id)
+                        {u.followed ?
+                            <button disabled={props.followingInProgress.some((id) => id === u.id)} onClick={() => {
+                                props.unfollow(u.id)
 
                             }}>Unfollow</button>
-                            : <button disabled={props.followingInProgress.some((id)=>id===u.id)} onClick={() => {
+                            : <button disabled={props.followingInProgress.some((id) => id === u.id)} onClick={() => {
                                 props.follow(u.id)
 
                             }}>Follow</button>}
@@ -61,5 +61,6 @@ export const Users = (props: UsersPropsType) => {
 
     );
 };
+
 
 export default Users;

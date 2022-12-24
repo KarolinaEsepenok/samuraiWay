@@ -2,11 +2,13 @@ import React from 'react';
 import {PostsType, StateType} from "../state";
 import {Dispatch} from "redux";
 import {usersAPI} from "../components/api/api-js";
+import {FilterType} from "../components/Users/UsersSearchForm";
 
 
 type FollowActionType = ReturnType<typeof followSuccess>
 type UnfollowActionType = ReturnType<typeof unfollowSuccess>
 type SetUsersActionType = ReturnType<typeof setUsers>
+type SetFilterActionType = ReturnType<typeof setFilterAC>
 type SetCurrentPageActionType = ReturnType<typeof setCurrentPageAC>
 type SetTotalUsersCountActionType = ReturnType<typeof setTotalUsersCount>
 type onPageChangedActionType = ReturnType<typeof onPageChangedAC>
@@ -15,7 +17,7 @@ type ToggleFollowingProgressActionType = ReturnType<typeof toggleFollowingProgre
 export type ActionsTypes = FollowActionType | UnfollowActionType
     | SetUsersActionType | SetCurrentPageActionType
     | SetTotalUsersCountActionType | onPageChangedActionType
-    | ToggleIsFetchingActionType | ToggleFollowingProgressActionType
+    | ToggleIsFetchingActionType | ToggleFollowingProgressActionType | SetFilterActionType
 
 
 const FOLLOW = 'FOLLOW';
@@ -24,6 +26,7 @@ const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const ON_PAGE_CHANGED = 'ON_PAGE_CHANGED';
+const SET_FILTER = 'SET_FILTER';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
 
@@ -33,7 +36,10 @@ let initialState: InitialState = {
     totalUsersCount: 10,
     currentPage: 2,
     isFetching: false,
-    followingInProgress: []
+    followingInProgress: [],
+    filter:{term:'',
+        friend:null
+    }
 };
 
 type InitialState = {
@@ -42,7 +48,11 @@ type InitialState = {
     totalUsersCount: number,
     currentPage: number,
     isFetching: boolean,
-    followingInProgress: Array<number>
+    followingInProgress: Array<number>,
+    filter:{
+        term:string,
+        friend: null | boolean
+    }
 
 }
 export type UsersType = {
@@ -92,6 +102,10 @@ export function UsersReducer(state = initialState, action: ActionsTypes): Initia
         case ON_PAGE_CHANGED: {
             return {...state, pageSize: action.pageNumber}
         }
+        case SET_FILTER: {
+            return {...state,filter:action.payload.filter}
+
+        }
         case TOGGLE_IS_FETCHING: {
             return {...state, isFetching: action.isFetching}
         }
@@ -130,6 +144,12 @@ export const setCurrentPageAC = (currentPage: number) => {
 
     } as const
 }
+export const setFilterAC = (filter:FilterType) => {
+    return {
+        type: SET_FILTER, payload:{filter}
+
+    } as const
+}
 export const setTotalUsersCount = (totalUsersCount: number) => {
     return {
         type: SET_TOTAL_USERS_COUNT, count: totalUsersCount
@@ -155,11 +175,12 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
     } as const
 }
 
-export const requestUsers = (page: number, pageSize: number): any => {
-    return (dispatch: Dispatch) => {
+export const requestUsers = (page: number, pageSize: number,filter:FilterType): any => {
+    return(dispatch: Dispatch) => {
         dispatch(toggleIsFetching(true));
-        dispatch(setCurrentPageAC(page))
-        usersAPI.getUsers(page, pageSize).then(data => {
+        dispatch(setCurrentPageAC(page));
+        dispatch(setFilterAC(filter))
+        usersAPI.getUsers(page, pageSize,filter.term, filter.friend).then(data => {
             dispatch(setUsers(data.items))
             dispatch(toggleIsFetching(false))
             dispatch(setTotalUsersCount(data.totalCount));

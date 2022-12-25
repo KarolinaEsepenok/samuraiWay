@@ -7,7 +7,7 @@ import {
     requestUsers,
     onPageChangedAC,
     setCurrentPageAC, toggleFollowingProgress, unfollowSuccess,
-    UsersType
+    UsersType, follow, unfollow
 } from "../../redux/UsersReducer";
 
 import Users from "./Users";
@@ -18,6 +18,7 @@ import {withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {getUserProfile} from "../../redux/ProfilePageReducer";
 import {FilterType} from "./UsersSearchForm";
+import {ThunkDispatch} from "redux-thunk";
 
 
 class UserContainer extends React.Component<UsersPropsType> {
@@ -41,7 +42,7 @@ class UserContainer extends React.Component<UsersPropsType> {
             <Users totalUsersCount={this.props.totalUsersCount}
                    pageSize={this.props.pageSize}
                    currentPage={this.props.currentPage}
-                   onPageChanged={this.props.onPageChanged}
+                   onPageChanged={this.onPageChanged}
                    users={this.props.users}
                    follow={this.props.follow}
                    unfollow={this.props.unfollow}
@@ -71,22 +72,22 @@ export let mapStateToProps = (state: AppStateType) => {
 
     }
 }
-export let mapDispatchToProps = (dispatch: Dispatch) => {
+export let mapDispatchToProps = (dispatch: ThunkDispatch<AppStateType, unknown, any>) => {
     return {
         follow: (userId: number) => {
-            dispatch(followSuccess(userId))
+            dispatch(follow(userId))
         },
         unfollow: (userId: number) => {
-            dispatch(unfollowSuccess(userId))
+            dispatch(unfollow(userId))
         },
 
         setCurrentPage: (pageNumber: number) => {
             dispatch(setCurrentPageAC(pageNumber))
         },
 
-        onPageChanged: (pageNumber: number) => {
-            dispatch(onPageChangedAC(pageNumber))
-        },
+        // onPageChanged: (pageNumber: number) => {
+        //     dispatch(onPageChangedAC(pageNumber))
+        // },
 
         toggleFollowingProgress: (isFetching: boolean, userId: number) => {
             dispatch(toggleFollowingProgress(isFetching, userId))

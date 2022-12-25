@@ -20,7 +20,7 @@ export const Users = (props: UsersPropsType) => {
             <UsersSearchForm onFilterChanged={props.onFilterChanged} />
             <div>
                 {pages.map(p => {
-                    return <span className={props.pageSize === p ? s.selectedPage : ""}
+                    return <span className={props.currentPage === p ? s.selectedPage : ""}
                                  onClick={(e) => {
                                      props.onPageChanged(p)
                                  }}>{p}</span>
@@ -37,13 +37,10 @@ export const Users = (props: UsersPropsType) => {
                         {u.followed ?
                             <button disabled={props.followingInProgress.some((id) => id === u.id)} onClick={() => {
                                 props.unfollow(u.id)
-
                             }}>Unfollow</button>
                             : <button disabled={props.followingInProgress.some((id) => id === u.id)} onClick={() => {
                                 props.follow(u.id)
-
                             }}>Follow</button>}
-
                     </div>
                 </span>
                 <span>

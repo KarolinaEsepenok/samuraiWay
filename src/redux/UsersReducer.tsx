@@ -192,10 +192,12 @@ export const requestUsers = (page: number, pageSize: number,filter:FilterType): 
 
 export const follow = (userId: number) => {
     return (dispatch: Dispatch) => {
+
         dispatch(toggleFollowingProgress(true, userId));
         usersAPI.follow(userId)
             .then(response => {
                 if (response.data.resultCode == 0) {
+
                     dispatch(followSuccess(userId))
                 }
                 dispatch(toggleFollowingProgress(false, userId))
@@ -205,10 +207,12 @@ export const follow = (userId: number) => {
 }
 export const unfollow = (userId: number) => {
     return (dispatch: Dispatch) => {
+
         dispatch(toggleFollowingProgress(true, userId));
         usersAPI.unfollow(userId)
             .then(response => {
                 if (response.data.resultCode == 0) {
+
                     dispatch(unfollowSuccess(userId))
                 }
                 dispatch(toggleFollowingProgress(false, userId))

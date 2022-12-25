@@ -24,3 +24,7 @@ export let reduser = combineReducers({
 export type AppStateType= ReturnType<typeof reduser>
 
 export let store= createStore(reduser, applyMiddleware(thunkMiddleware));
+
+
+// @ts-ignore
+window.store = store

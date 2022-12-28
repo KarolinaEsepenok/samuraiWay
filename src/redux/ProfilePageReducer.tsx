@@ -8,13 +8,15 @@ type AddPostActionType = ReturnType<typeof addPostActionCreator>
 type SetUserProfile = ReturnType<typeof setUserProfile >
 type SetStatus = ReturnType<typeof setStatus >
 type UpdateStatus = ReturnType<typeof setUpdateStatus >
+type DeletePost = ReturnType<typeof deletePost>
 
-export type ActionsTypes = AddPostActionType |  SetUserProfile |SetStatus |UpdateStatus
+export type ActionsTypes = AddPostActionType |  SetUserProfile |SetStatus |UpdateStatus |DeletePost
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 const UPDATE_STATUS = 'UPDATE_STATUS';
+const DELETE_POST= 'DELETE_POST'
 
 
 let initialState:ProfilePageType = {
@@ -49,6 +51,9 @@ export function ProfilePageReducer(state = initialState,action: ActionsTypes):Pr
         case UPDATE_STATUS:{
             return {...state,status: action.status}
         }
+        case DELETE_POST:{
+            return {...state, posts: state.posts.filter(p=>p.id!=action.postId)}
+        }
         default: return state
     }
 };
@@ -67,6 +72,12 @@ export const setStatus = (status:string) => {
     return {
         type: SET_STATUS,
         status
+    } as const
+}
+export const deletePost = (postId:number) => {
+    return {
+        type: DELETE_POST,
+       postId
     } as const
 }
 export const setUpdateStatus = (status:string) => {

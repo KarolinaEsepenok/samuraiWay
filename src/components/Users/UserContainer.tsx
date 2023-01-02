@@ -14,9 +14,9 @@ import {Users} from "./Users";
 import React from "react";
 
 import Preloader from "../common/Preloader/Preloader";
-import {withRouter} from "react-router-dom";
+
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
-import {getUserProfile} from "../../redux/ProfilePageReducer";
+
 import {FilterType} from "./UsersSearchForm";
 import {ThunkDispatch} from "redux-thunk";
 

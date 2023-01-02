@@ -8,3 +8,6 @@
 .selectedPage{
     font-weight: bold;
 }
+.pagination{
+    width: 300px;
+}

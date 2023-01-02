@@ -34,7 +34,7 @@ let initialState: InitialState = {
     users: [],
     pageSize: 5,
     totalUsersCount: 10,
-    currentPage: 2,
+    currentPage: 1,
     isFetching: false,
     followingInProgress: [],
     filter: {
@@ -96,9 +96,7 @@ export function UsersReducer(state = initialState, action: ActionsTypes): Initia
         case SET_TOTAL_USERS_COUNT: {
             return {
                 ...state, totalUsersCount: action.count
-
             }
-
         }
         case ON_PAGE_CHANGED: {
             return {...state, pageSize: action.pageNumber}

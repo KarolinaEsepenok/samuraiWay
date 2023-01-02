@@ -1,26 +1,48 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {UsersPropsType} from "./UserContainer";
 import s from "./Users.module.css";
 import users from "../asses/img/users.png";
 import {NavLink} from "react-router-dom";
 import {UsersSearchForm} from "./UsersSearchForm";
+import {Paginator} from "../common/Paginator/Paginator";
 
 
-export const Users = (props: UsersPropsType) => {
 
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+export const Users = (props: UsersPropsType,totalUsersCount:number,pageSize:number,portionSize=10,currentPage:any, onPageChanged:any) => {
+
+     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
+    let portionCount = Math.ceil(pagesCount/portionSize);
+    let [portionNumber, setPortionNumber]= useState(1);
+    let leftPortionPageNumber = (portionNumber - 1)* portionSize +1;
+    let rightPortionPageNumber = portionNumber * portionSize
 
 
     return (
         <div className={s.usersContainer}>
-            <UsersSearchForm onFilterChanged={props.onFilterChanged} />
-            <div>
+<Paginator totalUsersCount={totalUsersCount} pageSize={pageSize} portionSize={portionSize} currentPage={currentPage} onPageChanget={onPageChanged}/>
+                <UsersSearchForm onFilterChanged={props.onFilterChanged} />
+
+          {portionNumber > 1 &&
+                    <button onClick={()=>{setPortionNumber(portionNumber - 1)}}>Prev</button>}
+                {pages
+                    .filter(p=>p>= leftPortionPageNumber &&  p<= rightPortionPageNumber)
+
+                    .map(p => {
+                        return <span className={currentPage === p ? s.selectedPage : ""}
+                                     onClick={(e) => {
+                                         onPageChanged(p)
+                                     }}>{p}</span>
+                    })}
+                {portionCount>portionNumber &&
+                    <button onClick={()=>{setPortionNumber(portionNumber+1)}}>Next</button>}
+
+            <div className={s.pagination}>
                 {pages.map(p => {
-                    return <span className={props.currentPage === p ? s.selectedPage : ""}
+                    return <span  className={props.currentPage === p ? s.selectedPage : ""}
                                  onClick={(e) => {
                                      props.onPageChanged(p)
                                  }}>{p}</span>
@@ -54,10 +76,8 @@ export const Users = (props: UsersPropsType) => {
                 </span>
 
             </div>)}
-        </div>
+      </div>
 
-    );
-};
+)
 
-
-export default Users;
+}

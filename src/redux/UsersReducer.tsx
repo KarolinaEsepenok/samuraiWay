@@ -37,8 +37,9 @@ let initialState: InitialState = {
     currentPage: 2,
     isFetching: false,
     followingInProgress: [],
-    filter:{term:'',
-        friend:null
+    filter: {
+        term: '',
+        friend: null
     }
 };
 
@@ -49,8 +50,8 @@ type InitialState = {
     currentPage: number,
     isFetching: boolean,
     followingInProgress: Array<number>,
-    filter:{
-        term:string,
+    filter: {
+        term: string,
         friend: null | boolean
     }
 
@@ -103,7 +104,7 @@ export function UsersReducer(state = initialState, action: ActionsTypes): Initia
             return {...state, pageSize: action.pageNumber}
         }
         case SET_FILTER: {
-            return {...state,filter:action.payload.filter}
+            return {...state, filter: action.payload.filter}
 
         }
         case TOGGLE_IS_FETCHING: {
@@ -144,9 +145,9 @@ export const setCurrentPageAC = (currentPage: number) => {
 
     } as const
 }
-export const setFilterAC = (filter:FilterType) => {
+export const setFilterAC = (filter: FilterType) => {
     return {
-        type: SET_FILTER, payload:{filter}
+        type: SET_FILTER, payload: {filter}
 
     } as const
 }
@@ -175,53 +176,25 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
     } as const
 }
 
-export const requestUsers = (page: number, pageSize: number,filter:FilterType): any => {
-    return(dispatch: Dispatch) => {
-        dispatch(toggleIsFetching(true));
-        dispatch(setCurrentPageAC(page));
-        dispatch(setFilterAC(filter))
-        usersAPI.getUsers(page, pageSize,filter.term, filter.friend).then(data => {
-            dispatch(setUsers(data.items))
-            dispatch(toggleIsFetching(false))
-            dispatch(setTotalUsersCount(data.totalCount));
-
-        });
-
-    }
+export const requestUsers = (page: number, pageSize: number, filter: FilterType): any => async (dispatch: Dispatch) => {
+    dispatch(toggleIsFetching(true));
+    dispatch(setCurrentPageAC(page));
+    dispatch(setFilterAC(filter))
+    let data = await usersAPI.getUsers(page, pageSize, filter.term, filter.friend)
+    dispatch(setUsers(data.items))
+    dispatch(toggleIsFetching(false))
+    dispatch(setTotalUsersCount(data.totalCount));
 }
-
-export const follow = (userId: number) => {
-    return (dispatch: Dispatch) => {
-        dispatch(toggleFollowingProgress(true, userId));
-        usersAPI.follow(userId)
-            .then(response => {
-                if (response.data.resultCode == 0) {
-                    dispatch(followSuccess(userId))
-                }
-                dispatch(toggleFollowingProgress(false, userId))
-            });
-    }
+const followUnfollowFlow = async (dispatch:Dispatch, userId:number, apiMethod:any, actionCreator:any)=>{
+    dispatch(toggleFollowingProgress(true, userId));
+    let response = await apiMethod(userId)
+    if (response.data.resultCode == 0) {
+        dispatch(actionCreator(userId))
+}}
+export const follow = (userId: number) => async (dispatch: Dispatch) => {
+    let apiMethod = usersAPI.follow.bind(usersAPI)
+    followUnfollowFlow(dispatch, userId, apiMethod,followSuccess)
 }
-export const unfollow = (userId: number) => {
-    return (dispatch: Dispatch) => {
-
-        dispatch(toggleFollowingProgress(true, userId));
-        usersAPI.unfollow(userId)
-            .then(response => {
-                if (response.data.resultCode == 0) {
-
-                    dispatch(unfollowSuccess(userId))
-                }
-                dispatch(toggleFollowingProgress(false, userId))
-            });
-
-    }
-}
-
-{/*this.props.setCurrentPage(pageNumber);
-this.props.toggleIsFetching(true)
-usersAPI.getUsers(pageNumber,this.props.pageSize).then(data => {
-    this.props.toggleIsFetching(false)
-    this.props.setUsers(data.items)
-});*/
-}
+export const unfollow = (userId: number) => async (dispatch: Dispatch) => {
+    let apiMethod = usersAPI.unfollow.bind(usersAPI)
+    followUnfollowFlow(dispatch, userId, apiMethod, unfollowSuccess)}

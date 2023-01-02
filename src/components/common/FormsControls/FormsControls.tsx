@@ -1,6 +1,8 @@
 import React, {HTMLInputTypeAttribute} from "react";
 import styles from './FormsControls.module.css'
 import {WrappedFieldInputProps, WrappedFieldMetaProps} from 'redux-form/lib/Field'
+import {required} from "../../../utils/validators/validators";
+import {Field} from "redux-form";
 
 type FormsControls = {
     input: WrappedFieldInputProps
@@ -39,3 +41,8 @@ export const Input = ({meta, input, ...props}: FormsControls) => {
         </div>
     );
 };
+export const createField=(placeholder:string|null, name:string,validators:any, components:any,props:any)=>{
+    return (
+   <div> <Field placeholder={placeholder} name={name} component={components} validate={validators}{...props}/></div>
+    )
+}

@@ -1,9 +1,7 @@
 import React, {ComponentType} from 'react';
 import s from './App.module.css';
-
 import Navbar from "./components/Navbar/Navbar";
-
-import {BrowserRouter, Route, Switch, withRouter} from "react-router-dom";
+import { Route, Switch, withRouter} from "react-router-dom";
 import Settings from "./components/Settings/Settings";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
@@ -18,9 +16,7 @@ import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 
-//type MapDispatchToPropsType = {
-  //  getAuthUserData: () => void
-//}
+
 type mapStateToProps = {
     initialized:boolean
 }
@@ -38,9 +34,9 @@ const mapStateToProps = (state:AppStateType) => ({
      this.props.initializeApp();
     }
      render() {
-       /*  if(!this.props.initialized) {
-             return return <div><Preloader isFetching={true}/></div>
-         }*/
+       if(!this.props.initialized) {
+            return <div><Preloader isFetching={true}/></div>
+         }
         return (
             <div className={s.app}>
                 <div className={s.appWrapper}>

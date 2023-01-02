@@ -10,7 +10,7 @@ import {
     UsersType, follow, unfollow
 } from "../../redux/UsersReducer";
 
-import Users from "./Users";
+import {Users} from "./Users";
 import React from "react";
 
 import Preloader from "../common/Preloader/Preloader";
@@ -48,8 +48,6 @@ class UserContainer extends React.Component<UsersPropsType> {
                    unfollow={this.props.unfollow}
                    followingInProgress={this.props.followingInProgress}
                    onFilterChanged={this.onFilterChanged} filter={this.props.filter}
-
-
                    setCurrentPage={this.props.setCurrentPage}
                    isFetching={this.props.isFetching}
                    getUsers={this.props.getUsers}

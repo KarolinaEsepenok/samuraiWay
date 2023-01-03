@@ -43,7 +43,7 @@ let initialState: InitialState = {
     }
 };
 
-type InitialState = {
+export type InitialState = {
     users: UsersType[],
     pageSize: number,
     totalUsersCount: number,
@@ -59,8 +59,6 @@ type InitialState = {
 export type UsersType = {
     id: number, photos: { small: string, large: string }, followed: boolean, name: string, status: string, location: { city: string, country: string }
 }
-
-
 export function UsersReducer(state = initialState, action: ActionsTypes): InitialState {
     switch (action.type) {
         case FOLLOW:

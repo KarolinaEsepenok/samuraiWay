@@ -1,67 +1,52 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import {UsersPropsType} from "./UserContainer";
 import s from "./Users.module.css";
-import users from "../asses/img/users.png";
+import userPhoto from "../asses/img/users.png";
 import {NavLink} from "react-router-dom";
 import {UsersSearchForm} from "./UsersSearchForm";
 import {Paginator} from "../common/Paginator/Paginator";
+import {User} from "./User";
 
 
+// export const Users = (props: UsersPropsType,user:any, totalUsersCount: number, pageSize: number, portionSize = 10, currentPage: any, onPageChanged: any) => {
+export const Users: FC<UsersPropsType> = ({
+                                              totalUsersCount,
+                                              pageSize,
+                                              currentPage,
+                                              onPageChanged,
+                                              onFilterChanged,
+                                              users,
+                                              follow,
+                                              unfollow,
+                                              followingInProgress
 
-export const Users = (props: UsersPropsType,totalUsersCount:number,pageSize:number,portionSize=10,currentPage:any, onPageChanged:any) => {
+                                          }) => {
 
-     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
-    }
-    let portionCount = Math.ceil(pagesCount/portionSize);
-    let [portionNumber, setPortionNumber]= useState(1);
-    let leftPortionPageNumber = (portionNumber - 1)* portionSize +1;
-    let rightPortionPageNumber = portionNumber * portionSize
-
+    const portionSize = 10
 
     return (
         <div className={s.usersContainer}>
-<Paginator totalUsersCount={totalUsersCount} pageSize={pageSize} portionSize={portionSize} currentPage={currentPage} onPageChanget={onPageChanged}/>
-                <UsersSearchForm onFilterChanged={props.onFilterChanged} />
+            <Paginator totalItemsCount={totalUsersCount}
+                       pageSize={pageSize}
+                       portionSize={portionSize}
+                       currentPage={currentPage} onPageChanged={onPageChanged}/>
 
-          {portionNumber > 1 &&
-                    <button onClick={()=>{setPortionNumber(portionNumber - 1)}}>Prev</button>}
-                {pages
-                    .filter(p=>p>= leftPortionPageNumber &&  p<= rightPortionPageNumber)
+            <UsersSearchForm onFilterChanged={onFilterChanged}/>
 
-                    .map(p => {
-                        return <span className={currentPage === p ? s.selectedPage : ""}
-                                     onClick={(e) => {
-                                         onPageChanged(p)
-                                     }}>{p}</span>
-                    })}
-                {portionCount>portionNumber &&
-                    <button onClick={()=>{setPortionNumber(portionNumber+1)}}>Next</button>}
 
-            <div className={s.pagination}>
-                {pages.map(p => {
-                    return <span  className={props.currentPage === p ? s.selectedPage : ""}
-                                 onClick={(e) => {
-                                     props.onPageChanged(p)
-                                 }}>{p}</span>
-                })}
-            </div>
-            {/*}  <button onClick={props.getUsers}>Get Users</button>*/}
-            {props.users.map(u => <div key={u.id}>
+            {users.map(u => <div key={u.id}>
                 <span>
                     <div>
-                      <NavLink to={'/profile/' + u.id}> <img src={u.photos.small != null ? u.photos.small : users}
+                      <NavLink to={'/profile/' + u.id}> <img src={u.photos.small != null ? u.photos.small : userPhoto}
                                                              className={s.userPhoto}/></NavLink>
                 </div>
                     <div>
                         {u.followed ?
-                            <button disabled={props.followingInProgress.some((id) => id === u.id)} onClick={() => {
-                                props.unfollow(u.id)
+                            <button disabled={followingInProgress.some((id) => id === u.id)} onClick={() => {
+                                unfollow(u.id)
                             }}>Unfollow</button>
-                            : <button disabled={props.followingInProgress.some((id) => id === u.id)} onClick={() => {
-                                props.follow(u.id)
+                            : <button disabled={followingInProgress.some((id) => id === u.id)} onClick={() => {
+                                follow(u.id)
                             }}>Follow</button>}
                     </div>
                 </span>
@@ -76,8 +61,8 @@ export const Users = (props: UsersPropsType,totalUsersCount:number,pageSize:numb
                 </span>
 
             </div>)}
-      </div>
+        </div>
 
-)
+    )
 
 }

@@ -23,16 +23,16 @@ import {ThunkDispatch} from "redux-thunk";
 
 class UserContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize,this.props.filter)
+        this.props.getUsers(this.props.currentPage, this.props.pageSize, this.props.filter)
     }
 
     onPageChanged = (pageNumber: number) => {
-        const {pageSize,filter}= this.props
-        this.props.getUsers(pageNumber, pageSize,filter)
+        const {pageSize, filter} = this.props
+        this.props.getUsers(pageNumber, pageSize, filter)
     }
-    onFilterChanged=(filter:FilterType)=>{
-        const {pageSize}= this.props
-        this.props.getUsers(1, pageSize,filter)
+    onFilterChanged = (filter: FilterType) => {
+        const {pageSize} = this.props
+        this.props.getUsers(1, pageSize, filter)
     }
 
     render() {
@@ -58,6 +58,7 @@ class UserContainer extends React.Component<UsersPropsType> {
         </>
     }
 }
+
 export let mapStateToProps = (state: AppStateType) => {
     return {
         users: state.usersPage.users,
@@ -66,7 +67,7 @@ export let mapStateToProps = (state: AppStateType) => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress,
-        filter:state.usersPage.filter
+        filter: state.usersPage.filter
 
     }
 }
@@ -90,28 +91,28 @@ export let mapDispatchToProps = (dispatch: ThunkDispatch<AppStateType, unknown, 
         toggleFollowingProgress: (isFetching: boolean, userId: number) => {
             dispatch(toggleFollowingProgress(isFetching, userId))
         },
-        getUsers: (currentPage: number, pageSize: number,filter:FilterType) => {
-            dispatch(requestUsers(currentPage, pageSize,filter))
+        getUsers: (currentPage: number, pageSize: number, filter: FilterType) => {
+            dispatch(requestUsers(currentPage, pageSize, filter))
         }
     }
 }
 type MapStatePropsType = {
     users: UsersType[],
     pageSize: number,
-   totalUsersCount: number,
+    totalUsersCount: number,
     currentPage: number,
     isFetching: boolean
-   followingInProgress: Array<number>
-    filter:FilterType
+    followingInProgress: Array<number>
+    filter: FilterType
 }
 type MapDispatchPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    getUsers: (currentPage: number, pageSize: number,filter:FilterType) => void
+    getUsers: (currentPage: number, pageSize: number, filter: FilterType) => void
     setCurrentPage: (pageNumber: number) => void
-   onPageChanged: (pageNumber: number) => void
+    onPageChanged: (pageNumber: number) => void
     onFilterChanged: (filter: FilterType) => void
-   toggleFollowingProgress: (isFetching: boolean, userId: number) => void
+    toggleFollowingProgress: (isFetching: boolean, userId: number) => void
 
     //   setTotalUsersCount: (totalUsersCount: number) => void
     // toggleIsFetching: (isFetching: boolean) => void

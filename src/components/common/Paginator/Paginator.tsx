@@ -31,7 +31,6 @@ export const Paginator: React.FC<PaginatorPropsType> = ({
 
     return (
         <div className={s.paginator}>
-            hello
             {portionNumber > 1 && <button onClick={() => {
                 setPortionNumber(portionNumber - 1)
             }} className={s.button}> PREV </button>}

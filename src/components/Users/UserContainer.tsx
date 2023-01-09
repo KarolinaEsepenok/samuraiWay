@@ -52,8 +52,6 @@ class UserContainer extends React.Component<UsersPropsType> {
                    isFetching={this.props.isFetching}
                    getUsers={this.props.getUsers}
                    toggleFollowingProgress={this.props.toggleFollowingProgress}
-
-
             />
         </>
     }

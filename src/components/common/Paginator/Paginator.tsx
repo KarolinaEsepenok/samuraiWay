@@ -28,7 +28,6 @@ export const Paginator: React.FC<PaginatorPropsType> = ({
     const rightPortionNumber = portionNumber * portionSize
 
     console.log('paginationParams', pagesCount, portionNumber, portionCount, leftPortionNumber, rightPortionNumber)
-
     return (
         <div className={s.paginator}>
             {portionNumber > 1 && <button onClick={() => {

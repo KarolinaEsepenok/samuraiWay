@@ -37,7 +37,7 @@ export const Users: FC<UsersPropsType> = ({
             {users.map(u => <div key={u.id}>
                 <span>
                     <div>
-                      <NavLink to={'/profile/' + u.id}> <img src={u.photos.small != null ? u.photos.small : userPhoto}
+                      <NavLink to={'/profile/' + u.id}><img src={u.photos.small != null ? u.photos.small : userPhoto}
                                                              className={s.userPhoto}/></NavLink>
                 </div>
                     <div>
@@ -54,7 +54,7 @@ export const Users: FC<UsersPropsType> = ({
                     <span>
                         <div>{u.name}</div><div>{u.status}</div>
                     </span>
-                    <span>
+                    <span className={s.userDescr}>
                         <div>{'u.location.country'}</div>
                         <div>{'u.location.city'}</div>
                     </span>

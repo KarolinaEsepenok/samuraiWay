@@ -24,7 +24,12 @@
     border: none;
     width: 100px;
     font-family: "Montserrat";
+    transition-duration: 0.5s;
 
+}
+.loginBlock button:hover{
+    opacity: 0.8;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 .loginBlock a{
     color: black;

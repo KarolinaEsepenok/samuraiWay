@@ -22,6 +22,15 @@ margin: 20px;
     border-radius: 15px;
     text-align: center;
 }
+@media screen and (max-width: 520px){
+    .appWrapper{
+        grid-template-areas:
+          "h h h"
+          "n n n"
+          "c c c";
+    }
+}
+
 
 
 

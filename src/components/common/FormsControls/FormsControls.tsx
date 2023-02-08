@@ -4,6 +4,7 @@ import {WrappedFieldInputProps, WrappedFieldMetaProps} from 'redux-form/lib/Fiel
 import {required} from "../../../utils/validators/validators";
 import {Field} from "redux-form";
 
+
 type FormsControls = {
     input: WrappedFieldInputProps
     meta: WrappedFieldMetaProps
@@ -35,7 +36,7 @@ export const Input = ({meta, input, ...props}: FormsControls) => {
     const hasError = meta.error && meta.touched
     return (
         <div>
-            <div><input className={styles.formControl + ' ' + (hasError ? styles.error : '')}{...input} {...props}/>
+            <div className={styles.inputLogin}><input className={styles.formControl + ' ' + (hasError ? styles.error : '')}{...input} {...props}/>
             </div>
             {hasError && <span>{meta.error}</span>}
         </div>

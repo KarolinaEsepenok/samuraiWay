@@ -19,10 +19,10 @@ const LoginForm = (props: InjectedFormProps<FormDataType>) => {
         <form onSubmit={props.handleSubmit}>
             {createField('Email','email', [required], Input,{})}
             {createField('Password','password', [required], Input,{type:'password'})}
-            <div><Field type={'checkbox'} name={'rememberMe'} component={Input}/>Remember me</div>
+            <div ><Field className={s.checkboxLogin} type={'checkbox'} name={'rememberMe'} component={Input}/>Remember me</div>
             {props.error && <div className={s.forSummaryError}>{props.error}</div>}
             <div>
-                <button>Login</button></div>
+                <button className={s.btnLogin}>Login</button></div>
         </form>
     );
 };

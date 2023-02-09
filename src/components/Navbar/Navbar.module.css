@@ -40,5 +40,18 @@
     .nav{
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
+        padding: 10px 0px 0px 10px;
+    }
+    .item a{
+        padding: 5px 5px;
+    }
+    .items{
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: 10px;
+        width: 100%;
+        justify-content: space-evenly;
+        padding: 20px 0px;
     }
 }

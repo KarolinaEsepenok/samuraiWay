@@ -22,21 +22,16 @@ export const Users: FC<UsersPropsType> = ({
 
                                           }) => {
 
-    const portionSize = 10
+    const portionSize = 5
 
     return (
         <div className={s.usersContainer}>
-            <Paginator totalItemsCount={totalUsersCount}
-                       pageSize={pageSize}
-                       portionSize={portionSize}
-                       currentPage={currentPage} onPageChanged={onPageChanged}/>
-
             <UsersSearchForm onFilterChanged={onFilterChanged}/>
+<div className={s.userMain}>
 
-
-            {users.map(u => <div key={u.id}>
+            {users.map(u => <div className={s.userCont}  key={u.id}>
                 <span>
-                    <div>
+                    <div >
                       <NavLink to={'/profile/' + u.id}><img src={u.photos.small != null ? u.photos.small : userPhoto}
                                                              className={s.userPhoto}/></NavLink>
                 </div>
@@ -60,7 +55,13 @@ export const Users: FC<UsersPropsType> = ({
                     </span>
                 </span>
 
-            </div>)}
+            </div>)}</div>
+            <Paginator totalItemsCount={totalUsersCount}
+                       pageSize={pageSize}
+                       portionSize={portionSize}
+                       currentPage={currentPage} onPageChanged={onPageChanged}/>
+
+
         </div>
 
     )

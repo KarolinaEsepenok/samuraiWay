@@ -1,5 +1,6 @@
 import {Field, Form, Formik} from "formik";
 import React from "react";
+import s from './UsersSearchForm.module.css'
 
 const usersSearchFormValidate = (values: any) => {
     const errors = {};
@@ -20,7 +21,7 @@ export const UsersSearchForm:React.FC<PropsType> =React.memo( (props) => {
         setSubmitting(false)
 
     }
-    return <div>
+    return <div className={s.usersFormContainer}>
         <Formik
             initialValues={{term: '',friend:null}}
             validate={usersSearchFormValidate}

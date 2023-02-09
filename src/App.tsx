@@ -5,8 +5,7 @@ import { Route, Switch, withRouter} from "react-router-dom";
 import Settings from "./components/Settings/Settings";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
-const DialogsContainer = lazy(()=>import("./components/Dialogs/DialogsContainer"));
-const ProfileContainer = lazy(()=>import("./components/Profile/ProfileContainer"));
+
 import UserContainer from "./components/Users/UserContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
@@ -16,7 +15,8 @@ import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 
-
+const DialogsContainer = lazy(()=>import("./components/Dialogs/DialogsContainer"));
+const ProfileContainer = lazy(()=>import("./components/Profile/ProfileContainer"));
 type mapStateToProps = {
     initialized:boolean
 }

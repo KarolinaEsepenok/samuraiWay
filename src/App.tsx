@@ -43,6 +43,7 @@ const mapStateToProps = (state:AppStateType) => ({
                     <HeaderContainer/>
                     <Navbar/>
                     <div className={s.appWrapperContent}>
+
                         <Switch>
                             <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                             <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
@@ -52,6 +53,7 @@ const mapStateToProps = (state:AppStateType) => ({
                             <Route path='/users' render={() => <UserContainer/>}/>
                             <Route path='/login' render={() => <Login/>}/>
                         </Switch>
+
                     </div>
                 </div></div>
         );

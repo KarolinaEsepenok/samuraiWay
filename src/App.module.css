@@ -16,18 +16,21 @@
 }
 
 .appWrapperContent{
-    grid-area: auto;
+    grid-area: c;
 margin: 20px;
     background-color: #FFF;
     border-radius: 15px;
     text-align: center;
 }
-@media screen and (max-width: 520px){
+@media screen and (max-width: 460px){
     .appWrapper{
         grid-template-areas:
-          "h h h"
-          "n n n"
-          "c c c";
+          "h h "
+          "n n "
+          "c c ";
+    }
+    .appWrapperContent{
+        margin: 10px;
     }
 }
 

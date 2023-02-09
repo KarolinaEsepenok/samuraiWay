@@ -1,13 +1,13 @@
-import React, {ComponentType} from 'react';
+import React, {ComponentType, lazy} from 'react';
 import s from './App.module.css';
 import Navbar from "./components/Navbar/Navbar";
 import { Route, Switch, withRouter} from "react-router-dom";
 import Settings from "./components/Settings/Settings";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
+const DialogsContainer = lazy(()=>import("./components/Dialogs/DialogsContainer"));
+const ProfileContainer = lazy(()=>import("./components/Profile/ProfileContainer"));
 import UserContainer from "./components/Users/UserContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect} from "react-redux";
@@ -45,8 +45,16 @@ const mapStateToProps = (state:AppStateType) => ({
                     <div className={s.appWrapperContent}>
 
                         <Switch>
-                            <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                            <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+                            <Route path='/dialogs' render={() => {
+                                return <React.Suspense fallback={<div>Loading...</div>}>
+                                    <DialogsContainer/>
+                                </React.Suspense>
+                            }}/>
+                            <Route path='/profile/:userId?' render={() => {
+                                return <React.Suspense fallback={<div>Loading...</div>}>
+                                    <ProfileContainer/>
+                                </React.Suspense>
+                            }}/>
                             <Route path='/news' render={() => <News/>}/>
                             <Route path='/music' render={() => <Music/>}/>
                             <Route path='/settings' render={() => <Settings/>}/>

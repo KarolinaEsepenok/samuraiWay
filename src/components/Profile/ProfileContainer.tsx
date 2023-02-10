@@ -10,7 +10,7 @@ import {compose} from "redux";
 
 
 class ProfileContainer extends React.Component<CommonPropsType> {
-    componentDidMount() {
+    refreshProfile(){
         let userId:string | number = this.props.match.params.userId;
         if (!userId) {
             userId = Number(this.props.userId)
@@ -18,8 +18,19 @@ class ProfileContainer extends React.Component<CommonPropsType> {
                 this.props.history.push("/login")
             }
         }
-      this.props.getUserProfile(+userId)
+        this.props.getUserProfile(+userId)
         this.props.getStatus(+userId)
+    }
+    componentDidMount() {
+
+        this.refreshProfile()
+
+    }
+    componentDidUpdate(prevProps:any,prevState:any, snapshot:any) {
+        if(this.props.match.params.userId != prevProps.match.params.userId){
+            this.refreshProfile()
+        }
+
     }
 
     render() {

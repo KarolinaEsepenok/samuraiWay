@@ -40,7 +40,7 @@ export type RootStateType = {
     _state: StateType
 }
 export type ProfileType={
-    userId: number,
+    userId: number | null,
     lookingForAJob: boolean,
     lookingForAJobDescription: string,
     fullName: string,

@@ -22,7 +22,7 @@ export const Users: FC<UsersPropsType> = ({
 
                                           }) => {
 
-    const portionSize = 5
+    const portionSize = 10
 
     return (
         <div className={s.usersContainer}>

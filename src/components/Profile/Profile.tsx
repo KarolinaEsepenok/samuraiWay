@@ -9,13 +9,15 @@ type PropsType = {
     profile: ProfileType
     status: string
     updateStatus: (status:string)=>void
+    isOwner:boolean
+    savePhoto:()=>void
 }
 function Profile(props: PropsType) {
 
     return (
         <div className={s.ProfileContainer}>
 
-            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus} />
+            <ProfileInfo savePhoto={props.savePhoto} isOwner={props.isOwner} profile={props.profile} status={props.status} updateStatus={props.updateStatus} />
             <MyPostsContainer />
         </div>
     )

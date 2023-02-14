@@ -43,8 +43,14 @@
         justify-content: center;
         padding: 10px 0px 0px 10px;
     }
+    .item:hover{
+        background-color: #FFFFFF;
+        width: fit-content;
+    }
     .item a{
-        padding: 5px 5px;
+        padding: 10px 10px;
+        width: fit-content;
+
     }
     .items{
         display: flex;

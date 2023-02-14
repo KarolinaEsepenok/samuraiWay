@@ -29,13 +29,14 @@ export const UsersSearchForm:React.FC<PropsType> =React.memo( (props) => {
         >
             {({isSubmitting}) => (
                 <Form>
-                    <Field type="text" name="term"/>
-                    <Field name="friend" as="select">
+
+                    <Field className={s.inputUsersSearch} type="text" name="term" placeholder="Search name"/>
+                    <Field className={s.selectUsersFilter}name="friend" as="select">
                         <option value="null">All</option>
                         <option value="true">Followed</option>
                         <option value="false">Unfollowed</option>
                     </Field>
-                    <button type="submit" disabled={isSubmitting}>
+                    <button className={s.btnUsersFilter} type="submit" disabled={isSubmitting}>
                         Find
                     </button>
                 </Form>

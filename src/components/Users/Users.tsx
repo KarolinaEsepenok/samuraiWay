@@ -47,7 +47,7 @@ export const Users: FC<UsersPropsType> = ({
                 </span>
                 <span>
                     <span>
-                        <div>{u.name}</div><div>{u.status}</div>
+                        <div className={s.userName}>{u.name}</div><div>{u.status}</div>
                     </span>
                     <span className={s.userDescr}>
                         <div>{'u.location.country'}</div>

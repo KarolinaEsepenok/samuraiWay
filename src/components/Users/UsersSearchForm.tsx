@@ -28,8 +28,7 @@ export const UsersSearchForm:React.FC<PropsType> =React.memo( (props) => {
             onSubmit={submit}
         >
             {({isSubmitting}) => (
-                <Form>
-
+                <Form className={s.usersForm}>
                     <Field className={s.inputUsersSearch} type="text" name="term" placeholder="Search name"/>
                     <Field className={s.selectUsersFilter}name="friend" as="select">
                         <option value="null">All</option>

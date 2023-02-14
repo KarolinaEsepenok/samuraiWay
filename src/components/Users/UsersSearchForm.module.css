@@ -3,6 +3,10 @@
     display: flex;
     justify-content: end;
 }
+.usersForm{
+
+}
+
 .inputUsersSearch{
     padding: 8px;
     border: 1px solid #b0b0b0;
@@ -26,4 +30,34 @@
 .btnUsersFilter:hover{
     opacity: 0.8;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+@media screen and (max-width: 700px) {
+    .btnUsersFilter{
+        width: 50px;
+    }
+    .inputUsersSearch{
+        margin-right: 15px;
+    }
+    .selectUsersFilter{
+        margin-right: 15px;
+    }
+    }
+@media screen and (max-width: 455px) {
+    .usersForm{
+        display: flex;
+        flex-direction: column;
+        width: 95%;
+    }
+    .btnUsersFilter{
+        justify-items: end;
+        width: 100px;
+        align-self: end;
+        margin-right: 15px;
+    }
+    .inputUsersSearch{
+        margin-bottom: 5px;
+    }
+    .selectUsersFilter{
+        margin-bottom: 5px;
+    }
 }

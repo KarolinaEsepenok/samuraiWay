@@ -15,7 +15,6 @@ export const Paginator: React.FC<PaginatorPropsType> = ({
                                                             onPageChanged,
                                                             portionSize
                                                         }) => {
-    console.log('pages', totalItemsCount, pageSize)
     const pagesCount = Math.ceil(totalItemsCount / pageSize)
 
     const pages = []
@@ -26,8 +25,7 @@ export const Paginator: React.FC<PaginatorPropsType> = ({
     const [portionNumber, setPortionNumber] = useState(1)
     const leftPortionNumber = (portionNumber - 1) * portionSize + 1
     const rightPortionNumber = portionNumber * portionSize
-
-    console.log('paginationParams', pagesCount, portionNumber, portionCount, leftPortionNumber, rightPortionNumber)
+console.log(totalItemsCount, currentPage,portionSize )
     return (
         <div className={s.paginator}>
             {portionNumber > 1 && <button onClick={() => {

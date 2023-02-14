@@ -1,5 +1,4 @@
 import React from 'react';
-import {PostsType, StateType} from "../state";
 import {Dispatch} from "redux";
 import {usersAPI} from "../components/api/api-js";
 import {FilterType} from "../components/Users/UsersSearchForm";
@@ -32,8 +31,8 @@ const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
 
 let initialState: InitialState = {
     users: [],
-    pageSize: 10,
-    totalUsersCount: 20,
+    pageSize: 15,
+    totalUsersCount: 15,
     currentPage: 1,
     isFetching: false,
     followingInProgress: [],

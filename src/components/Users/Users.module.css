@@ -4,7 +4,7 @@
     justify-content: space-evenly;
 }
 .usersContainer{
-    height: 100vh;
+
 }
 .userPhoto{
     width: 70px;
@@ -25,8 +25,13 @@
     width: 150px;
 }
 .userName{
-    max-width: 145px;
+    max-width: 125px;
 }
 .userDescr{
-    max-width: 145px;
+    max-width: 125px;
+}
+@media screen and (max-width: 408px) {
+    .userCont{
+        width: 130px;
+    }
 }

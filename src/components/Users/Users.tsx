@@ -22,7 +22,7 @@ export const Users: FC<UsersPropsType> = ({
 
                                           }) => {
 
-    const portionSize = 10
+    const portionSize = 5
 
     return (
         <div className={s.usersContainer}>
@@ -50,8 +50,8 @@ export const Users: FC<UsersPropsType> = ({
                         <div className={s.userName}>{u.name}</div><div>{u.status}</div>
                     </span>
                     <span className={s.userDescr}>
-                        <div>{'u.location.country'}</div>
-                        <div>{'u.location.city'}</div>
+                        <div>{'u.loc.country'}</div>
+                        <div>{'u.loc.city'}</div>
                     </span>
                 </span>
 

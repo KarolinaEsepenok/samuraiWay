@@ -36,7 +36,7 @@
 .item a.active{
     color:#0077B5;
 }
-@media screen and (max-width: 600px){
+@media screen and (max-width: 620px){
     .nav{
         display: flex;
         flex-wrap: wrap;

@@ -39,7 +39,7 @@ function ProfileInfo(props: PropsType) {
             <div className={s.descriptionBlock}>
                 {photoSrc ? <img src={photoSrc}/> : <img className={s.profileImgCommon} src={user}/>}
                 {props.isOwner &&
-                    <label className={s.labelChangeAva}><img src={changeAva}/>
+                    <label className={s.labelChangeAva} title={'Change photo'}><img src={changeAva}/>
                         <input type={'file'} onChange={mainPhotoSelected} className={s.changeAvatar}/>
                     </label>
                    }

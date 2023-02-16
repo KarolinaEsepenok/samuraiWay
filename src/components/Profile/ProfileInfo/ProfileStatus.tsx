@@ -37,7 +37,7 @@ class ProfileStatus extends React.Component<any, any> {
     render() {
         return (
             <div>{!this.state.editMode &&
-                <div className={s.status}><span onDoubleClick={this.activateEditMode}>{this.props.status || "my status"}</span></div>
+                <div className={s.status} title={'Change status'}><span onDoubleClick={this.activateEditMode}>{this.props.status || "my status"}</span></div>
             }
                 {this.state.editMode && <div >
                     <input className={s.statusInput} onChange={this.onStatusChange}

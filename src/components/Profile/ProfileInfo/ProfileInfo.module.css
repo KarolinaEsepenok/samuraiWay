@@ -14,7 +14,7 @@
 .profileImgCommon{
     width: 150px;
     height: 150px;
-    border-radius: 45px;
+    border-radius: 15px;
     display: block;
     margin: 0 auto;
 }
@@ -66,4 +66,8 @@
     font-size: 16px;
     font-weight: 600;
     color: #282828;
+}
+.profileInformation{
+    align-self: start;
+    text-align: start;
 }

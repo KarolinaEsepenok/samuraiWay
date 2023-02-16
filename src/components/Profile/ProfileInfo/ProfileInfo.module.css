@@ -23,6 +23,7 @@
     width: 100px;
    padding: 7px 10px;
     margin-top: 20px;
+    cursor: pointer;
 
     background-color: #f5f6f7;
 }

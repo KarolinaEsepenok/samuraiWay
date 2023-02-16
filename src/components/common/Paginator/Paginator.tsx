@@ -30,7 +30,7 @@ console.log(totalItemsCount, currentPage,portionSize )
         <div className={s.paginator}>
             {portionNumber > 1 && <button onClick={() => {
                 setPortionNumber(portionNumber - 1)
-            }} className={s.button}> PREV </button>}
+            }} className={s.button}> Prev </button>}
 
             {pages.filter(p => p >= leftPortionNumber && p <= rightPortionNumber)
                 .map(p => {
@@ -40,7 +40,7 @@ console.log(totalItemsCount, currentPage,portionSize )
 
             {portionNumber < portionCount && <button onClick={() => {
                 setPortionNumber(portionNumber + 1)
-            }} className={s.button}> NEXT </button>}
+            }} className={s.button}> Next </button>}
         </div>
     );
 };

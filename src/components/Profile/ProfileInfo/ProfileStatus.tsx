@@ -1,4 +1,5 @@
 import React, {ChangeEvent} from 'react';
+import s from './ProfileInfo.module.css'
 
 export type ProfileStatusPropsType = {
     status: string
@@ -36,9 +37,10 @@ class ProfileStatus extends React.Component<any, any> {
     render() {
         return (
             <div>{!this.state.editMode &&
-                <div><span onDoubleClick={this.activateEditMode}>{this.props.status || "____"}</span></div>
+                <div className={s.status}><span onDoubleClick={this.activateEditMode}>{this.props.status || "my status"}</span></div>
             }
-                {this.state.editMode && <div><input onChange={this.onStatusChange}
+                {this.state.editMode && <div >
+                    <input className={s.statusInput} onChange={this.onStatusChange}
                                                     autoFocus={true} onBlur={this.deactivateEditMode}
                                                     value={this.state.status}/></div>
                 }

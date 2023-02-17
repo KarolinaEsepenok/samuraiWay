@@ -24,7 +24,7 @@ export type PostsType = {
 }
 export type ProfilePageType = {
     posts: PostsType[],
-    profile: null | ProfileType
+    profile: ProfileType | null,
     status: string
 }
 export type DialogsPageType = {
@@ -40,10 +40,10 @@ export type RootStateType = {
     _state: StateType
 }
 export type ProfileType={
-    userId: number | null,
-    lookingForAJob: boolean,
-    lookingForAJobDescription: string,
-    fullName: string,
+    userId?: number | null | undefined,
+    lookingForAJob?: boolean | undefined,
+    lookingForAJobDescription?: string | undefined,
+    fullName: string |undefined,
     contacts:object,
     github: string,
     vk: string,
@@ -52,10 +52,13 @@ export type ProfileType={
     twitter: string,
     website:string,
     youtube: string,
-    mainLink: string,
-    photos:{
+    mainLink?: string | undefined,
+    photos:PhotosType
+    aboutMe:string
+}
+export type PhotosType={
     small: string | null,
-    large: string | null }
+    large: string | null
 }
 
 export let store: RootStateType = {
@@ -88,80 +91,6 @@ export let store: RootStateType = {
                 {id: 5, message: 'Yo'},
                 {id: 6, message: 'Yo'},],
             newMessageBody: '',
-        },
-       // sidebar: {}
+        }
 
-
-   // _callSubscriber() {
-   //     console.log('State')
-   // },
-  //  getState() {
-  //      return this._state;
-  //  },
-  //  subscriber(observer: () => void) {
-  //      this._callSubscriber = observer;
-  //  },
-  //  dispatch(action) {
-      //   this._state.profilePage = ProfilePageReducer(store, action)
-      //   this._state.dialogsPage = DialogsPageReducer(this._state.dialogsPage, action)
-      // //  this._state.sidebar = SidebarReducer(this._state.sidebar, action)
-      //   this._callSubscriber(this._state)
-
-
-    }
-}
-
-
-//    _callSubscriber(),
-//  rerenderEntireTree (state:StateType) {},
-
-/* addPost (postMessage: string)  {
-   const newPost: PostsType = {
-       id: new Date().getTime(),
-       message:postMessage,
-       likeCounts: '0'
-   }
-   store._state.profilePage.posts.push(newPost);
-   store._state.profilePage.newPostText='';
-   rerenderEntireTree(store._state);
-},
-   updateNewPostText (newPostText:string)  {
-       store._state.profilePage.newPostText= newPostText;
-       rerenderEntireTree(store._state);
-   }
-
-
-export const addPostActionCreator = () => {
-    return {
-        type: ADD_POST,
-    } as const
-}
-export const updateNewPostTextActionCreator = (text: string) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: text
-    } as const
-}
-export const sendMessageCreator = () => {
-    return {
-        type: SEND_MESSAGE,
-    } as const
-}
-export const updateNewMessageBodyCreator = (text: string) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_BODY,
-        body: text
-    } as const
-}
-type AddPostActionType = ReturnType<typeof addPostActionCreator>
-type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
-type SendMessageType = ReturnType<typeof sendMessageCreator>
-type UpdateNewMessageBodyType = ReturnType<typeof updateNewMessageBodyCreator>
-
-export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | SendMessageType | UpdateNewMessageBodyType
-
-*/
-
-
-
-
+    }}

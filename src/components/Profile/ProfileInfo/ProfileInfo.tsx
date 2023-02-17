@@ -5,8 +5,9 @@ import {ProfileType} from "../../../state";
 import ProfileStatus from "./ProfileStatus";
 import user from "../../asses/img/user.svg";
 import changeAva from "../../asses/img/changeAva.png"
-import ProfileData from "../../Profile/ProfileInfo/ProfileData";
-import {ProfileDataForm} from "../..//Profile/ProfileInfo/ProfileDataForm";
+import {ProfileData} from "../../Profile/ProfileInfo/ProfileData";
+
+import ProfileDataForm from "../..//Profile/ProfileInfo/ProfileDataForm";
 
 type PropsType = {
     profile: ProfileType
@@ -14,9 +15,10 @@ type PropsType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: () => void
+   saveProfile:(formData:any)=>void
 }
 
-function ProfileInfo(props: PropsType) {
+function ProfileInfo(props: PropsType, saveProfile:any) {
     const [editMode, setEditMode]= useState(false)
     if (!props.profile) {
         return <Preloader isFetching={true}/>
@@ -28,7 +30,14 @@ function ProfileInfo(props: PropsType) {
             props.savePhoto(e.target.files[0])
         }
     }
+    const onSubmit = (formData:any) => {
+        props.saveProfile(formData)
+        setEditMode(false)
+
+
+    }
     const photoSrc = props.profile?.photos.small
+
     return (
         <div>
             <div className={s.descriptionBlock}>
@@ -41,7 +50,8 @@ function ProfileInfo(props: PropsType) {
                 }
                 <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                 {editMode ?
-                    <ProfileDataForm isOwner={props.isOwner} goToEditMode={()=>{setEditMode(true)}} profile={props.profile}/>
+                    // @ts-ignore
+                    <ProfileDataForm initialValues={props.profile} onSubmit={onSubmit} profile={props.profile}/>
                     : <ProfileData goToEditMode={()=>{setEditMode(true)}} profile={props.profile} isOwner={props.isOwner}/>}
 
             </div>

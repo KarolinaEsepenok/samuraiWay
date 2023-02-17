@@ -3,6 +3,7 @@ import { PostsType, ProfilePageType, ProfileType, StateType} from "../state";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../components/api/api-js";
 import profile from "../components/Profile/Profile";
+import {AppStateType} from "../redux/reduxStore";
 
 type AddPostActionType = ReturnType<typeof addPostActionCreator>
 type SetUserProfile = ReturnType<typeof setUserProfile>
@@ -10,6 +11,7 @@ type SetStatus = ReturnType<typeof setStatus>
 type UpdateStatus = ReturnType<typeof setUpdateStatus>
 type DeletePost = ReturnType<typeof deletePost>
 type SavePhoto = ReturnType<typeof savePhotoSuccess>
+//type SaveProfile = ReturnType<typeof saveProfileSuccess>
 
 export type ActionsTypes = AddPostActionType | SetUserProfile | SetStatus | UpdateStatus | DeletePost | SavePhoto
 
@@ -18,7 +20,8 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 const UPDATE_STATUS = 'UPDATE_STATUS';
 const DELETE_POST = 'DELETE_POST';
-const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS'
+const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
+//const SAVE_PROFILE_SUCCESS ='SAVE_PROFILE_SUCCESS'
 
 
 let initialState: ProfilePageType = {
@@ -60,6 +63,9 @@ export function ProfilePageReducer(state = initialState, action: ActionsTypes): 
             //@ts-ignore
             return {...state, profile:{...state.profile, photos:action.photos}}
         }
+        {/*  case SAVE_PROFILE_SUCCESS: {
+            return {...state, profile:action.profile}
+        }*/}
         default:
             return state
     }
@@ -99,6 +105,12 @@ export const savePhotoSuccess = (photos:any) => {
         photos
     } as const
 }
+{/*export const saveProfileSuccess = (profile:ProfileType) => {
+    return {
+        type: SAVE_PROFILE_SUCCESS,
+        profile
+    } as const
+}*/}
 export const getUserProfile = (userId: number) => async (dispatch: Dispatch) => {
     let response = await usersAPI.getProfile(userId)
     dispatch(setUserProfile(response.data))
@@ -119,4 +131,25 @@ export const savePhoto = (file: any) => async (dispatch: Dispatch) => {
         dispatch(savePhotoSuccess(response.data.data.photos))
     }
 }
+export const saveProfile = (profile: ProfileType) => async (dispatch: Dispatch,getState:()=>AppStateType) => {
+    const userId = getState().auth.userId
+    let response = await profileAPI.saveProfile(profile)
+    if (response.data.resultCode === 0) {
+        // @ts-ignore
+        dispatch(getUserProfile(userId))
+    }
+    else {
+        const errorMessage = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
 
+        //find contact with error
+        const errorArray = response.data.messages[0].toLowerCase().split("->")
+        let contactWithError = errorArray[1].slice(0, -1)
+        if (contactWithError === "mainlink") {
+            contactWithError = "mainLink"
+        }
+        const obj: any = {}
+        obj[contactWithError] = errorMessage
+
+        //dispatch(stopSubmit("edit_profile", {"contacts": obj}))
+    }
+}

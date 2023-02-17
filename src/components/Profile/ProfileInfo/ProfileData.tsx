@@ -13,7 +13,7 @@ const ProfileData = (props: PropsType) => {
 
         <div className={s.profileInformation}>
             {props.isOwner && <div>
-                <button onClick={props.goToEditMode}>Edit</button>
+                {/* <button onClick={props.goToEditMode}>Edit</button>*/}
             </div>}
             <div>Full name: {props.profile.fullName}</div>
             <div>Looking for a job: {props.profile.lookingForAJob ? 'Yes' : 'No'}</div>
